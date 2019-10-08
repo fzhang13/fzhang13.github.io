@@ -332,3 +332,17 @@ function switchTheme(e) {
 }
 
 toggleSwitch.addEventListener('change', switchTheme, false);
+
+$( document ).ready(function () {
+		$(".animate-box").slice(0, 3).show();
+		if ($(".animate-box:hidden").length != 0) {
+			$("#loadMore").show();
+		}		
+		$("#loadMore").on('click', function (e) {
+			e.preventDefault();
+			$(".animate-box:hidden").slice(0, 6).slideDown();
+			if ($(".animate-box:hidden").length == 0) {
+				$("#loadMore").fadeOut('slow');
+			}
+		});
+	});
