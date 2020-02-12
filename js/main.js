@@ -310,6 +310,7 @@
 }());
 
 
+//toggles dark mode on/off
 const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
 const currentTheme = localStorage.getItem('theme');
 
@@ -333,6 +334,9 @@ function switchTheme(e) {
 
 toggleSwitch.addEventListener('change', switchTheme, false);
 
+
+
+//load more function
 $( document ).ready(function () {
 		$(".animate-box").slice(0, 3).show();
 		if ($(".animate-box:hidden").length != 0) {
