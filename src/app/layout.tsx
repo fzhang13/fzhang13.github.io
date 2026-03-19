@@ -17,11 +17,20 @@ export const metadata: Metadata = {
     title: copy.meta.title,
     description: copy.meta.ogDescription,
     siteName: copy.meta.siteName,
+    images: [
+      {
+        url: `${copy.meta.url}/images/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: copy.meta.title,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: copy.meta.title,
     description: copy.meta.ogDescription,
+    images: [`${copy.meta.url}/images/og-image.png`],
   },
   robots: {
     index: true,
@@ -38,6 +47,7 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth ${GeistSans.variable}`}>
       <head>
         <link rel="shortcut icon" href="/fonts/favicon/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/fonts/favicon/favicon.svg" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

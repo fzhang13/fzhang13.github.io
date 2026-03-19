@@ -1,0 +1,29 @@
+
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="fg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#59b0ff"/>
+      <stop offset="100%" stop-color="#1b6ff5"/>
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#111215"/>
+      <stop offset="100%" stop-color="#0d0e10"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" rx="92" fill="url(#bgGrad)"/>
+
+  <!-- Border -->
+  <rect x="10" y="10"
+        width="492" height="492"
+        rx="92" fill="none"
+        stroke="#59b0ff" stroke-width="20" stroke-opacity="0.3"/>
+
+  <!-- FZ text -->
+  <text x="256" y="297" text-anchor="middle"
+        font-family="system-ui, -apple-system, sans-serif" font-weight="800"
+        font-size="215" fill="url(#fg)" letter-spacing="-1">
+    FZ
+  </text>
+</svg>
