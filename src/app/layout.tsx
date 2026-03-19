@@ -23,6 +23,7 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: copy.meta.title,
+        type: "image/png",
       },
     ],
   },
@@ -30,7 +31,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: copy.meta.title,
     description: copy.meta.ogDescription,
-    images: [`${copy.meta.url}/images/og-image.png`],
+    images: [
+      {
+        url: `${copy.meta.url}/images/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: copy.meta.title,
+      },
+    ],
   },
   robots: {
     index: true,
