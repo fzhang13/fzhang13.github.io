@@ -2,7 +2,13 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Cloud, Terminal, Boxes, MapPin } from "lucide-react";
+import { Cloud, Terminal, Boxes, MapPin, type LucideIcon } from "lucide-react";
+import InteractiveTerminal from "./InteractiveTerminal";
+import copy from "@/copy.json";
+
+const statIcons: Record<string, LucideIcon> = {
+  Cloud, Terminal, Boxes,
+};
 
 export default function About() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -16,69 +22,123 @@ export default function About() {
           transition={{ duration: 0.6 }}
         >
           <p className="section-subheading font-mono">
-            <span className="text-primary-400">01.</span> About
+            <span className="text-primary-400">{copy.about.sectionNumber}.</span> {copy.about.sectionLabel}
           </p>
-          <h2 className="section-heading mb-12">Who I Am</h2>
+          <h2 className="section-heading mb-12">{copy.about.heading}</h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-5 gap-12">
+        <div className="grid md:grid-cols-5 gap-8">
           <motion.div
-            className="md:col-span-3 space-y-5"
+            className="md:col-span-3"
             initial={{ opacity: 0, y: 40 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <p className="text-dark-200 text-lg leading-relaxed">
-              Hey there! I&apos;m <span className="text-white font-semibold">Felix Zhang</span>, 
-              a Full-Stack Engineer with 6+ years of experience, based in{" "}
-              <span className="text-primary-400 inline-flex items-center gap-1">
-                <MapPin size={14} /> Toronto, Canada
-              </span>.
-            </p>
+            {/* Node.js-style code card */}
+            <div className="glass-card p-6 font-mono text-sm leading-relaxed overflow-x-auto">
+              <div className="flex items-center gap-2 mb-4">
+                <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                <span className="ml-2 text-dark-500 text-xs">felix.js</span>
+              </div>
 
-            <p className="text-dark-300 leading-relaxed">
-              I specialize in delivering scalable web applications, cloud
-              infrastructure, and digital experiences. From architecting
-              serverless backends on{" "}
-              <span className="text-white">AWS</span> and{" "}
-              <span className="text-white">GCP</span> to building full-stack
-              monorepo architectures.
-            </p>
+              <div className="space-y-1 text-dark-300">
+                <p><span className="text-purple-400">const</span> <span className="text-blue-300">felix</span> <span className="text-primary-400">=</span> {`{`}</p>
 
-            <p className="text-dark-300 leading-relaxed">
-              I&apos;ve shipped production code at{" "}
-              <span className="text-white">Meta (Facebook)</span> as a contingent
-              engineer, and built high-profile experiences for brands like{" "}
-              <span className="text-white">Adidas</span>,{" "}
-              <span className="text-white">Airbnb</span>,{" "}
-              <span className="text-white">KFC</span>, and{" "}
-              <span className="text-white">Zoox</span> at{" "}
-              <a
-                href="https://www.mediamonks.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-400 hover:underline"
-              >
-                MediaMonks (formerly Jam3)
-              </a>
-              . My backend focus includes Node.js, PostgreSQL, GraphQL, Docker,
-              Terraform, and serverless architecture.
-            </p>
+                <p className="pl-4">
+                  <span className="text-dark-500">name:</span>{" "}
+                  <span className="text-green-400">&quot;Felix Zhang&quot;</span>,
+                </p>
+                <p className="pl-4">
+                  <span className="text-dark-500">role:</span>{" "}
+                  <span className="text-green-400">&quot;Full-Stack Engineer&quot;</span>,
+                </p>
+                <p className="pl-4">
+                  <span className="text-dark-500">experience:</span>{" "}
+                  <span className="text-green-400">&quot;6+ years&quot;</span>,
+                </p>
+                <p className="pl-4">
+                  <span className="text-dark-500">location:</span>{" "}
+                  <span className="text-green-400">&quot;Toronto, Canada&quot;</span>,
+                </p>
 
-            <p className="text-dark-300 leading-relaxed">
-              Outside of work, I&apos;m either chasing powder on the slopes,
-              building custom mechanical keyboards, running, cycling, or coding
-              to{" "}
-              <a
-                href="https://youtu.be/hHW1oY26kxQ"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary-400 hover:underline"
-              >
-                chill beats
-              </a>
-              .
-            </p>
+                <p className="mt-3 pl-4">
+                  <span className="text-dark-500">summary:</span> [
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;Scalable web apps, cloud infra &amp; digital experiences&quot;</span>,
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;Serverless backends on AWS &amp; GCP&quot;</span>,
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;Full-stack monorepo architectures&quot;</span>,
+                </p>
+                <p className="pl-4">],</p>
+
+                <p className="mt-3 pl-4">
+                  <span className="text-dark-500">shipped:</span> [
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;Meta (Facebook)&quot;</span>,{" "}
+                  <span className="text-dark-600">// contingent engineer</span>
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;Adidas&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;Airbnb&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;KFC&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;Zoox&quot;</span>,
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;WhatsApp&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;Oculus&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;Visa&quot;</span>,
+                </p>
+                <p className="pl-4">],</p>
+
+                <p className="mt-3 pl-4">
+                  <span className="text-dark-500">backend:</span> [
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;Node.js&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;PostgreSQL&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;GraphQL&quot;</span>,
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;Docker&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;Terraform&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;Serverless&quot;</span>,
+                </p>
+                <p className="pl-4">],</p>
+
+                <p className="mt-3 pl-4">
+                  <span className="text-dark-500">offHours:</span> [
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;chasing powder &#x26d7;&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;building keyboards &#x2328;&quot;</span>,
+                </p>
+                <p className="pl-8">
+                  <span className="text-green-400">&quot;running&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;cycling&quot;</span>,{" "}
+                  <span className="text-green-400">&quot;coding to{" "}
+                  <a
+                    href="https://youtu.be/hHW1oY26kxQ"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary-400 hover:underline"
+                  >chill beats</a>&quot;</span>,
+                </p>
+                <p className="pl-4">],</p>
+
+                <p>{`}`};</p>
+
+                <p className="mt-3">
+                  <span className="text-purple-400">module</span>.<span className="text-blue-300">exports</span> <span className="text-primary-400">=</span> felix;
+                </p>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div
@@ -87,70 +147,24 @@ export default function About() {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            {/* Terminal-style info card */}
-            <div className="glass-card p-6 font-mono text-sm">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                <span className="ml-2 text-dark-500 text-xs">about.sh</span>
-              </div>
-              <div className="space-y-2 text-dark-300">
-                <p>
-                  <span className="text-primary-400">$</span> cat profile.yml
-                </p>
-                <p className="pl-4">
-                  <span className="text-dark-500">name:</span>{" "}
-                  <span className="text-white">Felix Zhang</span>
-                </p>
-                <p className="pl-4">
-                  <span className="text-dark-500">role:</span>{" "}
-                  <span className="text-green-400">Full-Stack Engineer</span>
-                </p>
-                <p className="pl-4">
-                  <span className="text-dark-500">location:</span> Toronto, CA
-                </p>
-                <p className="pl-4">
-                  <span className="text-dark-500">focus:</span>{" "}
-                  <span className="text-yellow-400">AWS</span> ·{" "}
-                  <span className="text-yellow-400">Cloud</span> ·{" "}
-                  <span className="text-yellow-400">Backend</span>
-                </p>
-                <p className="pl-4">
-                  <span className="text-dark-500">languages:</span>
-                </p>
-                <p className="pl-8">
-                  - JS · TypeScript · PHP · Python
-                </p>
-                <p className="pl-8">
-                  - SQL · Java · HTML/CSS/SCSS
-                </p>
-                <p className="pl-4">
-                  <span className="text-dark-500">hobbies:</span>{" "}
-                  keyboards, snowboarding,
-                </p>
-                <p className="pl-8">
-                  running, cycling
-                </p>
-              </div>
-            </div>
+            {/* Interactive terminal */}
+            <InteractiveTerminal />
 
             {/* Quick stats */}
             <div className="grid grid-cols-3 gap-3">
-              {[
-                { icon: Cloud, label: "Cloud", value: "AWS/GCP" },
-                { icon: Terminal, label: "Experience", value: "6+ yrs" },
-                { icon: Boxes, label: "Projects", value: "20+" },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="glass-card p-4 text-center"
-                >
-                  <stat.icon className="mx-auto mb-2 text-primary-400" size={18} />
-                  <p className="text-white font-semibold text-sm">{stat.value}</p>
-                  <p className="text-dark-500 text-xs">{stat.label}</p>
-                </div>
-              ))}
+              {copy.about.stats.map((stat) => {
+                const Icon = statIcons[stat.icon];
+                return (
+                  <div
+                    key={stat.label}
+                    className="glass-card p-4 text-center"
+                  >
+                    {Icon && <Icon className="mx-auto mb-2 text-primary-400" size={18} />}
+                    <p className="text-white font-semibold text-sm">{stat.value}</p>
+                    <p className="text-dark-500 text-xs">{stat.label}</p>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         </div>

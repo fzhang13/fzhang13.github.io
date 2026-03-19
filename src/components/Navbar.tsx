@@ -3,17 +3,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import copy from "@/copy.json";
 
-const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Expertise", href: "#expertise" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
-];
+const navItems = copy.nav.items;
 
-export default function Navbar() {
+interface NavbarProps {
+  revealed: boolean;
+}
+
+export default function Navbar({ revealed }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -55,11 +53,11 @@ export default function Navbar() {
           href="#home"
           className="text-xl font-bold text-white hover:text-primary-400 transition-colors font-mono"
         >
-          felix<span className="text-primary-400">.</span>zhang
+          {copy.nav.brand.split(".")[0]}<span className="text-primary-400">.</span>{copy.nav.brand.split(".")[1]}
         </a>
 
         {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className={`hidden md:flex items-center gap-8 transition-all duration-700 ${revealed ? 'blur-0 opacity-100' : 'blur-md opacity-40 pointer-events-none'}`}>
           {navItems.map((item) => (
             <li key={item.href}>
               <a
@@ -76,12 +74,12 @@ export default function Navbar() {
           ))}
           <li>
             <a
-              href="/resume/FelixZhang.pdf"
+              href={copy.nav.resumeHref}
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm font-medium px-4 py-2 rounded-lg border border-primary-500 text-primary-400 hover:bg-primary-500/10 transition-all"
             >
-              Resume
+              {copy.nav.resumeLabel}
             </a>
           </li>
         </ul>
@@ -89,7 +87,7 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden text-white p-2"
+          className={`md:hidden text-white p-2 transition-all duration-700 ${revealed ? 'blur-0 opacity-100' : 'blur-md opacity-40 pointer-events-none'}`}
           aria-label="Toggle menu"
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -123,12 +121,12 @@ export default function Navbar() {
               ))}
               <li>
                 <a
-                  href="/resume/FelixZhang.pdf"
+                  href={copy.nav.resumeHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block text-sm font-medium px-4 py-2 rounded-lg border border-primary-500 text-primary-400"
                 >
-                  Resume
+                  {copy.nav.resumeLabel}
                 </a>
               </li>
             </ul>

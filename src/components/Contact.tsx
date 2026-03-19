@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Mail, MapPin, Github, Linkedin, Send } from "lucide-react";
+import copy from "@/copy.json";
 
 export default function Contact() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
@@ -17,13 +18,11 @@ export default function Contact() {
           className="text-center max-w-2xl mx-auto"
         >
           <p className="section-subheading font-mono">
-            <span className="text-primary-400">06.</span> Contact
+            <span className="text-primary-400">{copy.contact.sectionNumber}.</span> {copy.contact.sectionLabel}
           </p>
-          <h2 className="section-heading mb-4">Get In Touch</h2>
+          <h2 className="section-heading mb-4">{copy.contact.heading}</h2>
           <p className="text-dark-400 mb-12">
-            I&apos;m always open to new opportunities, interesting projects, and
-            conversations about cloud architecture. Whether you have a question
-            or just want to say hi — my inbox is open.
+            {copy.contact.description}
           </p>
         </motion.div>
 
@@ -35,7 +34,7 @@ export default function Contact() {
         >
           <div className="glass-card p-8">
             <form
-              action="https://formspree.io/f/felix.zhang.dev@gmail.com"
+              action={copy.contact.form.action}
               method="POST"
               className="space-y-5"
             >
@@ -44,7 +43,7 @@ export default function Contact() {
                   htmlFor="name"
                   className="block text-sm font-medium text-dark-300 mb-2"
                 >
-                  Name
+                  {copy.contact.form.nameLabel}
                 </label>
                 <input
                   type="text"
@@ -52,7 +51,7 @@ export default function Contact() {
                   name="name"
                   required
                   className="w-full px-4 py-3 rounded-lg bg-dark-800/50 border border-dark-700/50 text-white placeholder-dark-500 focus:outline-none focus:border-primary-500 transition-colors"
-                  placeholder="Your name"
+                  placeholder={copy.contact.form.namePlaceholder}
                 />
               </div>
 
@@ -61,15 +60,16 @@ export default function Contact() {
                   htmlFor="email"
                   className="block text-sm font-medium text-dark-300 mb-2"
                 >
-                  Email
+                  {copy.contact.form.emailLabel}
                 </label>
                 <input
                   type="email"
                   id="email"
                   name="_replyto"
                   required
+                  maxLength={254}
                   className="w-full px-4 py-3 rounded-lg bg-dark-800/50 border border-dark-700/50 text-white placeholder-dark-500 focus:outline-none focus:border-primary-500 transition-colors"
-                  placeholder="your@email.com"
+                  placeholder={copy.contact.form.emailPlaceholder}
                 />
               </div>
 
@@ -78,22 +78,32 @@ export default function Contact() {
                   htmlFor="message"
                   className="block text-sm font-medium text-dark-300 mb-2"
                 >
-                  Message
+                  {copy.contact.form.messageLabel}
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
                   rows={5}
+                  maxLength={2000}
                   className="w-full px-4 py-3 rounded-lg bg-dark-800/50 border border-dark-700/50 text-white placeholder-dark-500 focus:outline-none focus:border-primary-500 transition-colors resize-none"
-                  placeholder="What's on your mind?"
+                  placeholder={copy.contact.form.messagePlaceholder}
                 />
               </div>
 
               <input
                 type="hidden"
                 name="_subject"
-                value="Portfolio Contact Form"
+                value={copy.contact.form.subject}
+              />
+
+              {/* Honeypot — hidden from real users, catches bots */}
+              <input
+                type="text"
+                name="_gotcha"
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
               />
 
               <button
@@ -101,7 +111,7 @@ export default function Contact() {
                 className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-primary-600 text-white font-medium hover:bg-primary-500 transition-colors"
               >
                 <Send size={16} />
-                Send Message
+                {copy.contact.form.submitLabel}
               </button>
             </form>
           </div>
@@ -109,15 +119,15 @@ export default function Contact() {
           {/* Contact info */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-6 text-sm">
             <a
-              href="mailto:felix.zhang.dev@gmail.com"
+              href={`mailto:${copy.contact.email}`}
               className="flex items-center gap-2 text-dark-400 hover:text-primary-400 transition-colors"
             >
               <Mail size={16} />
-              felix.zhang.dev@gmail.com
+              {copy.contact.email}
             </a>
             <span className="flex items-center gap-2 text-dark-400">
               <MapPin size={16} />
-              Toronto, Ontario, Canada
+              {copy.contact.location}
             </span>
           </div>
         </motion.div>
