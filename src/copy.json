@@ -263,8 +263,35 @@
       }
     ]
   },
+  "projects": {
+    "sectionNumber": "04",
+    "sectionLabel": "Projects",
+    "heading": "Things I've Built",
+    "description": "A mix of cloud infrastructure, backend services, and full-stack applications I've worked on.",
+    "items": [
+      {
+        "title": "Zoox.com",
+        "description": "Full-stack digital experience for Zoox, Amazon's autonomous vehicle subsidiary. Architected and delivered a high-performance web platform showcasing their robotaxi technology.",
+        "tags": ["React", "Next.js", "AWS", "GraphQL"],
+        "category": "FULLSTACK · MEDIAMONKS",
+        "live": "https://www.zoox.com"
+      },
+      {
+        "title": "Adidas Experiences",
+        "description": "Multiple high-profile Adidas projects including the LA flagship retail installation, FIFA World Cup campaign, and Adidas Community platform.",
+        "tags": ["React", "TypeScript", "Node.js", "AWS"],
+        "category": "FULLSTACK · MEDIAMONKS"
+      },
+      {
+        "title": "Novi.com (Meta)",
+        "description": "Led development of the Novi digital wallet marketing site at Meta. Multi-locale launch with advanced content management and the Novi Newsroom feature.",
+        "tags": ["React", "PHP", "Hacklang", "Node.js"],
+        "category": "FULLSTACK · META"
+      }
+    ]
+  },
   "contact": {
-    "sectionNumber": "06",
+    "sectionNumber": "05",
     "sectionLabel": "Contact",
     "heading": "Get In Touch",
     "description": "I'm always open to new opportunities, interesting projects, and conversations about cloud architecture. Whether you have a question or just want to say hi — my inbox is open.",

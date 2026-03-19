@@ -2,64 +2,11 @@
 
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import GitHubActivity from "@/components/GitHubActivity";
+import copy from "@/copy.json";
 
-interface Project {
-  title: string;
-  description: string;
-  tags: string[];
-  category: string;
-  github?: string;
-  live?: string;
-}
-
-const projects: Project[] = [
-  {
-    title: "Zoox.com",
-    description:
-      "Full-stack digital experience for Zoox, Amazon's autonomous vehicle subsidiary. Architected and delivered a high-performance web platform showcasing their robotaxi technology.",
-    tags: ["React", "Next.js", "Node.js", "AWS"],
-    category: "FULLSTACK · MEDIAMONKS",
-    live: "https://www.zoox.com",
-  },
-  {
-    title: "Adidas Experiences",
-    description:
-      "Multiple high-profile Adidas projects including the LA flagship retail installation, FIFA World Cup campaign, and Adidas Community platform.",
-    tags: ["React", "TypeScript", "Node.js", "GraphQL"],
-    category: "FULLSTACK · MEDIAMONKS",
-  },
-  {
-    title: "Airbnb x Obama Voyager",
-    description:
-      "Built the Airbnb x Obama Voyager Scholarship portal — a digital experience connecting students to travel scholarship opportunities.",
-    tags: ["React", "Next.js", "Node.js"],
-    category: "FULLSTACK · MEDIAMONKS",
-  },
-  {
-    title: "Novi.com (Meta)",
-    description:
-      "Led development of the Novi digital wallet marketing site at Meta. Multi-locale launch with advanced content management and the Novi Newsroom feature.",
-    tags: ["React", "PHP", "Hacklang", "Node.js"],
-    category: "FULLSTACK · META",
-  },
-  {
-    title: "WhatsApp.com & Meta Properties",
-    description:
-      "Contributing developer on Facebook Marketplace, CreativeX, Brand Portal, WhatsApp.com, Oculus.com, and Visa Super Bowl digital experience.",
-    tags: ["React", "PHP", "Hacklang", "Web Performance"],
-    category: "FULLSTACK · META",
-    live: "https://www.whatsapp.com",
-  },
-  {
-    title: "Portfolio Website",
-    description:
-      "This site — built with Next.js 14, Tailwind CSS, and Framer Motion. Statically exported and deployed to GitHub Pages via GitHub Actions CI/CD.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    category: "FRONTEND · OSS",
-    github: "https://github.com/fzhang13/fzhang13.github.io",
-  },
-];
+const projects = copy.projects.items;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -88,12 +35,11 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
         >
           <p className="section-subheading font-mono">
-            <span className="text-primary-400">04.</span> Projects
+            <span className="text-primary-400">{copy.projects.sectionNumber}.</span> {copy.projects.sectionLabel}
           </p>
-          <h2 className="section-heading mb-4">Things I&apos;ve Built</h2>
+          <h2 className="section-heading mb-4">{copy.projects.heading}</h2>
           <p className="text-dark-400 max-w-2xl mb-12">
-            A mix of cloud infrastructure, backend services, and full-stack
-            applications I&apos;ve worked on.
+            {copy.projects.description}
           </p>
         </motion.div>
 
@@ -114,17 +60,6 @@ export default function Projects() {
                   {project.category}
                 </span>
                 <div className="flex items-center gap-2">
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-dark-400 hover:text-primary-400 transition-colors"
-                      aria-label={`GitHub: ${project.title}`}
-                    >
-                      <Github size={18} />
-                    </a>
-                  )}
                   {project.live && (
                     <a
                       href={project.live}
@@ -160,6 +95,11 @@ export default function Projects() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* GitHub Activity Graph */}
+        <div className="mt-16">
+          <GitHubActivity />
+        </div>
       </div>
     </section>
   );

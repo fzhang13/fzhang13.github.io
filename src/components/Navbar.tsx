@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import copy from "@/copy.json";
@@ -15,6 +15,24 @@ export default function Navbar({ revealed }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const navRef = useRef<HTMLUListElement>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+
+  // Update indicator position when active section changes
+  useEffect(() => {
+    if (!navRef.current) return;
+    const activeLink = navRef.current.querySelector<HTMLAnchorElement>(
+      `a[href="#${activeSection}"]`
+    );
+    if (activeLink) {
+      const navRect = navRef.current.getBoundingClientRect();
+      const linkRect = activeLink.getBoundingClientRect();
+      setIndicatorStyle({
+        left: linkRect.left - navRect.left,
+        width: linkRect.width,
+      });
+    }
+  }, [activeSection]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,7 +75,13 @@ export default function Navbar({ revealed }: NavbarProps) {
         </a>
 
         {/* Desktop nav */}
-        <ul className={`hidden md:flex items-center gap-8 transition-all duration-700 ${revealed ? 'blur-0 opacity-100' : 'blur-md opacity-40 pointer-events-none'}`}>
+        <ul ref={navRef} className={`hidden md:flex items-center gap-8 relative transition-all duration-700 ${revealed ? 'blur-0 opacity-100' : 'blur-md opacity-40 pointer-events-none'}`}>
+          {/* Sliding indicator */}
+          <motion.div
+            className="absolute -bottom-1 h-0.5 bg-primary-400 rounded-full"
+            animate={{ left: indicatorStyle.left, width: indicatorStyle.width }}
+            transition={{ type: "spring", stiffness: 350, damping: 30 }}
+          />
           {navItems.map((item) => (
             <li key={item.href}>
               <a

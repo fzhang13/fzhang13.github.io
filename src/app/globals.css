@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 @layer base {
   html {
@@ -44,7 +44,29 @@
   }
 
   .glass-card {
-    @apply bg-dark-900/50 backdrop-blur-sm border border-dark-700/50 rounded-xl;
+    @apply bg-dark-900/50 backdrop-blur-sm rounded-xl relative;
+    border: 1px solid rgba(62, 65, 71, 0.5);
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: conic-gradient(from var(--border-angle, 0deg), transparent 40%, rgba(59,145,255,0.4) 50%, transparent 60%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+
+  .glass-card:hover::before {
+    opacity: 1;
+    animation: border-rotate 3s linear infinite;
   }
 
   .gradient-text {
@@ -71,4 +93,17 @@
 .gradient-line {
   background: linear-gradient(90deg, transparent, theme('colors.primary.500'), transparent);
   height: 1px;
+}
+
+/* Rotating gradient border for glass cards */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-rotate {
+  to {
+    --border-angle: 360deg;
+  }
 }
