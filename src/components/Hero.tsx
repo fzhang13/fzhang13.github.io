@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown, type LucideIcon } from "lucide-react";
 import copy from "@/copy.json";
@@ -17,9 +17,32 @@ interface HeroProps {
 }
 
 export default function Hero({ revealed, onReveal }: HeroProps) {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
   const handleReveal = useCallback(() => {
     if (!revealed) onReveal();
   }, [revealed, onReveal]);
+
+  // Cursor glow tracking
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    };
+    el.addEventListener("mousemove", onMove);
+    return () => el.removeEventListener("mousemove", onMove);
+  }, []);
+
+  // Scroll-linked parallax offset
+  const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Lock scroll until revealed — but only if the user is near the top.
   // If they refreshed while scrolled down, auto-reveal so the page isn't stuck.
@@ -48,17 +71,37 @@ export default function Hero({ revealed, onReveal }: HeroProps) {
 
   return (
     <section
+      ref={sectionRef}
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
+      {/* Cursor glow */}
+      <div
+        className={`pointer-events-none absolute inset-0 z-0 transition-opacity duration-700 ${
+          revealed ? "opacity-100" : "opacity-0"
+        }`}
+        style={{
+          background: `radial-gradient(700px circle at ${mouse.x}px ${mouse.y}px, rgba(59,145,255,0.25), rgba(59,145,255,0.08) 40%, transparent 70%)`,
+        }}
+      />
+
       {/* Background grid effect */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,145,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,145,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]" />
+      <div
+        className="absolute inset-0 bg-[linear-gradient(rgba(59,145,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,145,255,0.03)_1px,transparent_1px)] bg-[size:60px_60px]"
+        style={{ transform: `translate3d(0, ${scrollY * 0.15}px, 0)` }}
+      />
       <div className="absolute inset-0 bg-gradient-to-b from-dark-950 via-transparent to-dark-950" />
 
       {/* Glow orb */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-600/5 rounded-full blur-3xl" />
+      <div
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-600/5 rounded-full blur-3xl"
+        style={{ transform: `translate3d(-50%, ${scrollY * 0.3}px, 0)` }}
+      />
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+      <div
+        className="relative z-10 max-w-4xl mx-auto px-6 text-center"
+        style={{ transform: `translate3d(0, ${scrollY * 0.08}px, 0)` }}
+      >
         {/* Prompt */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}

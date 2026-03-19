@@ -216,13 +216,16 @@ export default function Expertise() {
                   {copy.expertise.techStackHeading}
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {techStack.map((tech) => (
-                    <span
+                  {techStack.map((tech, i) => (
+                    <motion.span
                       key={tech.name}
+                      initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ duration: 0.25, delay: 0.6 + i * 0.04 }}
                       className="px-3 py-1.5 rounded-lg bg-dark-800/60 border border-dark-700/40 text-dark-200 text-sm font-mono hover:border-primary-500/30 hover:text-primary-400 transition-colors cursor-default"
                     >
                       {tech.name}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </motion.div>

@@ -6,8 +6,10 @@ import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Expertise from "@/components/Expertise";
 import Experience from "@/components/Experience";
+import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import SectionReveal from "@/components/SectionReveal";
 
 export default function Home() {
   const [revealed, setRevealed] = useState(false);
@@ -18,13 +20,15 @@ export default function Home() {
       <main>
         <Hero revealed={revealed} onReveal={() => setRevealed(true)} />
         <div className="gradient-line" />
-        <About />
+        <SectionReveal><About /></SectionReveal>
         <div className="gradient-line" />
-        <Expertise />
+        <SectionReveal><Expertise /></SectionReveal>
         <div className="gradient-line" />
-        <Experience />
+        <SectionReveal><Experience /></SectionReveal>
         <div className="gradient-line" />
-        <Contact />
+        <SectionReveal><Projects /></SectionReveal>
+        <div className="gradient-line" />
+        <SectionReveal><Contact /></SectionReveal>
       </main>
       <Footer />
     </>
