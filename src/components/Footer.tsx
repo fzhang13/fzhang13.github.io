@@ -1,6 +1,13 @@
 "use client";
 
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, type LucideIcon } from "lucide-react";
+import copy from "@/copy.json";
+
+const iconMap: Record<string, LucideIcon> = {
+  github: Github,
+  linkedin: Linkedin,
+  email: Mail,
+};
 
 export default function Footer() {
   return (
@@ -8,39 +15,29 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <a
-              href="https://github.com/fzhang13"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-dark-500 hover:text-primary-400 transition-colors"
-              aria-label="GitHub"
-            >
-              <Github size={18} />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/f-zhang/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-dark-500 hover:text-primary-400 transition-colors"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={18} />
-            </a>
-            <a
-              href="mailto:felix.zhang.dev@gmail.com"
-              className="text-dark-500 hover:text-primary-400 transition-colors"
-              aria-label="Email"
-            >
-              <Mail size={18} />
-            </a>
+            {copy.footer.socials.map((s) => {
+              const Icon = iconMap[s.platform];
+              return (
+                <a
+                  key={s.platform}
+                  href={s.href}
+                  target={s.platform === "email" ? undefined : "_blank"}
+                  rel={s.platform === "email" ? undefined : "noopener noreferrer"}
+                  className="text-dark-500 hover:text-primary-400 transition-colors"
+                  aria-label={s.label}
+                >
+                  {Icon && <Icon size={18} />}
+                </a>
+              );
+            })}
           </div>
 
           <p className="text-dark-500 text-sm font-mono">
-            &copy; {new Date().getFullYear()} Felix Zhang
+            &copy; {new Date().getFullYear()} {copy.footer.copyright}
           </p>
 
           <p className="text-dark-600 text-xs">
-            Built with Next.js & Tailwind CSS
+            {copy.footer.builtWith}
           </p>
         </div>
       </div>

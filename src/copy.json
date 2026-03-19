@@ -1,0 +1,294 @@
+{
+  "meta": {
+    "title": "Felix Zhang | Full-Stack Engineer",
+    "description": "Felix Zhang is a Full-Stack Engineer with 6+ years of experience delivering scalable web applications, cloud infrastructure, and digital experiences. Based in Toronto, Canada.",
+    "ogDescription": "Full-Stack Engineer with 6+ years of experience delivering scalable web applications, cloud infrastructure, and digital experiences.",
+    "siteName": "Felix Zhang Portfolio",
+    "url": "https://fzhang13.github.io",
+    "keywords": [
+      "Felix Zhang",
+      "Cloud Engineer",
+      "Backend Developer",
+      "AWS",
+      "Software Engineer",
+      "Toronto",
+      "DevOps",
+      "Infrastructure",
+      "Serverless",
+      "Distributed Systems"
+    ]
+  },
+  "nav": {
+    "brand": "felix.zhang",
+    "items": [
+      { "label": "Home", "href": "#home" },
+      { "label": "About", "href": "#about" },
+      { "label": "Expertise", "href": "#expertise" },
+      { "label": "Experience", "href": "#experience" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "resumeLabel": "Resume",
+    "resumeHref": "/resume/FelixZhang.pdf"
+  },
+  "hero": {
+    "prompt": "$ whoami",
+    "firstName": "Felix",
+    "lastName": "Zhang",
+    "subtitle": "Full-Stack Engineer",
+    "subtitleParts": ["Cloud & Backend", "AWS", "Scalable Systems"],
+    "revealCta": "press Enter or click to reveal ⏎",
+    "viewWorkLabel": "View My Work",
+    "viewWorkHref": "#about",
+    "downloadCvLabel": "Download CV",
+    "downloadCvHref": "/resume/FelixZhang.pdf",
+    "socials": [
+      { "platform": "github", "href": "https://github.com/fzhang13", "label": "GitHub" },
+      { "platform": "linkedin", "href": "https://www.linkedin.com/in/f-zhang/", "label": "LinkedIn" },
+      { "platform": "email", "href": "mailto:felix.zhang.dev@gmail.com", "label": "Email" }
+    ]
+  },
+  "about": {
+    "sectionNumber": "01",
+    "sectionLabel": "About",
+    "heading": "Who I Am",
+    "codeCard": {
+      "filename": "felix.js",
+      "fields": {
+        "name": "Felix Zhang",
+        "role": "Full-Stack Engineer",
+        "experience": "6+ years",
+        "location": "Toronto, Canada"
+      },
+      "summary": [
+        "Scalable web apps, cloud infra & digital experiences",
+        "Serverless backends on AWS & GCP",
+        "Full-stack monorepo architectures"
+      ],
+      "shipped": [
+        { "name": "Meta (Facebook)", "comment": "contingent engineer" },
+        { "names": ["Adidas", "Airbnb", "KFC", "Zoox"] },
+        { "names": ["WhatsApp", "Oculus", "Visa"] }
+      ],
+      "backend": ["Node.js", "PostgreSQL", "GraphQL", "Docker", "Terraform", "Serverless"],
+      "offHours": [
+        { "text": "chasing powder ⛷", "items": ["building keyboards ⌨"] },
+        { "text": "running", "items": ["cycling", "coding to chill beats"] }
+      ],
+      "chillBeatsUrl": "https://youtu.be/hHW1oY26kxQ"
+    },
+    "stats": [
+      { "icon": "Cloud", "label": "Cloud", "value": "AWS/GCP" },
+      { "icon": "Terminal", "label": "Experience", "value": "6+ yrs" },
+      { "icon": "Boxes", "label": "Projects", "value": "20+" }
+    ]
+  },
+  "terminal": {
+    "filename": "about.sh",
+    "hint": "try \"help\"",
+    "commandHint": "commands: help · cat profile.yml · about · skills · hobbies · contact · clear",
+    "initialCommand": "cat profile.yml",
+    "initialOutput": [
+      "  name:      Felix Zhang",
+      "  role:      Full-Stack Engineer",
+      "  location:  Toronto, CA",
+      "  focus:     AWS · Cloud · Backend",
+      "  languages:",
+      "    - JS · TypeScript · PHP · Python",
+      "    - SQL · Java · HTML/CSS/SCSS",
+      "  hobbies:   keyboards, snowboarding,",
+      "             running, cycling"
+    ],
+    "commands": {
+      "cat profile.yml": [
+        "  name:      Felix Zhang",
+        "  role:      Full-Stack Engineer",
+        "  location:  Toronto, CA",
+        "  focus:     AWS · Cloud · Backend",
+        "  languages:",
+        "    - JS · TypeScript · PHP · Python",
+        "    - SQL · Java · HTML/CSS/SCSS",
+        "  hobbies:   keyboards, snowboarding,",
+        "             running, cycling"
+      ],
+      "help": [
+        "Available commands:",
+        "  help              — show this message",
+        "  cat profile.yml   — display profile",
+        "  about             — who is Felix?",
+        "  skills            — list technical skills",
+        "  hobbies           — off-the-clock interests",
+        "  contact           — get in touch",
+        "  clear             — clear terminal"
+      ],
+      "about": [
+        "Felix Zhang — Full-Stack Engineer",
+        "6+ years building scalable web apps,",
+        "cloud infrastructure & digital experiences.",
+        "Currently at MediaMonks (formerly Jam3).",
+        "Type \"skills\" or \"hobbies\" to learn more."
+      ],
+      "skills": [
+        "Languages:  JS · TypeScript · PHP · Python · SQL · Java",
+        "Frontend:   React · Next.js · React Native",
+        "Backend:    Node.js · GraphQL · PostgreSQL · MySQL · MongoDB",
+        "Cloud:      AWS · GCP · Docker · Terraform · Serverless",
+        "Tools:      Git · CircleCI · Jira · Figma"
+      ],
+      "hobbies": [
+        "⌨  Building custom mechanical keyboards",
+        "🏂  Chasing powder on the slopes",
+        "🏃  Running & cycling",
+        "🎵  Coding to chill beats"
+      ],
+      "contact": [
+        "Email:    felix.zhang.dev@gmail.com",
+        "GitHub:   github.com/fzhang13",
+        "LinkedIn: linkedin.com/in/f-zhang"
+      ]
+    },
+    "notFoundPrefix": "zsh: command not found:",
+    "notFoundHint": "try: help · cat profile.yml · about · skills · hobbies · contact · clear"
+  },
+  "expertise": {
+    "sectionNumber": "02",
+    "sectionLabel": "Expertise",
+    "heading": "What I Do",
+    "description": "I build and scale cloud infrastructure and backend systems. Hit the endpoint to see what I bring to the table.",
+    "apiEndpoint": "https://api.felixzhang.dev/v1/expertise",
+    "sendLabel": "Send Request",
+    "loadingText": "Fetching expertise data...",
+    "techStackHeading": "Tech Stack",
+    "areas": [
+      {
+        "title": "Cloud & DevOps",
+        "description": "AWS, GCP, Docker, Terraform, Serverless Architecture, CI/CD (CircleCI), infrastructure provisioning & cloud-native deployments",
+        "icon": "Cloud",
+        "color": "from-orange-500 to-yellow-500"
+      },
+      {
+        "title": "Backend Development",
+        "description": "Node.js, GraphQL, RESTful APIs, microservices, server-side rendering, backend infrastructure engineering for scalable digital experiences",
+        "icon": "Server",
+        "color": "from-primary-500 to-blue-500"
+      },
+      {
+        "title": "Database & Storage",
+        "description": "PostgreSQL, MySQL, MongoDB, data modeling, ETL pipelines, enterprise data migrations & integration",
+        "icon": "Database",
+        "color": "from-green-500 to-emerald-500"
+      },
+      {
+        "title": "Frontend Development",
+        "description": "React, Next.js, React Native, TypeScript, monorepo architecture, component libraries & design systems",
+        "icon": "Layers",
+        "color": "from-cyan-500 to-teal-500"
+      },
+      {
+        "title": "Full-Stack Architecture",
+        "description": "End-to-end application design, proof-of-concept prototyping to production, framework standards & best practices",
+        "icon": "GitBranch",
+        "color": "from-purple-500 to-violet-500"
+      },
+      {
+        "title": "Tools & Workflow",
+        "description": "Git, GitHub, Mercurial, Jira, Postman, Figma, VSCode, open-source contributions & internal tooling",
+        "icon": "Shield",
+        "color": "from-red-500 to-rose-500"
+      }
+    ],
+    "techStack": [
+      { "name": "JavaScript", "category": "Language" },
+      { "name": "TypeScript", "category": "Language" },
+      { "name": "PHP", "category": "Language" },
+      { "name": "Python", "category": "Language" },
+      { "name": "SQL", "category": "Language" },
+      { "name": "Java", "category": "Language" },
+      { "name": "HTML/CSS/SCSS", "category": "Language" },
+      { "name": "React", "category": "Frontend" },
+      { "name": "Next.js", "category": "Framework" },
+      { "name": "React Native", "category": "Mobile" },
+      { "name": "Node.js", "category": "Runtime" },
+      { "name": "PostgreSQL", "category": "Database" },
+      { "name": "MySQL", "category": "Database" },
+      { "name": "MongoDB", "category": "Database" },
+      { "name": "GraphQL", "category": "API" },
+      { "name": "AWS", "category": "Cloud" },
+      { "name": "GCP", "category": "Cloud" },
+      { "name": "Docker", "category": "DevOps" },
+      { "name": "Terraform", "category": "IaC" },
+      { "name": "Serverless", "category": "Architecture" },
+      { "name": "CircleCI", "category": "CI/CD" },
+      { "name": "Git", "category": "Tool" },
+      { "name": "Mercurial", "category": "Tool" },
+      { "name": "Jira", "category": "Tool" },
+      { "name": "Figma", "category": "Tool" }
+    ]
+  },
+  "experience": {
+    "sectionNumber": "03",
+    "sectionLabel": "Experience",
+    "heading": "Where I've Worked",
+    "items": [
+      {
+        "title": "Full Stack Developer",
+        "company": "MediaMonks Inc. (formerly Jam3)",
+        "companyUrl": "https://www.mediamonks.com",
+        "location": "Toronto, Ontario, Canada",
+        "period": "2020 — Present",
+        "highlights": [
+          "Architected and delivered full-stack solutions for high-profile digital experiences including Zoox.com, Adidas LA flagship retail installation, Oculus Creators platform, Adidas FIFA World Cup campaign, Airbnb x Obama Voyager Scholarship portal, and Novi.com",
+          "Engineered backend infrastructure for KFC Polladas (Mexico City) and Texas State Technical College digital experiences, ensuring scalability and performance",
+          "Contributing developer on Facebook Marketplace, CreativeX, Brand Portal, WhatsApp.com, Oculus.com, Adidas Community, and Visa Super Bowl digital experience",
+          "Deployed production code to Meta's internal infrastructure as a contingent engineering employee, adhering to enterprise-level code quality and security standards",
+          "Advanced full-stack monorepo architecture and front-end framework standards, establishing best practices for scalable application development",
+          "Maintained and enhanced open-source projects and internal toolings, improving developer productivity across teams",
+          "Transformed proof-of-concept prototypes into production applications",
+          "Led co-op recruitment strategy and mentorship programs to develop junior engineering talent",
+          "Spearheaded documentation initiative to improve visibility and adoption of tools used across the department"
+        ],
+        "tags": ["React", "Next.js", "Node.js", "PHP", "AWS", "Docker", "GraphQL", "Terraform"]
+      },
+      {
+        "title": "Full-Stack Application Developer",
+        "company": "Palomino Systems Innovations Inc.",
+        "companyUrl": "https://www.palominosys.com/",
+        "location": "Toronto, Ontario, Canada",
+        "period": "2019 — 2020",
+        "highlights": [
+          "Designed and implemented custom subscription management system leveraging Stripe API with automated renewal processing",
+          "Orchestrated enterprise data migration for Sterling Capital Brokers, transferring legacy datasets across MySQL and PostgreSQL using Laravel-based ETL pipelines",
+          "Delivered full-stack web applications using Laravel, MySQL, and JavaScript"
+        ],
+        "tags": ["Laravel", "PHP", "MySQL", "PostgreSQL", "JavaScript", "Stripe"]
+      }
+    ]
+  },
+  "contact": {
+    "sectionNumber": "06",
+    "sectionLabel": "Contact",
+    "heading": "Get In Touch",
+    "description": "I'm always open to new opportunities, interesting projects, and conversations about cloud architecture. Whether you have a question or just want to say hi — my inbox is open.",
+    "form": {
+      "action": "https://formspree.io/f/felix.zhang.dev@gmail.com",
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "messageLabel": "Message",
+      "messagePlaceholder": "What's on your mind?",
+      "subject": "Portfolio Contact Form",
+      "submitLabel": "Send Message"
+    },
+    "email": "felix.zhang.dev@gmail.com",
+    "location": "Toronto, Ontario, Canada"
+  },
+  "footer": {
+    "copyright": "Felix Zhang",
+    "builtWith": "Built with Next.js & Tailwind CSS",
+    "socials": [
+      { "platform": "github", "href": "https://github.com/fzhang13", "label": "GitHub" },
+      { "platform": "linkedin", "href": "https://www.linkedin.com/in/f-zhang/", "label": "LinkedIn" },
+      { "platform": "email", "href": "mailto:felix.zhang.dev@gmail.com", "label": "Email" }
+    ]
+  }
+}

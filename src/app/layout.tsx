@@ -1,38 +1,25 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import copy from "@/copy.json";
 
 export const metadata: Metadata = {
-  title: "Felix Zhang | Full-Stack Engineer",
-  description:
-    "Felix Zhang is a Full-Stack Engineer with 6+ years of experience delivering scalable web applications, cloud infrastructure, and digital experiences. Based in Toronto, Canada.",
-  keywords: [
-    "Felix Zhang",
-    "Cloud Engineer",
-    "Backend Developer",
-    "AWS",
-    "Software Engineer",
-    "Toronto",
-    "DevOps",
-    "Infrastructure",
-    "Serverless",
-    "Distributed Systems",
-  ],
+  title: copy.meta.title,
+  description: copy.meta.description,
+  keywords: copy.meta.keywords,
   authors: [{ name: "Felix Zhang" }],
   creator: "Felix Zhang",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://fzhang13.github.io",
-    title: "Felix Zhang | Full-Stack Engineer",
-    description:
-      "Full-Stack Engineer with 6+ years of experience delivering scalable web applications, cloud infrastructure, and digital experiences.",
-    siteName: "Felix Zhang Portfolio",
+    url: copy.meta.url,
+    title: copy.meta.title,
+    description: copy.meta.ogDescription,
+    siteName: copy.meta.siteName,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Felix Zhang | Full-Stack Engineer",
-    description:
-      "Full-Stack Engineer with 6+ years of experience delivering scalable web applications, cloud infrastructure, and digital experiences.",
+    title: copy.meta.title,
+    description: copy.meta.ogDescription,
   },
   robots: {
     index: true,
