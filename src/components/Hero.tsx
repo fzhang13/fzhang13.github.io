@@ -4,6 +4,7 @@ import { useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, ChevronDown, type LucideIcon } from "lucide-react";
 import copy from "@/copy.json";
+import TechPlayground from "@/components/TechPlayground";
 
 const iconMap: Record<string, LucideIcon> = {
   github: Github,
@@ -57,6 +58,9 @@ export default function Hero({ revealed, onReveal }: HeroProps) {
 
       {/* Glow orb */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary-600/5 rounded-full blur-3xl" />
+
+      {/* Tech icons – clustered center-bottom, launch on reveal */}
+      <TechPlayground revealed={revealed} />
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
         {/* Prompt */}
