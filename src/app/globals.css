@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;500;600;700;800&display=swap');
 
 @layer base {
   html {
@@ -93,6 +93,93 @@
 .gradient-line {
   background: linear-gradient(90deg, transparent, theme('colors.primary.500'), transparent);
   height: 1px;
+}
+
+/* ─── Blog prose ──────────────────────────────────────────── */
+.prose-blog {
+  color: theme('colors.dark.200');
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.prose-blog p {
+  margin-bottom: 1.5rem;
+}
+
+.prose-blog h2 {
+  @apply text-2xl font-bold text-white mt-12 mb-4 font-display;
+}
+
+.prose-blog h3 {
+  @apply text-xl font-semibold text-white mt-8 mb-3;
+}
+
+.prose-blog h4 {
+  @apply text-base font-semibold text-white mt-6 mb-2;
+}
+
+.prose-blog a {
+  @apply text-primary-400 underline underline-offset-2 hover:text-primary-300 transition-colors;
+}
+
+.prose-blog strong {
+  @apply text-white font-semibold;
+}
+
+.prose-blog em {
+  @apply text-dark-300 italic;
+}
+
+.prose-blog blockquote {
+  @apply border-l-2 border-primary-500/40 pl-5 my-6 text-dark-400 italic;
+}
+
+.prose-blog ul {
+  @apply list-none space-y-2 my-5 pl-0;
+}
+
+.prose-blog ul > li {
+  @apply pl-5 relative text-dark-300;
+}
+
+.prose-blog ul > li::before {
+  content: '—';
+  @apply absolute left-0 text-dark-600;
+}
+
+.prose-blog ol {
+  @apply list-decimal pl-6 space-y-2 my-5 text-dark-300;
+}
+
+.prose-blog hr {
+  @apply border-dark-800 my-12;
+}
+
+/* Inline code */
+.prose-blog :not(pre) > code {
+  @apply font-mono text-sm bg-dark-800/80 text-primary-300 px-1.5 py-0.5 rounded border border-dark-700/50;
+}
+
+/* Code blocks — rehype-pretty-code */
+.prose-blog [data-rehype-pretty-code-figure] {
+  @apply my-7 rounded-xl overflow-hidden border border-dark-700/50;
+}
+
+.prose-blog [data-rehype-pretty-code-title] {
+  @apply px-4 py-2.5 text-xs font-mono text-dark-400 bg-dark-900 border-b border-dark-700/50;
+}
+
+.prose-blog pre {
+  @apply overflow-x-auto p-5 text-sm leading-relaxed bg-dark-900/80 m-0;
+}
+
+.prose-blog pre code {
+  @apply font-mono bg-transparent border-0 p-0 text-inherit;
+}
+
+/* Syntax token colours */
+.prose-blog [data-line] {
+  @apply px-0;
 }
 
 /* Rotating gradient border for glass cards */

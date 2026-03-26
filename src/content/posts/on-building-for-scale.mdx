@@ -1,0 +1,106 @@
+---
+title: "On Building for Scale: Lessons from the Field"
+date: "2025-11-12"
+excerpt: "Shipping to millions of users changes how you think about every line of code. A few patterns I've carried across Meta, Zoox, Adidas, and Airbnb projects."
+tags: ["engineering", "scale", "aws", "architecture"]
+---
+
+There's a particular kind of discomfort that sets in the first time a deploy you pushed is serving millions of requests. You wrote the code. You reviewed the diff. It looked fine in staging. And now it's live, quietly doing its thing at a scale that makes every assumption you made either correct or catastrophically wrong.
+
+I've shipped to that scale a few times now — at Meta, on consumer-facing surfaces like WhatsApp.com and Oculus; on Zoox's public site during their Amazon acquisition coverage spike; on Adidas during FIFA World Cup launch. Each time, I came away with a clearer picture of what "building for scale" actually means in practice.
+
+Here's what stuck.
+
+## Cold paths are not edge cases
+
+In a standard CRUD app, the happy path is most of the traffic. At scale, you discover that every "rare" case — an unusual locale, a malformed cookie, an expired CDN cache entry — happens thousands of times per second.
+
+The corrective mental shift: **treat every conditional branch as if it will be exercised at full traffic**. If you write code that handles a missing auth token with a vague fallback, you'll find out it matters at 3 AM.
+
+Practically, this means:
+- Every nullable field in your API response deserves an explicit default, not a `?.` chain that silently renders nothing
+- Log levels matter — `console.error` for the truly unexpected, not for recoverable states you just haven't handled yet
+- Circuit breakers aren't premature optimisation on traffic that has any real burst pattern
+
+## Lambda cold starts and the myth of "serverless is slow"
+
+A common knock on AWS Lambda is latency — specifically the cold start problem. I ran into this hard on a project where we had infrequent but latency-sensitive calls hitting a Node.js Lambda.
+
+The root cause was usually one of three things:
+
+```typescript
+// 1. Top-level SDK clients initialised outside the handler — good
+const ddb = new DynamoDBClient({ region: process.env.AWS_REGION });
+
+export const handler = async (event: APIGatewayEvent) => {
+  // reuses the client across warm invocations
+  const result = await ddb.send(new GetItemCommand({ ... }));
+  return result;
+};
+```
+
+```typescript
+// 2. Bundle bloat — the entire AWS SDK v2 included when you need one service
+// Bad: import AWS from 'aws-sdk';
+// Good: import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+```
+
+```typescript
+// 3. VPC placement without a reason — adds ~500ms cold start penalty
+// Only put Lambdas in a VPC when they actually need private network access
+```
+
+The real lesson isn't about Lambda vs containers. It's that **any distributed system has latency budgets, and cold starts are one line item in that budget** — not a reason to avoid the tool.
+
+## Infrastructure is product
+
+The most underrated shift I made was starting to think of infrastructure as a product deliverable, not a behind-the-scenes concern.
+
+On the Zoox project, the marketing site had to stay live during and after Amazon's acquisition announcement — a moment we knew would bring unpredictable, massive traffic. The feature work was interesting, but the real question was: *will this stay up?*
+
+The answer involved:
+- CloudFront in front of everything with aggressive TTLs on static assets
+- Origin shield to absorb cache misses at the edge before they hit the origin
+- A dead-simple health check endpoint that didn't touch any database
+- Runbook written before launch day, not after
+
+None of those are glamorous. None of them show up in a component library. But when the traffic came and the site stayed up, that was the product.
+
+## The cost of implicit contracts
+
+At Meta, code goes through layers of review and automated checks before it ships. One thing that internalised for me there: **every API surface, internal or external, is a contract** — and undocumented contracts are liabilities.
+
+I'd seen this before at smaller scale (a PHP function that assumed a particular key existed in a config array, silently returning null when it didn't), but at Meta the consequences of a broken internal assumption were larger and harder to trace.
+
+The habit I brought back from that: if a function depends on an invariant, encode it explicitly.
+
+```typescript
+// Don't hope the caller checked this
+function getUserLocale(user: User): string {
+  return user.locale; // might be undefined
+}
+
+// Make the contract clear
+function getUserLocale(user: User): string {
+  if (!user.locale) throw new Error(`User ${user.id} has no locale set`);
+  return user.locale;
+}
+```
+
+TypeScript's strict mode catches a lot of this. But it doesn't catch invariants that your type system doesn't model — which is most of the interesting ones.
+
+## What "done" actually means
+
+The longer I've worked on projects that ship to real volume, the more I've come to think that "done" is a moving target with a predictable shape.
+
+A feature is done when:
+1. It works in the happy path
+2. It handles the known failure modes gracefully
+3. It's observable — you can tell from logs and metrics whether it's healthy
+4. Someone else can read it and understand what it's doing and why
+
+That last one is the one that gets cut under pressure. And it's the one that costs the most later.
+
+---
+
+*These are patterns I've arrived at through specific experiences. They're not universal laws. Your constraints will be different — but the underlying habit of thinking carefully about what happens when your assumptions are wrong seems to travel pretty well.*

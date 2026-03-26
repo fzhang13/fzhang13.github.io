@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import copy from "@/copy.json";
 
 const navItems = copy.nav.items;
@@ -97,6 +98,14 @@ export default function Navbar({ revealed }: NavbarProps) {
             </li>
           ))}
           <li>
+            <Link
+              href="/blog"
+              className="text-sm font-medium transition-colors hover:text-primary-400 text-dark-300"
+            >
+              Writing
+            </Link>
+          </li>
+          <li>
             <a
               href={copy.nav.resumeHref}
               target="_blank"
@@ -143,6 +152,15 @@ export default function Navbar({ revealed }: NavbarProps) {
                   </a>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/blog"
+                  onClick={() => setMobileOpen(false)}
+                  className="block text-sm font-medium transition-colors text-dark-300"
+                >
+                  Writing
+                </Link>
+              </li>
               <li>
                 <a
                   href={copy.nav.resumeHref}

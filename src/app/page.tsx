@@ -1,8 +1,4 @@
-"use client";
-
-import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
+import HomeClient from "@/components/HomeClient";
 import About from "@/components/About";
 import Expertise from "@/components/Expertise";
 import Experience from "@/components/Experience";
@@ -10,26 +6,35 @@ import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SectionReveal from "@/components/SectionReveal";
+import Writing from "@/components/Writing";
 
 export default function Home() {
-  const [revealed, setRevealed] = useState(false);
-
   return (
     <>
-      <Navbar revealed={revealed} />
-      <main>
-        <Hero revealed={revealed} onReveal={() => setRevealed(true)} />
+      <HomeClient>
         <div className="gradient-line" />
-        <SectionReveal><About /></SectionReveal>
+        <SectionReveal>
+          <About />
+        </SectionReveal>
         <div className="gradient-line" />
-        <SectionReveal><Expertise /></SectionReveal>
+        <SectionReveal>
+          <Expertise />
+        </SectionReveal>
         <div className="gradient-line" />
-        <SectionReveal><Experience /></SectionReveal>
+        <SectionReveal>
+          <Experience />
+        </SectionReveal>
         <div className="gradient-line" />
-        <SectionReveal><Projects /></SectionReveal>
+        <SectionReveal>
+          <Projects />
+        </SectionReveal>
         <div className="gradient-line" />
-        <SectionReveal><Contact /></SectionReveal>
-      </main>
+        <Writing />
+        <div className="gradient-line" />
+        <SectionReveal>
+          <Contact />
+        </SectionReveal>
+      </HomeClient>
       <Footer />
     </>
   );
