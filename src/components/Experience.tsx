@@ -143,7 +143,7 @@ export default function Experience() {
                                   }}
                                   className="text-dark-300 text-sm flex items-start gap-2"
                                 >
-                                  <span className="text-primary-500 mt-1.5 shrink-0">
+                                  <span className="text-primary-500 mt-0.5 shrink-0">
                                     ▹
                                   </span>
                                   {highlight}
