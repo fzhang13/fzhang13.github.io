@@ -8,7 +8,8 @@
     "keywords": [
       "Felix Zhang",
       "Cloud Engineer",
-      "Backend Developer",
+      "Backend Engineer",
+      "Frontend Engineer",
       "AWS",
       "Software Engineer",
       "Toronto",
@@ -230,7 +231,7 @@
     "heading": "Where I've Worked",
     "items": [
       {
-        "title": "Full Stack Developer",
+        "title": "Full Stack Engineer",
         "company": "MediaMonks Inc. (formerly Jam3)",
         "companyUrl": "https://www.mediamonks.com",
         "location": "Toronto, Ontario, Canada",
