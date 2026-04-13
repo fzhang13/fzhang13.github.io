@@ -1,0 +1,125 @@
+---
+title: "Next.js App Router: An Honest Take After a Year in Production"
+date: "2025-09-03"
+excerpt: "I've shipped several production apps with the App Router now. Here's what the migration guides don't tell you — the good, the frustrating, and what I'd change."
+tags: ["nextjs", "react", "opinion", "frontend"]
+---
+
+I've been building with Next.js since the pages router days. I've shipped the App Router in production on a few projects now, and I have opinions.
+
+This isn't a tutorial. The docs cover the mechanics well enough. This is more like: *here's what the migration guide glosses over, and here's the mental model shift that actually helped me use it well.*
+
+## The thing that changes everything
+
+Server Components aren't just "components that render on the server." They're a fundamentally different primitive — one that **closes the gap between your data layer and your UI**.
+
+In the pages router, the typical flow was:
+
+```typescript
+// pages/dashboard.tsx
+export async function getServerSideProps(ctx) {
+  const user = await db.getUser(ctx.query.id);
+  return { props: { user } };
+}
+
+export default function Dashboard({ user }: { user: User }) {
+  return <div>{user.name}</div>;
+}
+```
+
+The data fetching and the component are in the same file but in different worlds — one runs at request time on the server, one runs on the client and is hydrated. There's an invisible boundary you have to keep in your head.
+
+With Server Components, you just... fetch in the component:
+
+```typescript
+// app/dashboard/page.tsx
+export default async function Dashboard({ searchParams }: PageProps) {
+  const user = await db.getUser(searchParams.id);
+  return <div>{user.name}</div>;
+}
+```
+
+No props plumbing. No hydration mismatch errors. No thinking about what's serialisable. The data and the UI are genuinely colocated.
+
+This sounds like a small quality-of-life improvement. In practice it changes how you think about component decomposition, where you put loading states, and how much boilerplate you write. It's a bigger shift than I expected.
+
+## Where it gets confusing
+
+The `"use client"` directive is a source of real confusion, and I think the docs underexplain *why* it exists.
+
+The mental model that helped me: `"use client"` doesn't mean "this runs on the client." It means **"this is the boundary between the server component tree and the client component tree."** Everything below a `"use client"` component will be bundled and sent to the browser. Everything above it won't.
+
+This has a counterintuitive implication: you can pass Server Component output *as children* to a Client Component.
+
+```tsx
+// This works — ServerThing renders on the server, but ClientWrapper
+// is a Client Component that receives it as children
+export default function Page() {
+  return (
+    <ClientWrapper>
+      <ServerThing />
+    </ClientWrapper>
+  );
+}
+```
+
+```tsx
+// This doesn't work — you can't import a Server Component
+// from inside a Client Component
+"use client";
+
+import ServerThing from "./ServerThing"; // ❌ will silently become a client component
+
+export function ClientWrapper() {
+  return <ServerThing />;
+}
+```
+
+The rule: **you can pass server components as props (including `children`), but you can't import them from client components.** Once you have this clear, a lot of confusing errors start making sense.
+
+## Caching: powerful but treacherous
+
+The fetch cache in App Router is powerful and, in my experience, the most common source of "why is this showing stale data" bugs.
+
+By default, `fetch` in a Server Component is cached aggressively:
+
+```typescript
+// Cached indefinitely (equivalent to { cache: 'force-cache' })
+const data = await fetch('https://api.example.com/posts');
+
+// Not cached at all
+const data = await fetch('https://api.example.com/posts', {
+  cache: 'no-store'
+});
+
+// Revalidated every 60 seconds
+const data = await fetch('https://api.example.com/posts', {
+  next: { revalidate: 60 }
+});
+```
+
+The trap: if you're building a static export (`output: 'export'`), all this caching is moot — the data is fetched once at build time. But if you're on a standard deployment, you need to be explicit about caching intent or you will have confusing staleness bugs.
+
+My default: **explicit `cache: 'no-store'` for user-specific data, explicit `revalidate` for shared data, and a healthy distrust of anything that feels like it should be dynamic but isn't.**
+
+## What I'd tell myself a year ago
+
+1. **Start with Server Components and add `"use client"` only when you need interactivity.** Not the other way around. Defaulting to client components and then trying to move things server-side is much harder.
+
+2. **`loading.tsx` files are not optional.** Every route segment that does async work should have a loading state. You will forget this in development (where fetches are instant) and remember it painfully in production.
+
+3. **The router cache is separate from the fetch cache.** This bit me hard. `router.refresh()` invalidates the router cache (re-runs Server Components for the current route). It does not invalidate the fetch cache. If you need both, you need `router.refresh()` plus some mechanism to bust fetch caches.
+
+4. **Parallel routes and intercepting routes are genuinely useful, but save them for when you need them.** Don't architect your app around them speculatively.
+
+## The honest bottom line
+
+The App Router is better than the pages router for applications that have real data dependencies and complex routing. The Server Component model is genuinely good once the mental model clicks.
+
+The rough edges are real — the caching model is overcomplex, the error messages are still sometimes opaque, and the `"use client"` boundary rules have more subtlety than the docs suggest.
+
+But I've shipped it in production and I wouldn't go back. The reduction in data-fetching boilerplate alone makes it worth it, and that's before considering the performance improvements from not shipping server-only code to the browser.
+
+The migration path is also gentler than I expected — you can incrementally adopt Server Components, and `"use client"` at a layout level effectively opts an entire subtree back into pages-router-style behaviour while you figure out the new model.
+
+Worth learning. Worth the rough edges.

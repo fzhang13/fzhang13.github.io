@@ -38,6 +38,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        display: ["Syne", "sans-serif"],
         mono: ["JetBrains Mono", "Fira Code", "monospace"],
       },
       animation: {
