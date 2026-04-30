@@ -3,6 +3,32 @@ import "./globals.css";
 import copy from "@/copy.json";
 import FaviconPulse from "@/components/FaviconPulse";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { JetBrains_Mono, Space_Grotesk, Inter } from "next/font/google";
+
+// Optimize font loading with Next.js
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains",
+  display: "swap",
+  preload: true,
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space",
+  display: "swap",
+  preload: true,
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-inter",
+  display: "swap",
+  preload: false, // Not critical
+});
 
 export const metadata: Metadata = {
   title: copy.meta.title,
@@ -52,8 +78,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" data-theme="bin">
+    <html
+      lang="en"
+      data-theme="root"
+      className={`${jetbrainsMono.variable} ${spaceGrotesk.variable} ${inter.variable}`}
+    >
       <head>
+        {/* Favicons */}
         <link rel="shortcut icon" href="/fonts/favicon/favicon.ico" />
         <link rel="icon" type="image/svg+xml" href="/fonts/favicon/favicon.svg" />
         <link
@@ -73,6 +104,9 @@ export default function RootLayout({
           sizes="16x16"
           href="/fonts/favicon/favicon-16x16.png"
         />
+        {/* Performance: DNS prefetch for external resources */}
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
       </head>
       <body>
         <ThemeProvider>
