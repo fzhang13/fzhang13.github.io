@@ -28,7 +28,7 @@ function generateDeterministicHash(input: string): string {
 }
 
 export default function WorkPage() {
-  const items = copy.experience.items;
+  const { items, terminal } = copy.experience;
 
   return (
     <div>
@@ -43,15 +43,15 @@ export default function WorkPage() {
         className="font-mono text-sm mb-8 space-y-1"
       >
         <p className="text-on-surface-variant">
-          <span className="text-primary">user@system</span>
-          <span className="text-on-surface-variant"> : ~/work $ </span>
-          <span className="text-on-surface">tar -xvf WORK.tar.gz</span>
+          <span className="text-primary">{terminal.user}</span>
+          <span className="text-on-surface-variant">{terminal.workDir}</span>
+          <span className="text-on-surface">{terminal.extractCommand}</span>
         </p>
         <p className="text-on-surface-variant mt-4">
-          Extracting professional experience and archived volumes...
+          {terminal.extracting}
         </p>
         <p className="text-on-surface-variant">
-          <span className="text-primary">[OK]</span> {items.length} volumes mounted successfully.
+          <span className="text-primary">{terminal.extractOk}</span> {items.length} {terminal.volumesMounted}
         </p>
       </motion.div>
 
@@ -61,12 +61,12 @@ export default function WorkPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <TerminalCard title="SYS_LOG : EXPERIENCE">
+        <TerminalCard title={terminal.terminalTitle}>
           {/* Git log command */}
           <div className="font-mono text-sm mb-6">
-            <span className="text-primary">user@system</span>
-            <span className="text-on-surface-variant"> : ~/work/history $ </span>
-            <span className="text-on-surface">git log --oneline --graph --decorate</span>
+            <span className="text-primary">{terminal.user}</span>
+            <span className="text-on-surface-variant">{terminal.historyDir}</span>
+            <span className="text-on-surface">{terminal.gitCommand}</span>
           </div>
 
           {/* Git log entries */}
@@ -88,8 +88,8 @@ export default function WorkPage() {
                       <span className="text-secondary">commit {hash} </span>
                       {isHead && (
                         <>
-                        (<span className="text-primary">HEAD &rarr; main</span>,
-                        <span className="text-error"> origin/production</span>)
+                        (<span className="text-primary">{terminal.headLabel}</span>,
+                        <span className="text-error">{terminal.originLabel}</span>)
                         </>
                       )}
                     </div>
@@ -99,12 +99,12 @@ export default function WorkPage() {
                   <div className="ml-8 text-on-surface-variant">
                     <div className="flex items-start">
                       <span className={`${lineColor} flex-shrink-0`}>|</span>
-                      <span className="ml-1">Author: FELIX_ZHANG</span>
+                      <span className="ml-1">{terminal.author}</span>
                     </div>
                     <div className="flex items-start">
                       <span className={`${lineColor} flex-shrink-0`}>|</span>
                       <span className="ml-1">
-                        Date:{'   '}
+                        {terminal.datePrefix}
                         <span className="text-secondary">{exp.period}</span>
                       </span>
                     </div>
@@ -116,8 +116,8 @@ export default function WorkPage() {
                     <div className="flex items-start">
                       <span className={`${lineColor} flex-shrink-0`}>|</span>
                       <span className="ml-1 flex-1 min-w-0">
-                        <span className="text-secondary font-bold">[ROLE]</span>
-                        <span className="text-on-surface font-bold"> {exp.title} @ </span>
+                        <span className="text-secondary font-bold">{terminal.roleLabel}</span>
+                        <span className="text-on-surface font-bold"> {exp.title}{terminal.roleConnector}</span>
                         <a
                           href={exp.companyUrl}
                           target="_blank"

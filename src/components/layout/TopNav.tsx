@@ -8,9 +8,11 @@ export default function TopNav() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <header className="h-topnav border-b border-outline bg-surface flex items-center justify-between px-4 md:px-6">
-      <Link href="/" className="font-mono text-sm text-on-surface-variant hover:text-primary transition-colors">
-        <span className="text-primary">$</span> felix.zhang
+    <header className="h-topnav border-b border-outline bg-surface flex items-center justify-between pl-14 pr-4 md:px-6">
+      <Link href="/" className="font-mono text-sm text-on-surface-variant hover:text-primary transition-colors whitespace-nowrap">
+        <span className="text-primary">$</span>
+        <span className="md:hidden"> f.zhang</span>
+        <span className="hidden md:inline"> felix.zhang</span>
       </Link>
 
       <div className="flex items-center gap-1">

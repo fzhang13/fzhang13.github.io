@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import BlockCursor from '@/components/shared/BlockCursor';
 import TerminalCard from '@/components/shared/TerminalCard';
+import copy from '@/copy.json';
 
 interface Line {
   type: 'input' | 'output';
@@ -18,30 +19,6 @@ interface CrashLine {
   type: 'addr' | 'info' | 'err' | 'trace';
 }
 
-const CRASH_LINES: CrashLine[] = [
-  { text: 'Segmentation fault (core dumped)', delay: 0, type: 'err' },
-  { text: '', delay: 200, type: 'info' },
-  { text: '--- [ cut here ] ---', delay: 400, type: 'info' },
-  { text: 'kernel panic — not syncing: page not found', delay: 600, type: 'err' },
-  { text: '', delay: 800, type: 'info' },
-  { text: 'Call Trace:', delay: 1000, type: 'info' },
-  { text: '  [<0x00000404>] resolve_route+0x404/0x808', delay: 1150, type: 'trace' },
-  { text: '  [<0xDEADBEEF>] handle_request+0x42/0x200', delay: 1300, type: 'trace' },
-  { text: '  [<0xCAFEBABE>] page_lookup+0x13/0x37', delay: 1450, type: 'trace' },
-  { text: '  [<0x8BADF00D>] render_tree+0x0/0x100', delay: 1600, type: 'trace' },
-  { text: '  [<0xFEEDFACE>] next_handler+0x14/0x28', delay: 1750, type: 'trace' },
-  { text: '', delay: 1900, type: 'info' },
-  { text: 'Code: 04 04 00 00 de ad be ef ca fe ba be', delay: 2000, type: 'addr' },
-  { text: 'RIP: 0x0000000000000404', delay: 2150, type: 'addr' },
-  { text: 'RSP: 0x00007fff00000000', delay: 2250, type: 'addr' },
-  { text: '', delay: 2400, type: 'info' },
-  { text: 'System halted.', delay: 2600, type: 'err' },
-  { text: '', delay: 2800, type: 'info' },
-  { text: 'Rebooting into recovery shell...', delay: 3000, type: 'info' },
-];
-
-const CRASH_TOTAL = 3600;
-
 const NAV_TARGETS: Record<string, string> = {
   home: '/',
   about: '/about',
@@ -51,81 +28,6 @@ const NAV_TARGETS: Record<string, string> = {
 
 const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
 
-const SECRETS: Record<string, string[]> = {
-  'sudo reboot': [
-    'Permission denied. Nice try though.',
-    'visitor is not in the sudoers file. This incident will be reported.',
-  ],
-  'rm -rf /': [
-    'rm: refusing to remove \'/\' recursively',
-    'The site is already broken. How much worse can it get?',
-  ],
-  'cat /var/log/syslog': [
-    '[2026.04.30] ERR  route_resolver: no matching path for requested URL',
-    '[2026.04.30] WRN  page_cache: cache miss — entry evicted',
-    '[2026.04.30] INF  recovery_shell: interactive terminal spawned',
-    '[2026.04.30] DBG  easter_egg: you found the logs. try more commands.',
-  ],
-  'cat /etc/passwd': [
-    'root:x:0:0:Felix Zhang:/home/felix:/bin/zsh',
-    'visitor:x:1000:1000:Anonymous:/tmp:/usr/bin/nologin',
-    '',
-    'Nice try. No passwords here.',
-  ],
-  blame: [
-    'git blame 404.tsx:',
-    '  fzhang13  (2026-04-30)  — "it works on my machine"',
-  ],
-  'git log': [
-    'commit 0x404DEAD (HEAD -> nowhere)',
-    'Author: Felix Zhang <felix.zhang.dev@gmail.com>',
-    'Date:   Wed Apr 30 2026',
-    '',
-    '    fix: accidentally deleted this page',
-  ],
-  cowsay: [
-    ' _______________',
-    '< 404 not found >',
-    ' ---------------',
-    '        \\   ^__^',
-    '         \\  (oo)\\_______',
-    '            (__)\\       )\\/\\',
-    '                ||----w |',
-    '                ||     ||',
-  ],
-  matrix: ['FOLLOW_THE_WHITE_RABBIT'],
-  'make coffee': [
-    'make: *** No rule to make target \'coffee\'.',
-    'Try: make tea',
-    '',
-    '418 I\'m a teapot.',
-  ],
-  ping: [
-    'PING localhost (127.0.0.1): 56 data bytes',
-    '64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.042 ms',
-    '64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=404.000 ms',
-    '',
-    '--- localhost ping statistics ---',
-    '2 packets transmitted, 1 packets received, 50% packet loss',
-    'Suspicious latency detected.',
-  ],
-  uptime: [
-    ' 00:04:04 up 404 days, 4:04, 1 user, load average: 4.04, 0.04, 4.04',
-  ],
-  fortune: [
-    '',
-    '"The best error message is the one that never shows up."',
-    '  — Thomas Fuchs',
-    '',
-    '...oops.',
-  ],
-  whoami: [
-    'visitor — lost in the void',
-    'You took a wrong turn somewhere.',
-    'Type \'help\' for a way out.',
-  ],
-};
-
 function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter>): { lines: Line[]; action?: 'clear' | 'navigate'; navigateTo?: string } {
   const cmd = raw.trim().toLowerCase();
 
@@ -133,47 +35,41 @@ function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter
     return { lines: [], action: 'clear' };
   }
 
-  if (cmd === 'help') {
+  // Special handling for sudo commands
+  if (cmd.startsWith('sudo')) {
+    const sudoOutput = (copy.notFound.commands as Record<string, string[]>)['sudo reboot'];
+    if (sudoOutput) {
+      return {
+        lines: sudoOutput.map((text) => ({ type: 'output' as const, text })),
+      };
+    }
+  }
+
+  // Special handling for rm -rf variations
+  if (cmd === 'rm -rf /' || cmd === 'rm -rf' || cmd.startsWith('rm -rf /')) {
+    const rmOutput = (copy.notFound.commands as Record<string, string[]>)['rm -rf /'];
+    if (rmOutput) {
+      return {
+        lines: rmOutput.map((text) => ({ type: 'output' as const, text })),
+      };
+    }
+  }
+
+  // Check if command exists in copy.notFound.commands
+  const commands = copy.notFound.commands as Record<string, string[]>;
+
+  // Try exact match first
+  if (commands[cmd]) {
     return {
-      lines: [
-        { type: 'output', text: 'Recovery shell — available commands:' },
-        { type: 'output', text: '' },
-        { type: 'output', text: '  Navigation:' },
-        { type: 'output', text: '    home               go to homepage' },
-        { type: 'output', text: '    about              go to about page' },
-        { type: 'output', text: '    stack              view tech stack' },
-        { type: 'output', text: '    work               see experience' },
-        { type: 'output', text: '    cd <page>          navigate to a page' },
-        { type: 'output', text: '' },
-        { type: 'output', text: '  Diagnostics:' },
-        { type: 'output', text: '    cat /var/log/syslog view error logs' },
-        { type: 'output', text: '    blame              who did this?' },
-        { type: 'output', text: '    git log            recent changes' },
-        { type: 'output', text: '    whoami             identify yourself' },
-        { type: 'output', text: '    clear              clear terminal' },
-        { type: 'output', text: '' },
-        { type: 'output', text: '  ...there might be other commands too.' },
-      ],
+      lines: commands[cmd].map((text) => ({ type: 'output' as const, text })),
     };
   }
 
-  if (cmd === 'ls') {
+  // Try case-insensitive match
+  const commandKey = Object.keys(commands).find(k => k.toLowerCase() === cmd);
+  if (commandKey && commands[commandKey]) {
     return {
-      lines: [
-        { type: 'output', text: '-rw-r--r--  core.dump' },
-        { type: 'output', text: '-rw-r--r--  panic.log' },
-        { type: 'output', text: 'drwxr-xr-x  lost+found/' },
-        { type: 'output', text: 'drwxr-xr-x  /home/' },
-        { type: 'output', text: '' },
-        { type: 'output', text: '3 items. The page you wanted isn\'t here.' },
-      ],
-    };
-  }
-
-  const secret = SECRETS[cmd];
-  if (secret) {
-    return {
-      lines: secret.map((text) => ({ type: 'output' as const, text })),
+      lines: commands[commandKey].map((text) => ({ type: 'output' as const, text })),
     };
   }
 
@@ -190,7 +86,7 @@ function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter
   if (target) {
     const path = NAV_TARGETS[target];
     return {
-      lines: [{ type: 'output', text: `Navigating to ${path}...`, className: 'text-primary whitespace-pre' }],
+      lines: [{ type: 'output', text: copy.notFound.navigating.replace('{path}', path), className: 'text-primary whitespace-pre' }],
       action: 'navigate',
       navigateTo: path,
     };
@@ -198,8 +94,8 @@ function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter
 
   return {
     lines: [
-      { type: 'output', text: `recovery-sh: command not found: ${raw.trim()}` },
-      { type: 'output', text: 'Type \'help\' for available commands.' },
+      { type: 'output', text: copy.notFound.commandNotFound.replace('{cmd}', raw.trim()) },
+      { type: 'output', text: copy.notFound.commandNotFoundHint },
     ],
   };
 }
@@ -213,6 +109,7 @@ export default function NotFoundPage() {
   const [konamiIndex, setKonamiIndex] = useState(0);
   const [konamiActivated, setKonamiActivated] = useState(false);
   const [glitch, setGlitch] = useState(false);
+  const [hintIndex, setHintIndex] = useState(0);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const crashScrollRef = useRef<HTMLDivElement>(null);
@@ -221,10 +118,10 @@ export default function NotFoundPage() {
   useEffect(() => {
     const timers: NodeJS.Timeout[] = [];
 
-    CRASH_LINES.forEach((line) => {
+    copy.notFound.crashSequence.forEach((line) => {
       timers.push(
         setTimeout(() => {
-          setCrashLines((prev) => [...prev, line]);
+          setCrashLines((prev) => [...prev, line as CrashLine]);
         }, line.delay),
       );
     });
@@ -232,7 +129,7 @@ export default function NotFoundPage() {
     timers.push(
       setTimeout(() => {
         setPhase('shell');
-      }, CRASH_TOTAL),
+      }, copy.notFound.crashDuration),
     );
 
     return () => timers.forEach(clearTimeout);
@@ -267,11 +164,11 @@ export default function NotFoundPage() {
         setShellLines((prev) => [
           ...prev,
           { type: 'output', text: '' },
-          { type: 'output', text: '  ★ ★ ★  KONAMI CODE ACTIVATED  ★ ★ ★', className: 'text-primary phosphor-glow-strong whitespace-pre' },
+          { type: 'output', text: copy.notFound.konamiMessage, className: 'text-primary phosphor-glow-strong whitespace-pre' },
           { type: 'output', text: '' },
-          { type: 'output', text: '  +30 lives granted. Not that you needed them.' },
-          { type: 'output', text: '  You\'re already immortalized in this 404.' },
-          { type: 'output', text: '  Achievement unlocked: LOST_AND_FOUND' },
+          { type: 'output', text: copy.notFound.konamiLives },
+          { type: 'output', text: copy.notFound.konamiImmortalized },
+          { type: 'output', text: copy.notFound.konamiAchievement },
           { type: 'output', text: '' },
         ]);
         setTimeout(() => setGlitch(false), 2000);
@@ -287,6 +184,17 @@ export default function NotFoundPage() {
     window.addEventListener('keydown', handleKonami);
     return () => window.removeEventListener('keydown', handleKonami);
   }, [handleKonami]);
+
+  // Rotate hints every 4 seconds
+  useEffect(() => {
+    if (phase !== 'shell' || shellLines.length > 0) return;
+
+    const interval = setInterval(() => {
+      setHintIndex((prev) => (prev + 1) % copy.notFound.easterEggHints.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [phase, shellLines.length]);
 
   const handleSubmit = () => {
     const raw = input.trim();
@@ -323,7 +231,7 @@ export default function NotFoundPage() {
 
   return (
     <div className={glitch ? 'animate-glitch' : ''}>
-      <h1 className="sr-only">404 — Page Not Found</h1>
+      <h1 className="sr-only">{copy.notFound.pageTitle}</h1>
 
       {/* Crash sequence */}
       <AnimatePresence>
@@ -367,13 +275,13 @@ export default function NotFoundPage() {
           {/* Error heading */}
           <div className="mb-8">
             <div className="font-mono text-xs text-error uppercase tracking-wider mb-3">
-              [ FAULT ] SEGV — page not mapped
+              {copy.notFound.faultLabel}
             </div>
             <div className="font-heading text-5xl md:text-7xl font-bold text-on-surface tracking-tight leading-none phosphor-glow">
-              404
+              {copy.notFound.heading}
             </div>
             <div className="font-mono text-sm text-on-surface-variant mt-3">
-              The page you&apos;re looking for doesn&apos;t exist, was moved, or was never here to begin with.
+              {copy.notFound.description}
             </div>
           </div>
 
@@ -383,18 +291,18 @@ export default function NotFoundPage() {
               onClick={() => router.push('/')}
               className="px-5 py-2 border border-primary bg-primary text-bg font-mono text-sm uppercase tracking-wider hover:bg-transparent hover:text-primary transition-colors"
             >
-              Go Home
+              {copy.notFound.goHomeLabel}
             </button>
             <button
               onClick={() => router.back()}
               className="px-5 py-2 border border-outline text-on-surface-variant font-mono text-sm uppercase tracking-wider hover:border-primary hover:text-primary transition-colors"
             >
-              Go Back
+              {copy.notFound.goBackLabel}
             </button>
           </div>
 
           {/* Recovery terminal */}
-          <TerminalCard title="RECOVERY_SHELL">
+          <TerminalCard title={copy.notFound.recoveryTitle}>
             <div
               className="cursor-text"
               onClick={() => inputRef.current?.focus()}
@@ -408,7 +316,7 @@ export default function NotFoundPage() {
                   {shellLines.map((line, i) =>
                     line.type === 'input' ? (
                       <p key={i} className="text-on-surface">
-                        <span className="text-error">$</span> {line.text}
+                        <span className="text-error">{copy.notFound.recoveryPrompt}</span> {line.text}
                       </p>
                     ) : (
                       <p
@@ -424,7 +332,7 @@ export default function NotFoundPage() {
 
               {/* Input */}
               <div className="flex items-center font-mono text-sm">
-                <span className="text-error mr-1">$</span>
+                <span className="text-error mr-1">{copy.notFound.recoveryPrompt}</span>
                 <div className="relative flex-1">
                   <input
                     ref={inputRef}
@@ -449,9 +357,23 @@ export default function NotFoundPage() {
               </div>
 
               {shellLines.length === 0 && (
-                <p className="font-mono text-xs text-outline-bright mt-2">
-                  recovery mode — type &apos;help&apos; for commands
-                </p>
+                <>
+                  <p className="font-mono text-xs text-outline-bright mt-2">
+                    {copy.notFound.recoveryHint}
+                  </p>
+                  <AnimatePresence mode="wait">
+                    <motion.p
+                      key={hintIndex}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 0.6, x: 0 }}
+                      exit={{ opacity: 0, x: 10 }}
+                      transition={{ duration: 0.4 }}
+                      className="font-mono text-xs text-secondary mt-1 italic"
+                    >
+                      {copy.notFound.easterEggHints[hintIndex]}
+                    </motion.p>
+                  </AnimatePresence>
+                </>
               )}
             </div>
           </TerminalCard>
@@ -462,7 +384,7 @@ export default function NotFoundPage() {
               animate={{ opacity: 1, scale: 1 }}
               className="mt-4 font-mono text-xs text-center text-primary opacity-60"
             >
-              ↑↑↓↓←→←→BA — you found it.
+              {copy.notFound.konamiIndicator}
             </motion.div>
           )}
         </motion.div>

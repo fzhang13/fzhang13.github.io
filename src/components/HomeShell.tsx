@@ -134,24 +134,27 @@ export default function HomeShell() {
       onClick={() => inputRef.current?.focus()}
     >
       {lines.length > 0 && (
-        <div
-          ref={scrollRef}
-          className="font-mono text-sm max-h-48 overflow-y-auto space-y-0.5 mb-2"
-        >
-          {lines.map((line, i) =>
-            line.type === 'input' ? (
-              <p key={i} className="text-on-surface">
-                <span className="text-primary">$</span> {line.text}
-              </p>
-            ) : (
-              <p
-                key={i}
-                className={line.className || 'text-on-surface-variant whitespace-pre'}
-              >
-                {line.text}
-              </p>
-            ),
-          )}
+        <div className="relative mb-2">
+          <div
+            ref={scrollRef}
+            className="font-mono text-sm max-h-48 overflow-y-auto overflow-x-auto space-y-0.5 scrollbar-thin"
+          >
+            {lines.map((line, i) =>
+              line.type === 'input' ? (
+                <p key={i} className="text-on-surface">
+                  <span className="text-primary">$</span> {line.text}
+                </p>
+              ) : (
+                <p
+                  key={i}
+                  className={line.className || 'text-on-surface-variant whitespace-pre'}
+                >
+                  {line.text}
+                </p>
+              ),
+            )}
+          </div>
+          <div className="absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-bg to-transparent pointer-events-none" />
         </div>
       )}
 
@@ -164,7 +167,7 @@ export default function HomeShell() {
             value={input}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
-            className="bg-transparent border-none outline-none text-on-surface w-full caret-transparent"
+            className="bg-transparent border-none outline-none text-on-surface w-full caret-transparent text-base"
             autoComplete="off"
             autoCapitalize="off"
             autoCorrect="off"

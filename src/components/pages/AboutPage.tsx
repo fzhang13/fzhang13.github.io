@@ -18,7 +18,7 @@ const BAR_COLORS = [
 ];
 
 export default function AboutPage() {
-  const { sysSpecs, historyLog } = copy.about;
+  const { sysSpecs, historyLog, terminalTitles } = copy.about;
 
   return (
     <div>
@@ -32,7 +32,7 @@ export default function AboutPage() {
         transition={{ delay: 0.1 }}
         className="mb-6"
       >
-        <TerminalCard title="&gt; EXECUTE WHOAMI.SH">
+        <TerminalCard title={terminalTitles.whoami}>
           <InteractiveTerminal embedded />
         </TerminalCard>
       </motion.div>
@@ -44,7 +44,7 @@ export default function AboutPage() {
         transition={{ delay: 0.2 }}
         className="mb-6"
       >
-        <TerminalCard title="SYS_SPECS">
+        <TerminalCard title={terminalTitles.sysSpecs}>
           <div className="space-y-4">
             {sysSpecs.map((spec, i) => (
               <div key={spec.label}>
@@ -73,28 +73,23 @@ export default function AboutPage() {
         transition={{ delay: 0.3 }}
         className="mb-6"
       >
-        <TerminalCard title="TAIL -F HISTORY.LOG">
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse font-mono text-sm">
-              <tbody>
-                {historyLog.map((entry, i) => (
-                  <tr
-                    key={i}
-                    className="border-b border-outline last:border-b-0"
-                  >
-                    <td className="py-4 pr-4 text-on-surface-variant whitespace-nowrap align-top">
-                      {entry.timestamp}
-                    </td>
-                    <td className={`py-4 pr-4 font-bold whitespace-nowrap align-top ${LEVEL_STYLES[entry.level] || 'text-primary'}`}>
-                      {entry.level}
-                    </td>
-                    <td className="py-4 text-on-surface align-top">
-                      {entry.description}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+        <TerminalCard title={terminalTitles.history}>
+          <div className="font-mono text-sm divide-y divide-outline">
+            {historyLog.map((entry, i) => (
+              <div key={i} className="py-4">
+                <div className="flex items-center gap-3 mb-1">
+                  <span className="text-on-surface-variant text-xs">
+                    {entry.timestamp}
+                  </span>
+                  <span className={`font-bold text-xs ${LEVEL_STYLES[entry.level] || 'text-primary'}`}>
+                    {entry.level}
+                  </span>
+                </div>
+                <p className="text-on-surface">
+                  {entry.description}
+                </p>
+              </div>
+            ))}
           </div>
         </TerminalCard>
       </motion.div>

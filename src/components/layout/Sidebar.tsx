@@ -52,14 +52,17 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile toggle */}
-      <button
-        onClick={() => setMobileOpen(!mobileOpen)}
-        className="md:hidden fixed top-3 left-3 z-[100] p-2 border border-outline bg-surface text-primary"
-        aria-label="Toggle navigation"
-      >
-        {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-      </button>
+      {/* Mobile hamburger (only shown when closed) */}
+      {!mobileOpen && (
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="md:hidden fixed left-3 z-[100] border border-outline bg-surface text-primary flex items-center justify-center"
+          style={{ top: '0.6rem', padding: '0.4rem' }}
+          aria-label="Open navigation"
+        >
+          <Menu size={18} />
+        </button>
+      )}
 
       {/* Mobile overlay */}
       {mobileOpen && (
@@ -79,6 +82,20 @@ export default function Sidebar() {
           md:translate-x-0 md:static md:z-auto
         `}
       >
+        {/* Mobile close button (inside sidebar) */}
+        {mobileOpen && (
+          <div className="md:hidden flex justify-end px-4 pt-3 pb-2">
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="border border-outline bg-surface text-primary flex items-center justify-center"
+              style={{ padding: '0.4rem' }}
+              aria-label="Close navigation"
+            >
+              <X size={18} />
+            </button>
+          </div>
+        )}
+
         <div className="flex-1 py-4 overflow-y-auto">
           {navContent}
         </div>
