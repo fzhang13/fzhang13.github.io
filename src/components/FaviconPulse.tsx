@@ -42,10 +42,10 @@ function createPulseFavicon(): string {
   const ctx = canvas.getContext("2d");
   if (!ctx) return "";
 
-  // Draw a simple blue circle with a wave emoji feel
+  const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() || '#ffb000';
   ctx.beginPath();
   ctx.arc(16, 16, 14, 0, Math.PI * 2);
-  ctx.fillStyle = "#3b91ff";
+  ctx.fillStyle = primaryColor;
   ctx.fill();
 
   ctx.font = "bold 14px sans-serif";

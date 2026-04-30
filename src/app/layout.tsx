@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import copy from "@/copy.json";
 import FaviconPulse from "@/components/FaviconPulse";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export const metadata: Metadata = {
   title: copy.meta.title,
@@ -52,7 +52,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`scroll-smooth ${GeistSans.variable}`}>
+    <html lang="en" data-theme="bin">
       <head>
         <link rel="shortcut icon" href="/fonts/favicon/favicon.ico" />
         <link rel="icon" type="image/svg+xml" href="/fonts/favicon/favicon.svg" />
@@ -74,9 +74,11 @@ export default function RootLayout({
           href="/fonts/favicon/favicon-16x16.png"
         />
       </head>
-      <body className="antialiased">
-        <FaviconPulse />
-        {children}
+      <body>
+        <ThemeProvider>
+          <FaviconPulse />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
