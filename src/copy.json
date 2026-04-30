@@ -25,8 +25,7 @@
       { "label": "Home", "href": "#home" },
       { "label": "About", "href": "#about" },
       { "label": "Expertise", "href": "#expertise" },
-      { "label": "Experience", "href": "#experience" },
-      { "label": "Contact", "href": "#contact" }
+      { "label": "Experience", "href": "#experience" }
     ],
     "resumeLabel": "Resume",
     "resumeHref": "/resume/FelixZhang.pdf"
@@ -36,7 +35,7 @@
     "firstName": "Felix",
     "lastName": "Zhang",
     "subtitle": "Full-Stack Engineer",
-    "subtitleParts": ["Cloud & Backend", "AWS", "Scalable Systems"],
+    "subtitleParts": ["I code stuff, mostly backend, sometimes frontend and infra. ¯\\_(ツ)_/¯ "],
     "revealCta": "press Enter or click to reveal ⏎",
     "viewWorkLabel": "View My Work",
     "viewWorkHref": "#about",
@@ -81,13 +80,55 @@
       { "icon": "Cloud", "label": "Cloud", "value": "AWS/GCP" },
       { "icon": "Terminal", "label": "Experience", "value": "6+ yrs" },
       { "icon": "Boxes", "label": "Projects", "value": "20+" }
+    ],
+    "sysSpecs": [
+      { "label": "FRONTEND_RENDER", "value": 88 },
+      { "label": "BACKEND_LOGIC", "value": 91 },
+      { "label": "INFRA_DEVOPS", "value": 74 }
+    ],
+    "historyLog": [
+      {
+        "timestamp": "[2026.03.22:09302]",
+        "level": "INF",
+        "description": "Snow module deployed. Weather API synced with route optimizer. Powder alert daemon running on cron. Advisory: send it."
+      },
+      {
+        "timestamp": "[2026.03.01:14002]",
+        "level": "INF",
+        "description": "Monks.flow AI pipeline operational. LLM content generators spawned across NestJS workers. Claude Code agent integrated for autonomous refactoring cycles."
+      },
+      {
+        "timestamp": "[2025.03.10:08452]",
+        "level": "INF",
+        "description": "Zoox.com V2.0 pushed to production. Full architectural overhaul — frontend, backend, CMS, cloud infra. Lighthouse perf and a11y scores holding at 90+."
+      },
+      {
+        "timestamp": "[2024.08.15:11002]",
+        "level": "INF",
+        "description": "Adidas LA Flagship retail experience activated. NFC modules synced with AWS backend. Full-stack in-store digital pipeline operational."
+      },
+      {
+        "timestamp": "[2022.01.10:18452]",
+        "level": "WRN",
+        "description": "Meta internal deployment pipeline engaged. Novi.com shipped under elevated security protocols. Multi-locale CMS and Newsroom feature operational. Compliance audit: passed."
+      },
+      {
+        "timestamp": "[2020.01.06:03018]",
+        "level": "INF",
+        "description": "MediaMonks system integration initialized. Primary employment loop commenced. Enterprise stack onboarding complete."
+      },
+      {
+        "timestamp": "[2019.03.14:02102]",
+        "level": "ERR",
+        "description": "Production database fault at Palomino Systems. Stripe webhook cascade triggered data inconsistency. Manual reconciliation applied. Post-mortem filed."
+      }
     ]
   },
   "terminal": {
     "filename": "about.sh",
     "hint": "try \"help\"",
-    "commandHint": "commands: help · cat profile.yml · about · skills · hobbies · contact · clear",
-    "initialCommand": "cat profile.yml",
+    "commandHint": "commands: help · cat about.yml · about · skills · hobbies · contact · clear",
+    "initialCommand": "cat about.yml",
     "initialOutput": [
       "  name:      Felix Zhang",
       "  role:      Full-Stack Engineer",
@@ -100,7 +141,7 @@
       "             running, cycling"
     ],
     "commands": {
-      "cat profile.yml": [
+      "cat about.yml": [
         "  name:      Felix Zhang",
         "  role:      Full-Stack Engineer",
         "  location:  Toronto, CA",
@@ -114,7 +155,7 @@
       "help": [
         "Available commands:",
         "  help              — show this message",
-        "  cat profile.yml   — display profile",
+        "  cat about.yml   — display profile",
         "  about             — who is Felix?",
         "  skills            — list technical skills",
         "  hobbies           — off-the-clock interests",
@@ -148,7 +189,7 @@
       ]
     },
     "notFoundPrefix": "zsh: command not found:",
-    "notFoundHint": "try: help · cat profile.yml · about · skills · hobbies · contact · clear"
+    "notFoundHint": "try: help · cat about.yml · about · skills · hobbies · contact · clear"
   },
   "expertise": {
     "sectionNumber": "02",
@@ -198,31 +239,42 @@
       }
     ],
     "techStack": [
-      { "name": "JavaScript", "category": "Language" },
       { "name": "TypeScript", "category": "Language" },
-      { "name": "PHP", "category": "Language" },
+      { "name": "JavaScript", "category": "Language" },
       { "name": "Python", "category": "Language" },
+      { "name": "PHP", "category": "Language" },
       { "name": "SQL", "category": "Language" },
-      { "name": "Java", "category": "Language" },
       { "name": "HTML/CSS/SCSS", "category": "Language" },
       { "name": "React", "category": "Frontend" },
-      { "name": "Next.js", "category": "Framework" },
-      { "name": "React Native", "category": "Mobile" },
-      { "name": "Node.js", "category": "Runtime" },
+      { "name": "Next.js", "category": "Frontend" },
+      { "name": "Vite", "category": "Frontend" },
+      { "name": "React Native", "category": "Frontend" },
+      { "name": "Node.js", "category": "Backend" },
+      { "name": "NestJS", "category": "Backend" },
+      { "name": "GraphQL", "category": "Backend" },
       { "name": "PostgreSQL", "category": "Database" },
       { "name": "MySQL", "category": "Database" },
       { "name": "MongoDB", "category": "Database" },
-      { "name": "GraphQL", "category": "API" },
-      { "name": "AWS", "category": "Cloud" },
-      { "name": "GCP", "category": "Cloud" },
-      { "name": "Docker", "category": "DevOps" },
-      { "name": "Terraform", "category": "IaC" },
-      { "name": "Serverless", "category": "Architecture" },
-      { "name": "CircleCI", "category": "CI/CD" },
+      { "name": "Redis", "category": "Database" },
+      { "name": "AWS", "category": "Cloud & DevOps" },
+      { "name": "GCP", "category": "Cloud & DevOps" },
+      { "name": "Docker", "category": "Cloud & DevOps" },
+      { "name": "Terraform", "category": "Cloud & DevOps" },
+      { "name": "Serverless", "category": "Cloud & DevOps" },
+      { "name": "OpenAI GPT", "category": "AI" },
+      { "name": "Anthropic Claude", "category": "AI" },
+      { "name": "Google Gemini", "category": "AI" },
+      { "name": "Prompt Engineering", "category": "AI" },
+      { "name": "GitHub Copilot", "category": "AI" },
+      { "name": "Claude Code", "category": "AI" },
+      { "name": "OpenAI Codex", "category": "AI" },
       { "name": "Git", "category": "Tool" },
-      { "name": "Mercurial", "category": "Tool" },
+      { "name": "GitHub", "category": "Tool" },
       { "name": "Jira", "category": "Tool" },
-      { "name": "Figma", "category": "Tool" }
+      { "name": "Postman", "category": "Tool" },
+      { "name": "Figma", "category": "Tool" },
+      { "name": "VSCode", "category": "Tool" },
+      { "name": "Cursor", "category": "Tool" }
     ]
   },
   "experience": {
@@ -231,24 +283,24 @@
     "heading": "Where I've Worked",
     "items": [
       {
-        "title": "Full Stack Engineer",
-        "company": "MediaMonks Inc. (formerly Jam3)",
+        "title": "Full-Stack Engineer",
+        "company": "MediaMonks Inc. (Formerly Jam3)",
         "companyUrl": "https://www.mediamonks.com",
         "location": "Toronto, Ontario, Canada",
         "period": "2020 — Present",
         "highlights": [
-          "Contributing engineer on Monks.flow, Media Monks full fledge AI platform for marketing",
-          "Architected and delivered full-stack solutions for high-profile digital experiences including Zoox.com, Adidas LA flagship retail installation, Oculus Creators platform, Adidas FIFA World Cup campaign, Airbnb x Obama Voyager Scholarship portal, and Novi.com",
-          "Engineered backend infrastructure for KFC Polladas (Mexico City) and Texas State Technical College digital experiences, ensuring scalability and performance",
-          "Contributing developer on Facebook Marketplace, CreativeX, Brand Portal, WhatsApp.com, Oculus.com, Adidas Community, and Visa Super Bowl digital experience",
-          "Deployed production code to Meta's internal infrastructure as a contingent engineering employee, adhering to enterprise-level code quality and security standards",
-          "Advanced full-stack monorepo architecture and front-end framework standards, establishing best practices for scalable application development",
-          "Maintained and enhanced open-source projects and internal toolings, improving developer productivity across teams",
-          "Transformed proof-of-concept prototypes into production applications",
-          "Led co-op recruitment strategy and mentorship programs to develop junior engineering talent",
-          "Spearheaded documentation initiative to improve visibility and adoption of tools used across the department"
+          "SWE IC on Monks.flow. MediaMonks' full-stack AI platform for marketing — LLM-driven content generation pipelines built with NestJS, Redis, Docker, PostgreSQL and Vite, along with high test coverage maintained across all services",
+          "Integrated Claude Code into the development lifecycle of Monks.flow to automate complex refactors, generate comprehensive test suites, and accelerate feature iteration across the NestJS and Redis layers",
+          "Tech-led the full site launch of Zoox.com end-to-end — owning frontend architecture, backend APIs, headless CMS integration, and cloud infrastructure — delivering a highly animated experience with consistently high Lighthouse performance and accessibility scores (90+)",
+          "Tech lead on the Oculus Creators platform and Novi.com. Deployed production code to Meta's internal infrastructure as a contingent engineer, adhering to enterprise-level code quality, security compliance, and access-control standards",
+          "Tech lead on Adidas LA Flagship retail digital experience. Full-stack digital in store experience using NextJS, AWS, Node and NFC modules",
+          "Tech lead on Adidas FIFA World Cup and Airbnb Voyager Scholarship microsites",
+          "Architected and shipped full-stack solutions for KFC, Burger King and Texas State Technical College",
+          "IC Engineer for Facebook Marketplace, WhatsApp.com, Oculus.com, and Visa Super Bowl digital experiences",
+          "Championed monorepo architecture standards and frontend framework best practices across the engineering department",
+          "Led co-op recruitment strategy and mentorship programs, growing multiple junior engineers into full-time employees"
         ],
-        "tags": ["React", "Next.js", "Node.js", "PHP", "AWS", "Docker", "GraphQL", "Terraform"]
+        "tags": ["React", "Next.js", "NestJS", "Node.js", "Redis", "PostgreSQL", "AWS", "Docker", "GraphQL", "Vite"]
       },
       {
         "title": "Full-Stack Application Developer",
@@ -257,9 +309,9 @@
         "location": "Toronto, Ontario, Canada",
         "period": "2019 — 2020",
         "highlights": [
-          "Designed and implemented custom subscription management system leveraging Stripe API with automated renewal processing",
-          "Orchestrated enterprise data migration for Sterling Capital Brokers, transferring legacy datasets across MySQL and PostgreSQL using Laravel-based ETL pipelines",
-          "Delivered full-stack web applications using Laravel, MySQL, and JavaScript"
+          "Designed and implemented a subscription management system with Stripe API (automated renewal and webhook-driven state)",
+          "Orchestrated enterprise data migration for Sterling Capital Brokers across MySQL and PostgreSQL using Laravel-based ETL pipelines",
+          "Delivered full-stack web applications with Laravel, MySQL, and JavaScript, collaborating directly with stakeholders on requirements and QA"
         ],
         "tags": ["Laravel", "PHP", "MySQL", "PostgreSQL", "JavaScript", "Stripe"]
       }
@@ -292,25 +344,6 @@
       }
     ]
   },
-  "contact": {
-    "sectionNumber": "05",
-    "sectionLabel": "Contact",
-    "heading": "Get In Touch",
-    "description": "I'm always open to new opportunities, interesting projects, and conversations about cloud architecture. Whether you have a question or just want to say hi — my inbox is open.",
-    "form": {
-      "action": "https://formspree.io/f/felix.zhang.dev@gmail.com",
-      "nameLabel": "Name",
-      "namePlaceholder": "Your name",
-      "emailLabel": "Email",
-      "emailPlaceholder": "your@email.com",
-      "messageLabel": "Message",
-      "messagePlaceholder": "What's on your mind?",
-      "subject": "Portfolio Contact Form",
-      "submitLabel": "Send Message"
-    },
-    "email": "felix.zhang.dev@gmail.com",
-    "location": "Toronto, Ontario, Canada"
-  },
   "footer": {
     "copyright": "Felix Zhang",
     "builtWith": "Built with Next.js & Tailwind CSS",
@@ -319,5 +352,80 @@
       { "platform": "linkedin", "href": "https://www.linkedin.com/in/f-zhang/", "label": "LinkedIn" },
       { "platform": "email", "href": "mailto:felix.zhang.dev@gmail.com", "label": "Email" }
     ]
+  },
+  "homeShell": {
+    "commandHint": "type 'help' for commands",
+    "commands": {
+      "help": [
+        "Available commands:",
+        "",
+        "  Navigation:",
+        "    about              navigate to about",
+        "    stack              view tech stack",
+        "    work               see work experience",
+        "    cd <page>          navigate (cd about, cd /stack)",
+        "",
+        "  Info:",
+        "    whoami             display current user",
+        "    ls                 list available pages",
+        "    clear              clear terminal output",
+        "",
+        "  Other:",
+        "    neofetch           system info",
+        "    sudo               nice try",
+        "    rm -rf /           don't do it",
+        "    exit               you can't leave"
+      ],
+      "whoami": [
+        "visitor — browsing felix.zhang",
+        "Felix Zhang | Full-Stack Engineer | Toronto, CA",
+        "Type 'about' to learn more, or 'help' for all commands."
+      ],
+      "ls": [
+        "drwxr-xr-x  HOME.sh",
+        "drwxr-xr-x  ABOUT.log",
+        "drwxr-xr-x  STACK.env",
+        "drwxr-xr-x  WORK.tar.gz",
+        "",
+        "4 items, 0 hidden"
+      ],
+      "sudo": [
+        "Permission denied. Nice try though.",
+        "visitor is not in the sudoers file. This incident will be reported."
+      ],
+      "rm -rf /": [
+        "rm: cannot remove '/': Operation not permitted",
+        "Besides, this portfolio took too long to build."
+      ],
+      "exit": [
+        "There is no escape.",
+        "You're stuck here forever. Or just close the tab."
+      ]
+    },
+    "neofetch": {
+      "ascii": [
+      "   ███████  ███████",
+      "   ██       ░░░░░██",
+      "   ███████     ███ ",
+      "   ██          ██  ",
+      "   ██       ░░░░░██",
+      "   ██.      ███████"
+      ],
+      "fields": [
+        ["visitor", "@", "felix.zhang"],
+        ["---", "", "-----------------"],
+        ["OS", ": ", "felix.zhang v0.2.4"],
+        ["Host", ": ", "Next.js / GitHub Pages"],
+        ["Shell", ": ", "HomeShell v1.0.0"],
+        ["Theme", ": ", "{theme}"],
+        ["Terminal", ": ", "JetBrains Mono"],
+        ["Uptime", ": ", "6+ years"],
+        ["Packages", ": ", "38 (npm)"],
+        ["Resolution", ": ", "{viewport}"]
+      ]
+    },
+    "navigationFeedback": "Navigating to {page}...",
+    "notFoundPrefix": "zsh: command not found:",
+    "notFoundHint": "Type 'help' for available commands."
   }
 }

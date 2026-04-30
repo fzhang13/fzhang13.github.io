@@ -9,42 +9,54 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: "#eef7ff",
-          100: "#d9edff",
-          200: "#bce0ff",
-          300: "#8ecdff",
-          400: "#59b0ff",
-          500: "#3b91ff",
-          600: "#1b6ff5",
-          700: "#1459e1",
-          800: "#1748b6",
-          900: "#193f8f",
-          950: "#142857",
+        bg: "var(--bg)",
+        surface: {
+          DEFAULT: "var(--surface)",
+          low: "var(--surface-low)",
+          high: "var(--surface-high)",
+          highest: "var(--surface-highest)",
         },
-        dark: {
-          50: "#f6f6f7",
-          100: "#e2e3e5",
-          200: "#c4c6ca",
-          300: "#9fa2a8",
-          400: "#7b7f87",
-          500: "#60646c",
-          600: "#4c4f56",
-          700: "#3e4147",
-          800: "#2a2d32",
-          900: "#1a1c20",
-          950: "#0d0e10",
+        "on-surface": {
+          DEFAULT: "var(--on-surface)",
+          variant: "var(--on-surface-variant)",
+        },
+        primary: {
+          DEFAULT: "var(--primary)",
+          dim: "var(--primary-dim)",
+          container: "var(--primary-container)",
+        },
+        secondary: {
+          DEFAULT: "var(--secondary)",
+          container: "var(--secondary-container)",
+        },
+        outline: {
+          DEFAULT: "var(--outline)",
+          bright: "var(--outline-bright)",
+        },
+        error: {
+          DEFAULT: "var(--error)",
+          container: "var(--error-container)",
         },
       },
       fontFamily: {
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        sans: ["var(--font-body)", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "Fira Code", "monospace"],
+      },
+      spacing: {
+        "bezel": "40px",
+        "sidebar": "256px",
+        "topnav": "48px",
+      },
+      maxWidth: {
+        "shell": "1200px",
       },
       animation: {
         "fade-in": "fadeIn 0.5s ease-in-out",
         "slide-up": "slideUp 0.5s ease-out",
-        "typing": "typing 3.5s steps(40, end)",
-        "blink": "blink 0.75s step-end infinite",
+        "blink": "cursor-blink 1s step-end infinite",
+        "terminal-in": "terminalIn 0.3s ease-out",
+        "terminal-out": "terminalOut 0.2s ease-in",
       },
       keyframes: {
         fadeIn: {
@@ -55,13 +67,17 @@ const config: Config = {
           "0%": { opacity: "0", transform: "translateY(20px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        typing: {
-          "from": { width: "0" },
-          "to": { width: "100%" },
+        "cursor-blink": {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0" },
         },
-        blink: {
-          "from, to": { borderColor: "transparent" },
-          "50%": { borderColor: "currentColor" },
+        terminalIn: {
+          "0%": { opacity: "0", transform: "translateY(-10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        terminalOut: {
+          "0%": { opacity: "1", transform: "translateY(0)" },
+          "100%": { opacity: "0", transform: "translateY(-20px)" },
         },
       },
     },
