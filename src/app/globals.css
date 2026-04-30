@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+/* Fonts are now loaded via Next.js font optimization in layout.tsx */
 
 /* ============================================
    THEME DEFINITIONS (CSS Custom Properties)
@@ -25,8 +25,8 @@
   --outline-bright: #869486;
   --error: #ffb4ab;
   --error-container: #93000a;
-  --font-body: 'JetBrains Mono', monospace;
-  --font-heading: 'JetBrains Mono', monospace;
+  --font-body: var(--font-jetbrains), monospace;
+  --font-heading: var(--font-jetbrains), monospace;
   --glow-intensity: 0.3;
   --glow-blur: 0px;
   --glow-spread: 2px;
@@ -49,8 +49,8 @@
   --outline-bright: #9f8e78;
   --error: #ffb4ab;
   --error-container: #93000a;
-  --font-body: 'Space Grotesk', sans-serif;
-  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: var(--font-space), sans-serif;
+  --font-heading: var(--font-space), sans-serif;
   --glow-intensity: 0.4;
   --glow-blur: 0px;
   --glow-spread: 2px;
@@ -73,8 +73,8 @@
   --outline-bright: #b18780;
   --error: #ffb4ab;
   --error-container: #93000a;
-  --font-body: 'Space Grotesk', sans-serif;
-  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: var(--font-space), sans-serif;
+  --font-heading: var(--font-space), sans-serif;
   --glow-intensity: 0.3;
   --glow-blur: 0px;
   --glow-spread: 0px;
@@ -97,8 +97,8 @@
   --outline-bright: #839493;
   --error: #ffb4ab;
   --error-container: #93000a;
-  --font-body: 'Space Grotesk', sans-serif;
-  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: var(--font-space), sans-serif;
+  --font-heading: var(--font-space), sans-serif;
   --glow-intensity: 0.5;
   --glow-blur: 8px;
   --glow-spread: 4px;
@@ -171,7 +171,7 @@
 
   .section-subheading {
     color: var(--primary);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-jetbrains), monospace;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -191,7 +191,7 @@
     justify-content: space-between;
     padding: 8px 16px;
     border-bottom: 1px solid var(--outline);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-jetbrains), monospace;
     font-size: 0.75rem;
     color: var(--on-surface-variant);
     text-transform: uppercase;
@@ -229,7 +229,7 @@
   }
 
   .bracket-chip {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--font-jetbrains), monospace;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.1em;

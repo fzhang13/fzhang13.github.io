@@ -1,0 +1,8 @@
+# Target modern browsers only to reduce polyfills and improve performance
+# This matches baseline 2023+ browser support
+defaults and supports es6-module
+not IE 11
+not dead
+> 0.5%
+last 2 versions
+Firefox ESR

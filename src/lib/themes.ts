@@ -13,7 +13,7 @@ export const themes: ThemeDefinition[] = [
   { id: 'var', label: 'Var', description: 'Cyberpunk Cyan' },
 ];
 
-export const DEFAULT_THEME: ThemeId = 'bin';
+export const DEFAULT_THEME: ThemeId = 'root';
 
 export const NAV_ITEMS = [
   { label: 'HOME.sh', href: '/' },
