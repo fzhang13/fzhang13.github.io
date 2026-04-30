@@ -51,6 +51,11 @@
     "sectionNumber": "01",
     "sectionLabel": "About",
     "heading": "Who I Am",
+    "terminalTitles": {
+      "whoami": "&gt; EXECUTE WHOAMI.SH",
+      "sysSpecs": "SYS_SPECS",
+      "history": "TAIL -F HISTORY.LOG"
+    },
     "codeCard": {
       "filename": "felix.js",
       "fields": {
@@ -195,6 +200,57 @@
     "sendLabel": "Send Request",
     "loadingText": "Fetching expertise data...",
     "techStackHeading": "Tech Stack",
+    "stackTerminal": {
+      "prompt": "root@sys:~#",
+      "command": "npm install stack",
+      "pressEnter": "press enter or click to install",
+      "installTitle": "NPM_INSTALL",
+      "packagesTitle": "INSTALLED_PACKAGES.log"
+    },
+    "installSequence": [
+      { "text": "$ npm install stack", "delay": 0, "type": "cmd" },
+      { "text": "", "delay": 300, "type": "info" },
+      { "text": "resolving dependencies...", "delay": 500, "type": "info" },
+      { "text": "fetching packages from registry...", "delay": 900, "type": "info" },
+      { "text": "", "delay": 1100, "type": "info" },
+      { "text": "+ typescript@6.4       + javascript@es2026", "delay": 1300, "type": "pkg" },
+      { "text": "+ python@3.14.4        + php@8.5", "delay": 1450, "type": "pkg" },
+      { "text": "+ sql@ansi:2023        + html-css-scss@latest", "delay": 1600, "type": "pkg" },
+      { "text": "", "delay": 1700, "type": "info" },
+      { "text": "installing frontend frameworks...", "delay": 1800, "type": "info" },
+      { "text": "+ react@19.2.0         + next@16.2.0", "delay": 1950, "type": "pkg" },
+      { "text": "+ vite@7.0.4           + react-native@0.78.0", "delay": 2100, "type": "pkg" },
+      { "text": "", "delay": 2200, "type": "info" },
+      { "text": "installing backend modules...", "delay": 2300, "type": "info" },
+      { "text": "+ node@26.0.0          + nestjs@11.0.2", "delay": 2450, "type": "pkg" },
+      { "text": "+ graphql@17.x", "delay": 2600, "type": "pkg" },
+      { "text": "", "delay": 2700, "type": "info" },
+      { "text": "linking databases...", "delay": 2800, "type": "info" },
+      { "text": "+ postgresql@18.2      + mysql@9.0.1", "delay": 2950, "type": "pkg" },
+      { "text": "+ mongodb@9.0.0        + redis@8.0.0", "delay": 3100, "type": "pkg" },
+      { "text": "", "delay": 3200, "type": "info" },
+      { "text": "provisioning cloud infra...", "delay": 3300, "type": "info" },
+      { "text": "+ aws-sdk@3.x          + gcp@512.0.0", "delay": 3450, "type": "pkg" },
+      { "text": "+ docker@27.1.0        + terraform@1.8.5", "delay": 3600, "type": "pkg" },
+      { "text": "+ serverless@4.0.0", "delay": 3750, "type": "pkg" },
+      { "text": "", "delay": 3850, "type": "info" },
+      { "text": "loading AI modules...", "delay": 3950, "type": "info" },
+      { "text": "+ openai-gpt@4o        + anthropic-claude@4.7", "delay": 4100, "type": "pkg" },
+      { "text": "+ google-gemini@2.1    + github-copilot@2.12.0", "delay": 4250, "type": "pkg" },
+      { "text": "+ claude-code@latest    + openai-codex@latest", "delay": 4400, "type": "pkg" },
+      { "text": "", "delay": 4500, "type": "info" },
+      { "text": "configuring toolchain...", "delay": 4600, "type": "info" },
+      { "text": "+ git@2.52.0           + github-cli@2.60.0", "delay": 4750, "type": "pkg" },
+      { "text": "+ jira@cloud           + postman@11.5.0", "delay": 4900, "type": "pkg" },
+      { "text": "+ figma@124            + vscode@1.117.0", "delay": 5050, "type": "pkg" },
+      { "text": "+ cursor@0.62.1", "delay": 5200, "type": "pkg" },
+      { "text": "", "delay": 5300, "type": "info" },
+      { "text": "verifying integrity... checksum OK", "delay": 5400, "type": "ok" },
+      { "text": "", "delay": 5500, "type": "info" },
+      { "text": "added 38 packages in 4.20s", "delay": 5600, "type": "ok" },
+      { "text": "stack environment ready.", "delay": 5800, "type": "ok" }
+    ],
+    "installDuration": 6400,
     "areas": [
       {
         "title": "Cloud & DevOps",
@@ -276,6 +332,23 @@
     "sectionNumber": "03",
     "sectionLabel": "Experience",
     "heading": "Where I've Worked",
+    "terminal": {
+      "user": "user@system",
+      "workDir": " : ~/work $ ",
+      "historyDir": " : ~/work/history $ ",
+      "extractCommand": "tar -xvf WORK.tar.gz",
+      "extracting": "Extracting professional experience and archived volumes...",
+      "extractOk": "[OK]",
+      "volumesMounted": "volumes mounted successfully.",
+      "gitCommand": "git log --oneline --graph --decorate",
+      "author": "Author: FELIX_ZHANG",
+      "datePrefix": "Date:   ",
+      "roleLabel": "[ROLE]",
+      "roleConnector": " @ ",
+      "headLabel": "HEAD &rarr; main",
+      "originLabel": " origin/production",
+      "terminalTitle": "SYS_LOG : EXPERIENCE"
+    },
     "items": [
       {
         "title": "Full-Stack Engineer",
@@ -342,6 +415,9 @@
   "footer": {
     "copyright": "Felix Zhang",
     "builtWith": "Built with Next.js & Tailwind CSS",
+    "build": "BUILD: 0x4ADE88",
+    "status": "STATUS:",
+    "statusValue": "[ 200 OK ]",
     "socials": [
       { "platform": "github", "href": "https://github.com/fzhang13", "label": "GitHub" },
       { "platform": "linkedin", "href": "https://www.linkedin.com/in/f-zhang/", "label": "LinkedIn" },
@@ -421,6 +497,169 @@
     },
     "navigationFeedback": "Navigating to {page}...",
     "notFoundPrefix": "zsh: command not found:",
-    "notFoundHint": "Type 'help' for available commands."
+    "notFoundHint": "Type 'help' for available commands.",
+    "errorMessages": {
+      "catMissing": "cat: missing operand. Try: cat about.yml",
+      "alreadyHome": "Already home."
+    }
+  },
+  "notFound": {
+    "pageTitle": "404 — Page Not Found",
+    "heading": "404",
+    "faultLabel": "[ FAULT ] SEGV — page not mapped",
+    "description": "The page you're looking for doesn't exist, was moved, or was never here to begin with.",
+    "goHomeLabel": "Go Home",
+    "goBackLabel": "Go Back",
+    "recoveryTitle": "RECOVERY_SHELL",
+    "recoveryPrompt": "$",
+    "recoveryHint": "recovery mode — type 'help' for commands",
+    "easterEggHints": [
+      "try: cowsay",
+      "try: fortune",
+      "try: matrix",
+      "try: ping",
+      "try: git log",
+      "try: make coffee",
+      "hint: there are easter eggs hidden here...",
+      "hint: try some unix commands",
+      "psst... try 'git blame' to see who broke this"
+    ],
+    "konamiMessage": "  ★ ★ ★  KONAMI CODE ACTIVATED  ★ ★ ★",
+    "konamiLives": "  +30 lives granted. Not that you needed them.",
+    "konamiImmortalized": "  You're already immortalized in this 404.",
+    "konamiAchievement": "  Achievement unlocked: LOST_AND_FOUND",
+    "konamiIndicator": "↑↑↓↓←→←→BA — you found it.",
+    "navigating": "Navigating to {path}...",
+    "commandNotFound": "recovery-sh: command not found: {cmd}",
+    "commandNotFoundHint": "Type 'help' for available commands.",
+    "crashDuration": 3600,
+    "crashSequence": [
+      { "text": "Segmentation fault (core dumped)", "delay": 0, "type": "err" },
+      { "text": "", "delay": 200, "type": "info" },
+      { "text": "--- [ cut here ] ---", "delay": 400, "type": "info" },
+      { "text": "kernel panic — not syncing: page not found", "delay": 600, "type": "err" },
+      { "text": "", "delay": 800, "type": "info" },
+      { "text": "Call Trace:", "delay": 1000, "type": "info" },
+      { "text": "  [<0x00000404>] resolve_route+0x404/0x808", "delay": 1150, "type": "trace" },
+      { "text": "  [<0xDEADBEEF>] handle_request+0x42/0x200", "delay": 1300, "type": "trace" },
+      { "text": "  [<0xCAFEBABE>] page_lookup+0x13/0x37", "delay": 1450, "type": "trace" },
+      { "text": "  [<0x8BADF00D>] render_tree+0x0/0x100", "delay": 1600, "type": "trace" },
+      { "text": "  [<0xFEEDFACE>] next_handler+0x14/0x28", "delay": 1750, "type": "trace" },
+      { "text": "", "delay": 1900, "type": "info" },
+      { "text": "Code: 04 04 00 00 de ad be ef ca fe ba be", "delay": 2000, "type": "addr" },
+      { "text": "RIP: 0x0000000000000404", "delay": 2150, "type": "addr" },
+      { "text": "RSP: 0x00007fff00000000", "delay": 2250, "type": "addr" },
+      { "text": "", "delay": 2400, "type": "info" },
+      { "text": "System halted.", "delay": 2600, "type": "err" },
+      { "text": "", "delay": 2800, "type": "info" },
+      { "text": "Rebooting into recovery shell...", "delay": 3000, "type": "info" }
+    ],
+    "commands": {
+      "help": [
+        "Recovery shell — available commands:",
+        "",
+        "  Navigation:",
+        "    home               go to homepage",
+        "    about              go to about page",
+        "    stack              view tech stack",
+        "    work               see experience",
+        "    cd <page>          navigate to a page",
+        "",
+        "  Diagnostics:",
+        "    cat /var/log/syslog view error logs",
+        "    blame              who did this?",
+        "    git log            recent changes",
+        "    whoami             identify yourself",
+        "    clear              clear terminal",
+        "",
+        "  Fun:",
+        "    cowsay             ascii cow wisdom",
+        "    fortune            random fortune",
+        "    ping               test connectivity",
+        "    make coffee        brewing attempt",
+        "",
+        "  ...and maybe a few more easter eggs."
+      ],
+      "ls": [
+        "-rw-r--r--  core.dump",
+        "-rw-r--r--  panic.log",
+        "drwxr-xr-x  lost+found/",
+        "drwxr-xr-x  /home/",
+        "",
+        "3 items. The page you wanted isn't here."
+      ],
+      "sudo reboot": [
+        "Permission denied. Nice try though.",
+        "visitor is not in the sudoers file. This incident will be reported."
+      ],
+      "rm -rf /": [
+        "rm: refusing to remove '/' recursively",
+        "The site is already broken. How much worse can it get?"
+      ],
+      "cat /var/log/syslog": [
+        "[2026.04.30] ERR  route_resolver: no matching path for requested URL",
+        "[2026.04.30] WRN  page_cache: cache miss — entry evicted",
+        "[2026.04.30] INF  recovery_shell: interactive terminal spawned",
+        "[2026.04.30] DBG  easter_egg: you found the logs. try more commands."
+      ],
+      "cat /etc/passwd": [
+        "root:x:0:0:Felix Zhang:/home/felix:/bin/zsh",
+        "visitor:x:1000:1000:Anonymous:/tmp:/usr/bin/nologin",
+        "",
+        "Nice try. No passwords here."
+      ],
+      "git blame": [
+        "git blame 404.tsx:",
+        "  fzhang13  (2026-04-30)  — \"it works on my machine\""
+      ],
+      "git log": [
+        "commit 0x404DEAD (HEAD -> nowhere)",
+        "Author: Felix Zhang <felix.zhang.dev@gmail.com>",
+        "Date:   Wed Apr 30 2026",
+        "",
+        "    fix: accidentally deleted this page"
+      ],
+      "cowsay": [
+        " _______________",
+        "< 404 not found >",
+        " ---------------",
+        "        \\   ^__^",
+        "         \\  (oo)\\_______",
+        "            (__)\\       )\\/\\",
+        "                ||----w |",
+        "                ||     ||"
+      ],
+      "matrix": ["FOLLOW_THE_WHITE_RABBIT"],
+      "make coffee": [
+        "make: *** No rule to make target 'coffee'.",
+        "Try: make tea",
+        "",
+        "418 I'm a teapot."
+      ],
+      "ping": [
+        "PING localhost (127.0.0.1): 56 data bytes",
+        "64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.042 ms",
+        "64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=404.000 ms",
+        "",
+        "--- localhost ping statistics ---",
+        "2 packets transmitted, 1 packets received, 50% packet loss",
+        "Suspicious latency detected."
+      ],
+      "uptime": [
+        " 00:04:04 up 404 days, 4:04, 1 user, load average: 4.04, 0.04, 4.04"
+      ],
+      "fortune": [
+        "",
+        "\"The best error message is the one that never shows up.\"",
+        "  — Thomas Fuchs",
+        "",
+        "...oops."
+      ],
+      "whoami": [
+        "visitor — lost in the void",
+        "You took a wrong turn somewhere.",
+        "Type 'help' for a way out."
+      ]
+    }
   }
 }

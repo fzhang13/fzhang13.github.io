@@ -116,7 +116,7 @@ export function executeCommand(
   }
 
   if (cmd === 'cat') {
-    return { lines: [{ text: 'cat: missing operand. Try: cat about.yml' }] };
+    return { lines: [{ text: copy.homeShell.errorMessages.catMissing }] };
   }
 
   // Navigation: bare name, cd <name>, cd /<name>, cd ~, cd /
@@ -125,7 +125,7 @@ export function executeCommand(
   if (NAV_TARGETS[cmd]) {
     target = cmd;
   } else if (cmd === 'home' || cmd === 'cd' || cmd === 'cd /' || cmd === 'cd ~') {
-    return { lines: [{ text: 'Already home.' }] };
+    return { lines: [{ text: copy.homeShell.errorMessages.alreadyHome }] };
   } else if (cmd.startsWith('cd ')) {
     const arg = cmd.slice(3).replace(/^\//, '').trim();
     if (NAV_TARGETS[arg]) {

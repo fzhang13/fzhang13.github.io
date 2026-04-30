@@ -64,48 +64,51 @@ export default function InteractiveTerminal({ embedded = false }: InteractiveTer
   };
 
   const terminalContent = (
-    <div
-      ref={scrollRef}
-      className="space-y-1 font-mono text-sm max-h-96 overflow-y-auto"
-    >
-      {lines.map((line, i) =>
-        line.type === "input" ? (
-          <p key={i} className="text-on-surface">
-            <span className="text-primary">$</span> {line.text}
-          </p>
-        ) : (
-          <p key={i} className="text-on-surface-variant whitespace-pre">
-            {line.text}
-          </p>
-        )
-      )}
+    <div className="relative">
+      <div
+        ref={scrollRef}
+        className="space-y-1 font-mono text-sm max-h-96 overflow-y-auto overflow-x-auto scrollbar-thin"
+      >
+        {lines.map((line, i) =>
+          line.type === "input" ? (
+            <p key={i} className="text-on-surface">
+              <span className="text-primary">$</span> {line.text}
+            </p>
+          ) : (
+            <p key={i} className="text-on-surface-variant whitespace-pre">
+              {line.text}
+            </p>
+          )
+        )}
 
-      <p className="text-outline-bright text-xs mt-2">
-        {copy.terminal.commandHint}
-      </p>
+        <p className="text-outline-bright text-xs mt-2">
+          {copy.terminal.commandHint}
+        </p>
 
-      <div className="flex items-center">
-        <span className="text-primary mr-1">$</span>
-        <div className="relative flex-1">
-          <input
-            ref={inputRef}
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="bg-transparent border-none outline-none text-on-surface w-full caret-transparent"
-            autoComplete="off"
-            spellCheck={false}
-            aria-label="Terminal input"
-          />
-          <span
-            className="absolute top-0 pointer-events-none"
-            style={{ left: `${input.length}ch` }}
-          >
-            <span className="block-cursor">&#x2588;</span>
-          </span>
+        <div className="flex items-center">
+          <span className="text-primary mr-1">$</span>
+          <div className="relative flex-1">
+            <input
+              ref={inputRef}
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              className="bg-transparent border-none outline-none text-on-surface w-full caret-transparent text-base"
+              autoComplete="off"
+              spellCheck={false}
+              aria-label="Terminal input"
+            />
+            <span
+              className="absolute top-0 pointer-events-none"
+              style={{ left: `${input.length}ch` }}
+            >
+              <span className="block-cursor">&#x2588;</span>
+            </span>
+          </div>
         </div>
       </div>
+      <div className="absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-bg to-transparent pointer-events-none" />
     </div>
   );
 
