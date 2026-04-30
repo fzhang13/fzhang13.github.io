@@ -2,108 +2,360 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+/* ============================================
+   THEME DEFINITIONS (CSS Custom Properties)
+   ============================================ */
+
+[data-theme="root"] {
+  --bg: #0e150f;
+  --surface: #1a211b;
+  --surface-low: #161d17;
+  --surface-high: #242c25;
+  --surface-highest: #2f372f;
+  --on-surface: #dde5da;
+  --on-surface-variant: #bccabb;
+  --primary: #4ade80;
+  --primary-dim: #6bfb9a;
+  --primary-container: #005e2d;
+  --secondary: #ffc640;
+  --secondary-container: #5a4100;
+  --outline: #3d4a3e;
+  --outline-bright: #869486;
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --font-body: 'JetBrains Mono', monospace;
+  --font-heading: 'JetBrains Mono', monospace;
+  --glow-intensity: 0.3;
+  --glow-blur: 0px;
+  --glow-spread: 2px;
+}
+
+[data-theme="bin"] {
+  --bg: #161404;
+  --surface: #23200d;
+  --surface-low: #1f1c0a;
+  --surface-high: #2d2a17;
+  --surface-highest: #383521;
+  --on-surface: #eae3c5;
+  --on-surface-variant: #d7c4ac;
+  --primary: #ffb000;
+  --primary-dim: #ffd597;
+  --primary-container: #6a4700;
+  --secondary: #ff8000;
+  --secondary-container: #5e2b00;
+  --outline: #524533;
+  --outline-bright: #9f8e78;
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --glow-intensity: 0.4;
+  --glow-blur: 0px;
+  --glow-spread: 2px;
+}
+
+[data-theme="usr"] {
+  --bg: #131313;
+  --surface: #201f1f;
+  --surface-low: #1c1b1b;
+  --surface-high: #2a2a2a;
+  --surface-highest: #353534;
+  --on-surface: #e5e2e1;
+  --on-surface-variant: #ebbbb4;
+  --primary: #ff5540;
+  --primary-dim: #ffb4a8;
+  --primary-container: #5c0000;
+  --secondary: #ff5625;
+  --secondary-container: #541100;
+  --outline: #603e39;
+  --outline-bright: #b18780;
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --glow-intensity: 0.3;
+  --glow-blur: 0px;
+  --glow-spread: 0px;
+}
+
+[data-theme="var"] {
+  --bg: #0c1324;
+  --surface: #191f31;
+  --surface-low: #151b2d;
+  --surface-high: #23293c;
+  --surface-highest: #2e3447;
+  --on-surface: #dce1fb;
+  --on-surface-variant: #b9cac9;
+  --primary: #00dddd;
+  --primary-dim: #00fbfb;
+  --primary-container: #007070;
+  --secondary: #264b5d;
+  --secondary-container: #0a3445;
+  --outline: #3a4a49;
+  --outline-bright: #839493;
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-heading: 'Space Grotesk', sans-serif;
+  --glow-intensity: 0.5;
+  --glow-blur: 8px;
+  --glow-spread: 4px;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
 
 @layer base {
+  * {
+    border-radius: 0 !important;
+  }
+
   html {
     scroll-behavior: smooth;
   }
 
   body {
-    @apply bg-dark-950 text-dark-200 font-sans;
+    background-color: var(--bg);
+    color: var(--on-surface);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    @apply bg-primary-600/30 text-white;
+    background-color: var(--primary);
+    color: var(--bg);
   }
 
   ::-webkit-scrollbar {
-    @apply w-2;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-dark-950;
+    background: var(--bg);
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-dark-700 rounded-full;
+    background: var(--outline);
+    border: 1px solid var(--outline-bright);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-dark-600;
+    background: var(--outline-bright);
   }
 }
+
+/* ============================================
+   COMPONENT CLASSES
+   ============================================ */
 
 @layer components {
   .section-heading {
-    @apply text-3xl md:text-4xl font-bold text-white mb-2;
+    font-family: var(--font-heading);
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--on-surface);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 768px) {
+    .section-heading {
+      font-size: 2.25rem;
+    }
   }
 
   .section-subheading {
-    @apply text-primary-400 font-mono text-sm tracking-wider uppercase mb-4;
+    color: var(--primary);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
   }
 
-  .glass-card {
-    @apply bg-dark-900/50 backdrop-blur-sm rounded-xl relative;
-    border: 1px solid rgba(62, 65, 71, 0.5);
+  .terminal-card {
+    background-color: var(--surface);
+    border: 1px solid var(--outline);
+    position: relative;
   }
 
-  .glass-card::before {
-    content: '';
+  .terminal-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--outline);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--on-surface-variant);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .terminal-card-header h1,
+  .terminal-card-header h2,
+  .terminal-card-header h3,
+  .terminal-card-header h4,
+  .terminal-card-header h5,
+  .terminal-card-header h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Visually hidden but accessible to screen readers */
+  .sr-only {
     position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: conic-gradient(from var(--border-angle, 0deg), transparent 40%, rgba(59,145,255,0.4) 50%, transparent 60%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 
-  .glass-card:hover::before {
-    opacity: 1;
-    animation: border-rotate 3s linear infinite;
+  .terminal-card-body {
+    padding: 16px;
   }
 
-  .gradient-text {
-    @apply bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent;
+  .bracket-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+    white-space: nowrap;
   }
 
-  .hover-glow {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/10;
+  .bracket-chip::before {
+    content: '[ ';
+  }
+
+  .bracket-chip::after {
+    content: ' ]';
+  }
+
+  .ascii-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-family: var(--font-body);
+  }
+
+  .ascii-list-item::before {
+    content: '>';
+    color: var(--primary);
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .glow-text {
+    text-shadow:
+      0 0 var(--glow-blur) var(--primary),
+      var(--glow-spread) var(--glow-spread) 0px color-mix(in srgb, var(--primary) calc(var(--glow-intensity) * 100%), transparent);
   }
 }
 
-/* Terminal cursor animation */
-.cursor-blink::after {
-  content: '|';
-  animation: blink 1s step-end infinite;
+/* ============================================
+   CRT EFFECTS
+   ============================================ */
+
+.crt-scanlines {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 1px,
+    rgba(0, 0, 0, 0.1) 1px,
+    rgba(0, 0, 0, 0.1) 2px
+  );
 }
 
-@keyframes blink {
-  from, to { opacity: 1; }
+.crt-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.3) 80%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* ============================================
+   BLINKING CURSOR
+   ============================================ */
+
+.block-cursor {
+  display: inline-block;
+  color: var(--primary);
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-/* Gradient line */
-.gradient-line {
-  background: linear-gradient(90deg, transparent, theme('colors.primary.500'), transparent);
-  height: 1px;
+/* ============================================
+   PHOSPHOR GLOW (per-theme intensity via CSS vars)
+   ============================================ */
+
+.phosphor-glow {
+  text-shadow: 0 0 var(--glow-blur) var(--primary);
 }
 
-/* Rotating gradient border for glass cards */
-@property --border-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+.phosphor-glow-strong {
+  text-shadow:
+    0 0 4px var(--primary),
+    0 0 var(--glow-blur) var(--primary),
+    0 0 calc(var(--glow-blur) * 2) var(--primary);
 }
 
-@keyframes border-rotate {
-  to {
-    --border-angle: 360deg;
+/* ============================================
+   GLITCH EFFECT (404 easter egg)
+   ============================================ */
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  10% { transform: translate(-2px, 1px); }
+  20% { transform: translate(2px, -1px); }
+  30% { transform: translate(-1px, 2px); }
+  40% { transform: translate(1px, -2px); }
+  50% { transform: translate(-2px, -1px); }
+  60% { transform: translate(2px, 1px); }
+  70% { transform: translate(0, -1px); }
+  80% { transform: translate(-1px, 0); }
+  90% { transform: translate(1px, 1px); }
+  100% { transform: translate(0); }
+}
+
+.animate-glitch {
+  animation: glitch 0.15s ease-in-out infinite;
+}
+
+/* ============================================
+   MOBILE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .crt-scanlines {
+    opacity: 0.5;
   }
 }
