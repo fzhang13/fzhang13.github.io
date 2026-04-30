@@ -74,6 +74,8 @@ export default function WorkPage() {
             {items.map((exp, i) => {
               const hash = COMMIT_HASHES[i] || generateDeterministicHash(`${exp.company}-${exp.period}`);
               const isHead = i === 0;
+              const lineColor = isHead ? 'text-error' : 'text-outline-bright';
+              const isLast = i === items.length - 1;
 
               return (
                 <div key={i} className="relative">
@@ -82,7 +84,7 @@ export default function WorkPage() {
                     <div className="flex flex-col items-center w-6 flex-shrink-0 mr-2">
                       <span className="text-secondary font-bold">*</span>
                     </div>
-                    <div>
+                    <div className="flex-1 min-w-0">
                       <span className="text-secondary">commit {hash} </span>
                       {isHead && (
                         <>
@@ -95,39 +97,45 @@ export default function WorkPage() {
 
                   {/* Author & Date */}
                   <div className="ml-8 text-on-surface-variant">
-                    <div>
-                      <span className="text-outline-bright">|</span> Author: SYS_ADMIN
+                    <div className="flex items-start">
+                      <span className={`${lineColor} flex-shrink-0`}>|</span>
+                      <span className="ml-1">Author: FELIX_ZHANG</span>
                     </div>
-                    <div>
-                      <span className="text-outline-bright">|</span> Date:{'   '}
-                      <span className="text-secondary">{exp.period}</span>
+                    <div className="flex items-start">
+                      <span className={`${lineColor} flex-shrink-0`}>|</span>
+                      <span className="ml-1">
+                        Date:{'   '}
+                        <span className="text-secondary">{exp.period}</span>
+                      </span>
                     </div>
-                    <div className="text-outline-bright">|</div>
+                    <div className={lineColor}>|</div>
                   </div>
 
                   {/* Role */}
                   <div className="ml-8">
-                    <span className="text-outline-bright">|</span>
-                    <span className="ml-1">
-                      <span className="text-secondary font-bold">[ROLE]</span>
-                      <span className="text-on-surface font-bold"> {exp.title} @ </span>
-                      <a
-                        href={exp.companyUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline font-bold"
-                      >
-                        {exp.company}
-                      </a>
-                    </span>
+                    <div className="flex items-start">
+                      <span className={`${lineColor} flex-shrink-0`}>|</span>
+                      <span className="ml-1 flex-1 min-w-0">
+                        <span className="text-secondary font-bold">[ROLE]</span>
+                        <span className="text-on-surface font-bold"> {exp.title} @ </span>
+                        <a
+                          href={exp.companyUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline font-bold break-words"
+                        >
+                          {exp.company}
+                        </a>
+                      </span>
+                    </div>
                   </div>
 
                   {/* Highlights */}
                   <div className="ml-8 text-on-surface-variant">
                     {exp.highlights.map((h, j) => (
-                      <div key={j}>
-                        <span className="text-outline-bright">|</span>
-                        <span className="ml-1">
+                      <div key={j} className="flex items-start">
+                        <span className={`${lineColor} flex-shrink-0`}>|</span>
+                        <span className="ml-1 flex-1 min-w-0">
                           <span className="text-secondary">-</span> {h}
                         </span>
                       </div>
@@ -136,16 +144,20 @@ export default function WorkPage() {
 
                   {/* Tags */}
                   <div className="ml-8 mt-2 mb-1">
-                    <span className="text-outline-bright">|</span>
-                    <span className="ml-1 inline-flex flex-wrap gap-2">
-                      {exp.tags.map((tag, ti) => (
-                        <BracketChip key={tag} label={tag} variant={getTagVariant(ti)} />
-                      ))}
-                    </span>
+                    <div className="flex items-start">
+                      <span className={`${lineColor} flex-shrink-0`}>|</span>
+                      <span className="ml-1 inline-flex flex-wrap gap-2">
+                        {exp.tags.map((tag, ti) => (
+                          <BracketChip key={tag} label={tag} variant={getTagVariant(ti)} />
+                        ))}
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Separator */}
-                  <div className="ml-8 text-outline-bright mb-4">|</div>
+                  {/* Connecting line to next commit */}
+                  {!isLast && (
+                    <div className={`ml-8 ${lineColor}`}>|</div>
+                  )}
                 </div>
               );
             })}
