@@ -209,21 +209,26 @@ export default function StackPage() {
         >
           <TerminalCard title="INSTALLED_PACKAGES.log">
             <div className="space-y-5">
-              {categories.map((cat) => (
-                <div key={cat}>
-                  <div className="font-mono text-xs text-on-surface-variant uppercase tracking-wider mb-2">
-                    {cat}
+              {categories.map((cat, catIndex) => {
+                const variants: Array<'default' | 'success' | 'error'> = ['default', 'success', 'error'];
+                const variant = variants[catIndex % variants.length];
+
+                return (
+                  <div key={cat}>
+                    <div className="font-mono text-xs text-on-surface-variant uppercase tracking-wider mb-2">
+                      {cat}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {techStack
+                        .filter(t => t.category === cat)
+                        .map(t => (
+                          <BracketChip key={t.name} label={t.name} variant={variant} />
+                        ))
+                      }
+                    </div>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {techStack
-                      .filter(t => t.category === cat)
-                      .map(t => (
-                        <BracketChip key={t.name} label={t.name} />
-                      ))
-                    }
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </TerminalCard>
         </motion.div>
