@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import copy from '@/copy.json';
 import TerminalCard from '@/components/shared/TerminalCard';
 import InteractiveTerminal from '@/components/InteractiveTerminal';
-import BlockCursor from '@/components/shared/BlockCursor';
 
 const LEVEL_STYLES: Record<string, string> = {
   INF: 'text-primary',

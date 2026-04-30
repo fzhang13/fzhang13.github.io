@@ -118,7 +118,12 @@ export default function StackPage() {
           ref={promptRef}
           className="min-h-[60vh] flex flex-col items-center justify-center cursor-pointer outline-none"
           onClick={startInstall}
-          onKeyDown={(e) => e.key === 'Enter' && startInstall()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              startInstall();
+            }
+          }}
           tabIndex={0}
           role="button"
           aria-label="Run npm install stack"
