@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import copy from '@/copy.json';
 import TerminalCard from '@/components/shared/TerminalCard';
 import BracketChip from '@/components/shared/BracketChip';
-import BlockCursor from '@/components/shared/BlockCursor';
 import GitHubActivity from '@/components/GitHubActivity';
 
 const COMMIT_HASHES = ['0x7F8A9B', '0x3C4D5E'];
@@ -13,6 +12,19 @@ const TAG_VARIANTS: Array<'default' | 'success' | 'error'> = ['default', 'succes
 
 function getTagVariant(index: number): 'default' | 'success' | 'error' {
   return TAG_VARIANTS[index % TAG_VARIANTS.length];
+}
+
+// Deterministic hash generation from string input
+function generateDeterministicHash(input: string): string {
+  let hash = 0;
+  for (let i = 0; i < input.length; i++) {
+    const char = input.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  // Ensure positive and convert to hex, clamped to 6 digits
+  const hex = (Math.abs(hash) % 0xFFFFFF).toString(16).toUpperCase().padStart(6, '0');
+  return `0x${hex}`;
 }
 
 export default function WorkPage() {
@@ -60,7 +72,7 @@ export default function WorkPage() {
           {/* Git log entries */}
           <div className="font-mono text-sm space-y-0">
             {items.map((exp, i) => {
-              const hash = COMMIT_HASHES[i] || `0x${(Math.random() * 0xFFFFFF | 0).toString(16).toUpperCase()}`;
+              const hash = COMMIT_HASHES[i] || generateDeterministicHash(`${exp.company}-${exp.period}`);
               const isHead = i === 0;
 
               return (
