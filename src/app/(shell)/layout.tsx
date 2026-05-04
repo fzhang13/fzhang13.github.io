@@ -18,9 +18,7 @@ export default function ShellLayout({
         <TopNav />
         <main className="flex-1 overflow-y-auto">
           <div className="max-w-shell mx-auto px-6 md:px-10 py-8 md:py-12">
-            <PageTransition>
-              {children}
-            </PageTransition>
+            <PageTransition>{children}</PageTransition>
           </div>
         </main>
         <Footer />

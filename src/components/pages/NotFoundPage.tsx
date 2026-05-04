@@ -26,9 +26,23 @@ const NAV_TARGETS: Record<string, string> = {
   work: '/work',
 };
 
-const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+const KONAMI = [
+  'ArrowUp',
+  'ArrowUp',
+  'ArrowDown',
+  'ArrowDown',
+  'ArrowLeft',
+  'ArrowRight',
+  'ArrowLeft',
+  'ArrowRight',
+  'b',
+  'a',
+];
 
-function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter>): { lines: Line[]; action?: 'clear' | 'navigate'; navigateTo?: string } {
+function executeRecoveryCommand(
+  raw: string,
+  router: ReturnType<typeof useRouter>
+): { lines: Line[]; action?: 'clear' | 'navigate'; navigateTo?: string } {
   const cmd = raw.trim().toLowerCase();
 
   if (cmd === 'clear') {
@@ -37,20 +51,24 @@ function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter
 
   // Special handling for sudo commands
   if (cmd.startsWith('sudo')) {
-    const sudoOutput = (copy.notFound.commands as Record<string, string[]>)['sudo reboot'];
+    const sudoOutput = (copy.notFound.commands as Record<string, string[]>)[
+      'sudo reboot'
+    ];
     if (sudoOutput) {
       return {
-        lines: sudoOutput.map((text) => ({ type: 'output' as const, text })),
+        lines: sudoOutput.map(text => ({ type: 'output' as const, text })),
       };
     }
   }
 
   // Special handling for rm -rf variations
   if (cmd === 'rm -rf /' || cmd === 'rm -rf' || cmd.startsWith('rm -rf /')) {
-    const rmOutput = (copy.notFound.commands as Record<string, string[]>)['rm -rf /'];
+    const rmOutput = (copy.notFound.commands as Record<string, string[]>)[
+      'rm -rf /'
+    ];
     if (rmOutput) {
       return {
-        lines: rmOutput.map((text) => ({ type: 'output' as const, text })),
+        lines: rmOutput.map(text => ({ type: 'output' as const, text })),
       };
     }
   }
@@ -61,7 +79,7 @@ function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter
   // Try exact match first
   if (commands[cmd]) {
     return {
-      lines: commands[cmd].map((text) => ({ type: 'output' as const, text })),
+      lines: commands[cmd].map(text => ({ type: 'output' as const, text })),
     };
   }
 
@@ -69,7 +87,10 @@ function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter
   const commandKey = Object.keys(commands).find(k => k.toLowerCase() === cmd);
   if (commandKey && commands[commandKey]) {
     return {
-      lines: commands[commandKey].map((text) => ({ type: 'output' as const, text })),
+      lines: commands[commandKey].map(text => ({
+        type: 'output' as const,
+        text,
+      })),
     };
   }
 
@@ -86,7 +107,13 @@ function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter
   if (target) {
     const path = NAV_TARGETS[target];
     return {
-      lines: [{ type: 'output', text: copy.notFound.navigating.replace('{path}', path), className: 'text-primary whitespace-pre' }],
+      lines: [
+        {
+          type: 'output',
+          text: copy.notFound.navigating.replace('{path}', path),
+          className: 'text-primary whitespace-pre',
+        },
+      ],
       action: 'navigate',
       navigateTo: path,
     };
@@ -94,7 +121,10 @@ function executeRecoveryCommand(raw: string, router: ReturnType<typeof useRouter
 
   return {
     lines: [
-      { type: 'output', text: copy.notFound.commandNotFound.replace('{cmd}', raw.trim()) },
+      {
+        type: 'output',
+        text: copy.notFound.commandNotFound.replace('{cmd}', raw.trim()),
+      },
       { type: 'output', text: copy.notFound.commandNotFoundHint },
     ],
   };
@@ -118,18 +148,18 @@ export default function NotFoundPage() {
   useEffect(() => {
     const timers: NodeJS.Timeout[] = [];
 
-    copy.notFound.crashSequence.forEach((line) => {
+    copy.notFound.crashSequence.forEach(line => {
       timers.push(
         setTimeout(() => {
-          setCrashLines((prev) => [...prev, line as CrashLine]);
-        }, line.delay),
+          setCrashLines(prev => [...prev, line as CrashLine]);
+        }, line.delay)
       );
     });
 
     timers.push(
       setTimeout(() => {
         setPhase('shell');
-      }, copy.notFound.crashDuration),
+      }, copy.notFound.crashDuration)
     );
 
     return () => timers.forEach(clearTimeout);
@@ -153,32 +183,39 @@ export default function NotFoundPage() {
     }
   }, [shellLines]);
 
-  const handleKonami = useCallback((e: globalThis.KeyboardEvent) => {
-    if (konamiActivated) return;
-    if (e.key === KONAMI[konamiIndex]) {
-      const next = konamiIndex + 1;
-      if (next === KONAMI.length) {
-        setKonamiActivated(true);
-        setKonamiIndex(0);
-        setGlitch(true);
-        setShellLines((prev) => [
-          ...prev,
-          { type: 'output', text: '' },
-          { type: 'output', text: copy.notFound.konamiMessage, className: 'text-primary phosphor-glow-strong whitespace-pre' },
-          { type: 'output', text: '' },
-          { type: 'output', text: copy.notFound.konamiLives },
-          { type: 'output', text: copy.notFound.konamiImmortalized },
-          { type: 'output', text: copy.notFound.konamiAchievement },
-          { type: 'output', text: '' },
-        ]);
-        setTimeout(() => setGlitch(false), 2000);
+  const handleKonami = useCallback(
+    (e: globalThis.KeyboardEvent) => {
+      if (konamiActivated) return;
+      if (e.key === KONAMI[konamiIndex]) {
+        const next = konamiIndex + 1;
+        if (next === KONAMI.length) {
+          setKonamiActivated(true);
+          setKonamiIndex(0);
+          setGlitch(true);
+          setShellLines(prev => [
+            ...prev,
+            { type: 'output', text: '' },
+            {
+              type: 'output',
+              text: copy.notFound.konamiMessage,
+              className: 'text-primary phosphor-glow-strong whitespace-pre',
+            },
+            { type: 'output', text: '' },
+            { type: 'output', text: copy.notFound.konamiLives },
+            { type: 'output', text: copy.notFound.konamiImmortalized },
+            { type: 'output', text: copy.notFound.konamiAchievement },
+            { type: 'output', text: '' },
+          ]);
+          setTimeout(() => setGlitch(false), 2000);
+        } else {
+          setKonamiIndex(next);
+        }
       } else {
-        setKonamiIndex(next);
+        setKonamiIndex(0);
       }
-    } else {
-      setKonamiIndex(0);
-    }
-  }, [konamiIndex, konamiActivated]);
+    },
+    [konamiIndex, konamiActivated]
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', handleKonami);
@@ -190,7 +227,7 @@ export default function NotFoundPage() {
     if (phase !== 'shell' || shellLines.length > 0) return;
 
     const interval = setInterval(() => {
-      setHintIndex((prev) => (prev + 1) % copy.notFound.easterEggHints.length);
+      setHintIndex(prev => (prev + 1) % copy.notFound.easterEggHints.length);
     }, 3000);
 
     return () => clearInterval(interval);
@@ -250,8 +287,10 @@ export default function NotFoundPage() {
 
                 let className = 'text-on-surface-variant';
                 if (line.type === 'err') className = 'text-error';
-                if (line.type === 'trace') className = 'text-on-surface-variant opacity-70';
-                if (line.type === 'addr') className = 'text-on-surface-variant opacity-50';
+                if (line.type === 'trace')
+                  className = 'text-on-surface-variant opacity-70';
+                if (line.type === 'addr')
+                  className = 'text-on-surface-variant opacity-50';
 
                 return (
                   <div key={i} className={className}>
@@ -316,29 +355,37 @@ export default function NotFoundPage() {
                   {shellLines.map((line, i) =>
                     line.type === 'input' ? (
                       <p key={i} className="text-on-surface">
-                        <span className="text-error">{copy.notFound.recoveryPrompt}</span> {line.text}
+                        <span className="text-error">
+                          {copy.notFound.recoveryPrompt}
+                        </span>{' '}
+                        {line.text}
                       </p>
                     ) : (
                       <p
                         key={i}
-                        className={line.className || 'text-on-surface-variant whitespace-pre'}
+                        className={
+                          line.className ||
+                          'text-on-surface-variant whitespace-pre'
+                        }
                       >
                         {line.text}
                       </p>
-                    ),
+                    )
                   )}
                 </div>
               )}
 
               {/* Input */}
               <div className="flex items-center font-mono text-sm">
-                <span className="text-error mr-1">{copy.notFound.recoveryPrompt}</span>
+                <span className="text-error mr-1">
+                  {copy.notFound.recoveryPrompt}
+                </span>
                 <div className="relative flex-1">
                   <input
                     ref={inputRef}
                     type="text"
                     value={input}
-                    onChange={(e) => setInput(e.target.value)}
+                    onChange={e => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
                     className="bg-transparent border-none outline-none text-on-surface w-full caret-transparent"
                     autoComplete="off"

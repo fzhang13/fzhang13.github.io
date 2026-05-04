@@ -11,7 +11,7 @@ export default function TerminalCard({
   children,
   className = '',
   showControls = true,
-  headingLevel = 'span'
+  headingLevel = 'span',
 }: TerminalCardProps) {
   const HeadingTag = headingLevel as keyof JSX.IntrinsicElements;
 
@@ -27,9 +27,7 @@ export default function TerminalCard({
           )}
         </div>
       )}
-      <div className="terminal-card-body">
-        {children}
-      </div>
+      <div className="terminal-card-body">{children}</div>
     </div>
   );
 }

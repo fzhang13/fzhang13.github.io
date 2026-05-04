@@ -8,7 +8,7 @@
    THEME DEFINITIONS (CSS Custom Properties)
    ============================================ */
 
-[data-theme="root"] {
+[data-theme='root'] {
   --bg: #0e150f;
   --surface: #1a211b;
   --surface-low: #161d17;
@@ -32,7 +32,7 @@
   --glow-spread: 2px;
 }
 
-[data-theme="bin"] {
+[data-theme='bin'] {
   --bg: #161404;
   --surface: #23200d;
   --surface-low: #1f1c0a;
@@ -56,7 +56,7 @@
   --glow-spread: 2px;
 }
 
-[data-theme="usr"] {
+[data-theme='usr'] {
   --bg: #131313;
   --surface: #201f1f;
   --surface-low: #1c1b1b;
@@ -80,7 +80,7 @@
   --glow-spread: 0px;
 }
 
-[data-theme="var"] {
+[data-theme='var'] {
   --bg: #0c1324;
   --surface: #191f31;
   --surface-low: #151b2d;
@@ -263,7 +263,12 @@
   .glow-text {
     text-shadow:
       0 0 var(--glow-blur) var(--primary),
-      var(--glow-spread) var(--glow-spread) 0px color-mix(in srgb, var(--primary) calc(var(--glow-intensity) * 100%), transparent);
+      var(--glow-spread) var(--glow-spread) 0px
+        color-mix(
+          in srgb,
+          var(--primary) calc(var(--glow-intensity) * 100%),
+          transparent
+        );
   }
 }
 
@@ -309,8 +314,13 @@
 }
 
 @keyframes cursor-blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /* ============================================
@@ -333,17 +343,39 @@
    ============================================ */
 
 @keyframes glitch {
-  0% { transform: translate(0); }
-  10% { transform: translate(-2px, 1px); }
-  20% { transform: translate(2px, -1px); }
-  30% { transform: translate(-1px, 2px); }
-  40% { transform: translate(1px, -2px); }
-  50% { transform: translate(-2px, -1px); }
-  60% { transform: translate(2px, 1px); }
-  70% { transform: translate(0, -1px); }
-  80% { transform: translate(-1px, 0); }
-  90% { transform: translate(1px, 1px); }
-  100% { transform: translate(0); }
+  0% {
+    transform: translate(0);
+  }
+  10% {
+    transform: translate(-2px, 1px);
+  }
+  20% {
+    transform: translate(2px, -1px);
+  }
+  30% {
+    transform: translate(-1px, 2px);
+  }
+  40% {
+    transform: translate(1px, -2px);
+  }
+  50% {
+    transform: translate(-2px, -1px);
+  }
+  60% {
+    transform: translate(2px, 1px);
+  }
+  70% {
+    transform: translate(0, -1px);
+  }
+  80% {
+    transform: translate(-1px, 0);
+  }
+  90% {
+    transform: translate(1px, 1px);
+  }
+  100% {
+    transform: translate(0);
+  }
 }
 
 .animate-glitch {

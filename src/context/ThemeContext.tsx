@@ -1,6 +1,12 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  useCallback,
+} from 'react';
 import { ThemeId, DEFAULT_THEME } from '@/lib/themes';
 
 interface ThemeContextValue {

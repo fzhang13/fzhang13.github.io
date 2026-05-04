@@ -25,7 +25,7 @@ export default function Sidebar() {
           v0.2.4 // felix.zhang
         </div>
       </div>
-      {NAV_ITEMS.map((item) => {
+      {NAV_ITEMS.map(item => {
         const active = isActive(item.href);
         return (
           <Link
@@ -34,13 +34,16 @@ export default function Sidebar() {
             onClick={() => setMobileOpen(false)}
             className={`
               group flex items-center gap-2 px-4 py-2 font-mono text-sm transition-colors
-              ${active
-                ? 'text-primary border-r-2 border-primary bg-primary/5'
-                : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'
+              ${
+                active
+                  ? 'text-primary border-r-2 border-primary bg-primary/5'
+                  : 'text-on-surface-variant hover:text-primary hover:bg-primary/5'
               }
             `}
           >
-            <span className={`text-primary transition-opacity ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+            <span
+              className={`text-primary transition-opacity ${active ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
+            >
               &gt;
             </span>
             <span>{item.label}</span>
@@ -96,9 +99,7 @@ export default function Sidebar() {
           </div>
         )}
 
-        <div className="flex-1 py-4 overflow-y-auto">
-          {navContent}
-        </div>
+        <div className="flex-1 py-4 overflow-y-auto">{navContent}</div>
 
         <div className="border-t border-outline px-4 py-3">
           <div className="font-mono text-[10px] text-outline-bright">

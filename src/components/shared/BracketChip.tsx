@@ -4,7 +4,11 @@ interface BracketChipProps {
   className?: string;
 }
 
-export default function BracketChip({ label, variant = 'default', className = '' }: BracketChipProps) {
+export default function BracketChip({
+  label,
+  variant = 'default',
+  className = '',
+}: BracketChipProps) {
   const variantClasses = {
     default: 'text-primary',
     error: 'text-error',

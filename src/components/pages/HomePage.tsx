@@ -25,7 +25,8 @@ export default function HomePage() {
         >
           {/* Terminal prompt */}
           <div className="font-mono text-sm text-on-surface-variant mb-6">
-            <span className="text-primary">$</span> {copy.hero.prompt.replace('$ ', '')}
+            <span className="text-primary">$</span>{' '}
+            {copy.hero.prompt.replace('$ ', '')}
           </div>
 
           {/* Name */}
@@ -70,7 +71,7 @@ export default function HomePage() {
 
           {/* Social links */}
           <div className="flex gap-4">
-            {socials.map((social) => (
+            {socials.map(social => (
               <a
                 key={social.label}
                 href={social.href}
@@ -90,7 +91,6 @@ export default function HomePage() {
           </div>
         </motion.div>
       </div>
-
     </>
   );
 }

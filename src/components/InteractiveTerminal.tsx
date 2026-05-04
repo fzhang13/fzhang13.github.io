@@ -1,27 +1,32 @@
-"use client";
+'use client';
 
-import { useState, useRef, useEffect, KeyboardEvent } from "react";
-import copy from "@/copy.json";
+import { useState, useRef, useEffect, KeyboardEvent } from 'react';
+import copy from '@/copy.json';
 
 const COMMANDS: Record<string, string[]> = copy.terminal.commands;
 
 interface Line {
-  type: "input" | "output";
+  type: 'input' | 'output';
   text: string;
 }
 
 const INITIAL_LINES: Line[] = [
-  { type: "input", text: copy.terminal.initialCommand },
-  ...copy.terminal.initialOutput.map((text) => ({ type: "output" as const, text })),
+  { type: 'input', text: copy.terminal.initialCommand },
+  ...copy.terminal.initialOutput.map(text => ({
+    type: 'output' as const,
+    text,
+  })),
 ];
 
 interface InteractiveTerminalProps {
   embedded?: boolean;
 }
 
-export default function InteractiveTerminal({ embedded = false }: InteractiveTerminalProps) {
+export default function InteractiveTerminal({
+  embedded = false,
+}: InteractiveTerminalProps) {
   const [lines, setLines] = useState<Line[]>(INITIAL_LINES);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -35,30 +40,30 @@ export default function InteractiveTerminal({ embedded = false }: InteractiveTer
     const cmd = input.trim().toLowerCase();
     if (!cmd) return;
 
-    const newLines: Line[] = [...lines, { type: "input", text: cmd }];
+    const newLines: Line[] = [...lines, { type: 'input', text: cmd }];
 
-    if (cmd === "clear") {
+    if (cmd === 'clear') {
       setLines([]);
-      setInput("");
+      setInput('');
       return;
     }
 
     const response = COMMANDS[cmd];
     if (response) {
-      response.forEach((line) => newLines.push({ type: "output", text: line }));
+      response.forEach(line => newLines.push({ type: 'output', text: line }));
     } else {
       newLines.push(
-        { type: "output", text: `${copy.terminal.notFoundPrefix} ${cmd}` },
-        { type: "output", text: copy.terminal.notFoundHint },
+        { type: 'output', text: `${copy.terminal.notFoundPrefix} ${cmd}` },
+        { type: 'output', text: copy.terminal.notFoundHint }
       );
     }
 
     setLines(newLines);
-    setInput("");
+    setInput('');
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === 'Enter') {
       handleSubmit();
     }
   };
@@ -70,7 +75,7 @@ export default function InteractiveTerminal({ embedded = false }: InteractiveTer
         className="space-y-1 font-mono text-sm max-h-96 overflow-y-auto overflow-x-auto scrollbar-thin"
       >
         {lines.map((line, i) =>
-          line.type === "input" ? (
+          line.type === 'input' ? (
             <p key={i} className="text-on-surface">
               <span className="text-primary">$</span> {line.text}
             </p>
@@ -92,7 +97,7 @@ export default function InteractiveTerminal({ embedded = false }: InteractiveTer
               ref={inputRef}
               type="text"
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={e => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
               className="bg-transparent border-none outline-none text-on-surface w-full caret-transparent text-base"
               autoComplete="off"
@@ -114,10 +119,7 @@ export default function InteractiveTerminal({ embedded = false }: InteractiveTer
 
   if (embedded) {
     return (
-      <div
-        className="cursor-text"
-        onClick={() => inputRef.current?.focus()}
-      >
+      <div className="cursor-text" onClick={() => inputRef.current?.focus()}>
         {terminalContent}
       </div>
     );
@@ -131,14 +133,16 @@ export default function InteractiveTerminal({ embedded = false }: InteractiveTer
       <div className="terminal-card-header">
         <span>{copy.terminal.filename}</span>
         <div className="flex items-center gap-3">
-          <span className="text-on-surface-variant text-[10px]">{copy.terminal.hint}</span>
-          <span className="text-outline-bright font-mono text-[10px]">[X] [_] [^]</span>
+          <span className="text-on-surface-variant text-[10px]">
+            {copy.terminal.hint}
+          </span>
+          <span className="text-outline-bright font-mono text-[10px]">
+            [X] [_] [^]
+          </span>
         </div>
       </div>
 
-      <div className="terminal-card-body">
-        {terminalContent}
-      </div>
+      <div className="terminal-card-body">{terminalContent}</div>
     </div>
   );
 }

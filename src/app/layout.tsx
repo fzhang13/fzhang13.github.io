@@ -1,32 +1,32 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import copy from "@/copy.json";
-import FaviconPulse from "@/components/FaviconPulse";
-import { ThemeProvider } from "@/context/ThemeContext";
-import { JetBrains_Mono, Space_Grotesk, Inter } from "next/font/google";
+import type { Metadata } from 'next';
+import './globals.css';
+import copy from '@/copy.json';
+import FaviconPulse from '@/components/FaviconPulse';
+import { ThemeProvider } from '@/context/ThemeContext';
+import { JetBrains_Mono, Space_Grotesk, Inter } from 'next/font/google';
 
 // Optimize font loading with Next.js
 const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-jetbrains",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  variable: '--font-jetbrains',
+  display: 'swap',
   preload: true,
 });
 
 const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-space",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-space',
+  display: 'swap',
   preload: true,
 });
 
 const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-inter",
-  display: "swap",
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-inter',
+  display: 'swap',
   preload: false, // Not critical
 });
 
@@ -34,11 +34,11 @@ export const metadata: Metadata = {
   title: copy.meta.title,
   description: copy.meta.description,
   keywords: copy.meta.keywords,
-  authors: [{ name: "Felix Zhang" }],
-  creator: "Felix Zhang",
+  authors: [{ name: 'Felix Zhang' }],
+  creator: 'Felix Zhang',
   openGraph: {
-    type: "website",
-    locale: "en_US",
+    type: 'website',
+    locale: 'en_US',
     url: copy.meta.url,
     title: copy.meta.title,
     description: copy.meta.ogDescription,
@@ -49,12 +49,12 @@ export const metadata: Metadata = {
         width: 1200,
         height: 630,
         alt: copy.meta.title,
-        type: "image/png",
+        type: 'image/png',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
+    card: 'summary_large_image',
     title: copy.meta.title,
     description: copy.meta.ogDescription,
     images: [
@@ -86,7 +86,11 @@ export default function RootLayout({
       <head>
         {/* Favicons */}
         <link rel="shortcut icon" href="/fonts/favicon/favicon.ico" />
-        <link rel="icon" type="image/svg+xml" href="/fonts/favicon/favicon.svg" />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href="/fonts/favicon/favicon.svg"
+        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
