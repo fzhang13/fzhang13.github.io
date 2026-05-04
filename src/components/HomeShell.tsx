@@ -4,7 +4,11 @@ import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTheme } from '@/context/ThemeContext';
 import copy from '@/copy.json';
-import { getGhostText, executeCommand, OutputLine } from '@/lib/homeShellCommands';
+import {
+  getGhostText,
+  executeCommand,
+  OutputLine,
+} from '@/lib/homeShellCommands';
 
 interface Line {
   type: 'input' | 'output';
@@ -58,7 +62,7 @@ export default function HomeShell() {
       setLines([]);
       setInput('');
       setGhost('');
-      setHistoryStack((prev) => [...prev, raw]);
+      setHistoryStack(prev => [...prev, raw]);
       setHistoryIndex(-1);
       return;
     }
@@ -76,7 +80,7 @@ export default function HomeShell() {
     setLines(newLines);
     setInput('');
     setGhost('');
-    setHistoryStack((prev) => [...prev, raw]);
+    setHistoryStack(prev => [...prev, raw]);
     setHistoryIndex(-1);
 
     if (result.action === 'navigate' && result.navigateTo) {
@@ -91,7 +95,12 @@ export default function HomeShell() {
       return;
     }
 
-    if ((e.key === 'Tab' || (e.key === 'ArrowRight' && inputRef.current?.selectionStart === input.length)) && ghostText) {
+    if (
+      (e.key === 'Tab' ||
+        (e.key === 'ArrowRight' &&
+          inputRef.current?.selectionStart === input.length)) &&
+      ghostText
+    ) {
       e.preventDefault();
       const completed = input + ghostText;
       setInput(completed);
@@ -129,10 +138,7 @@ export default function HomeShell() {
   };
 
   return (
-    <div
-      className="cursor-text"
-      onClick={() => inputRef.current?.focus()}
-    >
+    <div className="cursor-text" onClick={() => inputRef.current?.focus()}>
       {lines.length > 0 && (
         <div className="relative mb-2">
           <div
@@ -147,11 +153,13 @@ export default function HomeShell() {
               ) : (
                 <p
                   key={i}
-                  className={line.className || 'text-on-surface-variant whitespace-pre'}
+                  className={
+                    line.className || 'text-on-surface-variant whitespace-pre'
+                  }
                 >
                   {line.text}
                 </p>
-              ),
+              )
             )}
           </div>
           <div className="absolute top-0 right-0 bottom-0 w-8 bg-gradient-to-l from-bg to-transparent pointer-events-none" />

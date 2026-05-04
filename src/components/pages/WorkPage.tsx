@@ -8,7 +8,11 @@ import GitHubActivity from '@/components/GitHubActivity';
 
 const COMMIT_HASHES = ['0x7F8A9B', '0x3C4D5E'];
 
-const TAG_VARIANTS: Array<'default' | 'success' | 'error'> = ['default', 'success', 'error'];
+const TAG_VARIANTS: Array<'default' | 'success' | 'error'> = [
+  'default',
+  'success',
+  'error',
+];
 
 function getTagVariant(index: number): 'default' | 'success' | 'error' {
   return TAG_VARIANTS[index % TAG_VARIANTS.length];
@@ -19,11 +23,14 @@ function generateDeterministicHash(input: string): string {
   let hash = 0;
   for (let i = 0; i < input.length; i++) {
     const char = input.charCodeAt(i);
-    hash = ((hash << 5) - hash) + char;
+    hash = (hash << 5) - hash + char;
     hash = hash & hash; // Convert to 32-bit integer
   }
   // Ensure positive and convert to hex, clamped to 6 digits
-  const hex = (Math.abs(hash) % 0xFFFFFF).toString(16).toUpperCase().padStart(6, '0');
+  const hex = (Math.abs(hash) % 0xffffff)
+    .toString(16)
+    .toUpperCase()
+    .padStart(6, '0');
   return `0x${hex}`;
 }
 
@@ -47,11 +54,10 @@ export default function WorkPage() {
           <span className="text-on-surface-variant">{terminal.workDir}</span>
           <span className="text-on-surface">{terminal.extractCommand}</span>
         </p>
-        <p className="text-on-surface-variant mt-4">
-          {terminal.extracting}
-        </p>
+        <p className="text-on-surface-variant mt-4">{terminal.extracting}</p>
         <p className="text-on-surface-variant">
-          <span className="text-primary">{terminal.extractOk}</span> {items.length} {terminal.volumesMounted}
+          <span className="text-primary">{terminal.extractOk}</span>{' '}
+          {items.length} {terminal.volumesMounted}
         </p>
       </motion.div>
 
@@ -65,14 +71,18 @@ export default function WorkPage() {
           {/* Git log command */}
           <div className="font-mono text-sm mb-6">
             <span className="text-primary">{terminal.user}</span>
-            <span className="text-on-surface-variant">{terminal.historyDir}</span>
+            <span className="text-on-surface-variant">
+              {terminal.historyDir}
+            </span>
             <span className="text-on-surface">{terminal.gitCommand}</span>
           </div>
 
           {/* Git log entries */}
           <div className="font-mono text-sm space-y-0">
             {items.map((exp, i) => {
-              const hash = COMMIT_HASHES[i] || generateDeterministicHash(`${exp.company}-${exp.period}`);
+              const hash =
+                COMMIT_HASHES[i] ||
+                generateDeterministicHash(`${exp.company}-${exp.period}`);
               const isHead = i === 0;
               const lineColor = isHead ? 'text-error' : 'text-outline-bright';
               const isLast = i === items.length - 1;
@@ -88,8 +98,15 @@ export default function WorkPage() {
                       <span className="text-secondary">commit {hash} </span>
                       {isHead && (
                         <>
-                        (<span className="text-primary">{terminal.headLabel}</span>,
-                        <span className="text-error">{terminal.originLabel}</span>)
+                          (
+                          <span className="text-primary">
+                            {terminal.headLabel}
+                          </span>
+                          ,
+                          <span className="text-error">
+                            {terminal.originLabel}
+                          </span>
+                          )
                         </>
                       )}
                     </div>
@@ -116,8 +133,14 @@ export default function WorkPage() {
                     <div className="flex items-start">
                       <span className={`${lineColor} flex-shrink-0`}>|</span>
                       <span className="ml-1 flex-1 min-w-0">
-                        <span className="text-secondary font-bold">{terminal.roleLabel}</span>
-                        <span className="text-on-surface font-bold"> {exp.title}{terminal.roleConnector}</span>
+                        <span className="text-secondary font-bold">
+                          {terminal.roleLabel}
+                        </span>
+                        <span className="text-on-surface font-bold">
+                          {' '}
+                          {exp.title}
+                          {terminal.roleConnector}
+                        </span>
                         <a
                           href={exp.companyUrl}
                           target="_blank"
@@ -148,16 +171,18 @@ export default function WorkPage() {
                       <span className={`${lineColor} flex-shrink-0`}>|</span>
                       <span className="ml-1 inline-flex flex-wrap gap-2">
                         {exp.tags.map((tag, ti) => (
-                          <BracketChip key={tag} label={tag} variant={getTagVariant(ti)} />
+                          <BracketChip
+                            key={tag}
+                            label={tag}
+                            variant={getTagVariant(ti)}
+                          />
                         ))}
                       </span>
                     </div>
                   </div>
 
                   {/* Connecting line to next commit */}
-                  {!isLast && (
-                    <div className={`ml-8 ${lineColor}`}>|</div>
-                  )}
+                  {!isLast && <div className={`ml-8 ${lineColor}`}>|</div>}
                 </div>
               );
             })}

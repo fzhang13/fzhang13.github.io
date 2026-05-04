@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useState, useEffect, useMemo } from "react";
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 interface DayData {
   date: string;
@@ -15,16 +15,16 @@ interface ContributionData {
   contributions: DayData[];
 }
 
-const GITHUB_USERNAME = "fzhang13";
+const GITHUB_USERNAME = 'fzhang13';
 const WEEKS_TO_SHOW = 52;
 const CELL_GAP = 3;
 
 const LEVEL_STYLES: Record<number, string> = {
-  0: "opacity-10",
-  1: "opacity-30",
-  2: "opacity-50",
-  3: "opacity-75",
-  4: "opacity-100",
+  0: 'opacity-10',
+  1: 'opacity-30',
+  2: 'opacity-50',
+  3: 'opacity-75',
+  4: 'opacity-100',
 };
 
 function buildWeeks(contributions: DayData[]): DayData[][] {
@@ -56,8 +56,10 @@ export default function GitHubActivity() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
   useEffect(() => {
-    fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`)
-      .then((r) => (r.ok ? r.json() : null))
+    fetch(
+      `https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`
+    )
+      .then(r => (r.ok ? r.json() : null))
       .then((d: ContributionData | null) => {
         if (d) setData(d);
         setLoading(false);
@@ -84,7 +86,9 @@ export default function GitHubActivity() {
         <div className="terminal-card">
           {/* Header row */}
           <div className="terminal-card-header">
-            <span className="font-mono font-bold tracking-wider">GITHUB_COMMIT_ACTIVITY</span>
+            <span className="font-mono font-bold tracking-wider">
+              GITHUB_COMMIT_ACTIVITY
+            </span>
             <span className="text-on-surface-variant font-mono text-[10px] tracking-wider">
               SYS_LOG &mdash;METRICS
             </span>
@@ -96,7 +100,9 @@ export default function GitHubActivity() {
               <div className="font-mono text-xs space-y-0.5">
                 <p>
                   <span className="text-on-surface-variant">REPOSITORY: </span>
-                  <span className="text-primary font-bold">MASTER_BRANCH_CORE</span>
+                  <span className="text-primary font-bold">
+                    MASTER_BRANCH_CORE
+                  </span>
                 </p>
                 <p className="text-on-surface-variant">
                   ARCHIVE_PATH: /usr/local/git/logs
@@ -146,18 +152,25 @@ export default function GitHubActivity() {
                             style={{ aspectRatio: '1' }}
                           />
                         ))}
-                      {week.map((day) => (
+                      {week.map(day => (
                         <div
                           key={day.date}
                           className={`w-full cursor-default transition-all duration-150 hover:ring-1 hover:ring-outline-bright ${LEVEL_STYLES[day.level]}`}
                           style={{
                             aspectRatio: '1',
-                            backgroundColor: day.level === 0 ? 'var(--surface-high)' : 'var(--primary)',
+                            backgroundColor:
+                              day.level === 0
+                                ? 'var(--surface-high)'
+                                : 'var(--primary)',
                           }}
-                          onMouseEnter={(e) => {
+                          onMouseEnter={e => {
                             setHoveredDay(day);
-                            const rect = (e.target as HTMLElement).getBoundingClientRect();
-                            const parent = (e.target as HTMLElement).closest('.terminal-card')?.getBoundingClientRect();
+                            const rect = (
+                              e.target as HTMLElement
+                            ).getBoundingClientRect();
+                            const parent = (e.target as HTMLElement)
+                              .closest('.terminal-card')
+                              ?.getBoundingClientRect();
                             if (parent) {
                               setHoverPos({
                                 x: rect.left - parent.left + rect.width / 2,
@@ -176,17 +189,24 @@ export default function GitHubActivity() {
                 <div className="flex items-center justify-between mt-6 pt-4 border-t border-outline font-mono text-[10px] tracking-wider">
                   {/* Legend */}
                   <div className="flex items-center gap-2">
-                    <span className="text-on-surface-variant">LOAD_INTENSITY:</span>
+                    <span className="text-on-surface-variant">
+                      LOAD_INTENSITY:
+                    </span>
                     {Object.entries(LEVEL_STYLES).map(([level, style]) => (
                       <div
                         key={level}
                         className={`w-3 h-3 ${style}`}
                         style={{
-                          backgroundColor: Number(level) === 0 ? 'var(--surface-high)' : 'var(--primary)',
+                          backgroundColor:
+                            Number(level) === 0
+                              ? 'var(--surface-high)'
+                              : 'var(--primary)',
                         }}
                       />
                     ))}
-                    <span className="text-on-surface-variant ml-1">SCALE [0-100%]</span>
+                    <span className="text-on-surface-variant ml-1">
+                      SCALE [0-100%]
+                    </span>
                   </div>
 
                   {/* Stats */}
@@ -198,7 +218,8 @@ export default function GitHubActivity() {
                       &#9632;
                     </span>
                     <span>
-                      STAT_SUM: {totalContributions.toLocaleString()} COMMITS // AVG_UPTIME: 99.98%
+                      STAT_SUM: {totalContributions.toLocaleString()} COMMITS //
+                      AVG_UPTIME: 99.98%
                     </span>
                   </div>
                 </div>
@@ -210,19 +231,20 @@ export default function GitHubActivity() {
                     style={{
                       left: hoverPos.x,
                       top: hoverPos.y,
-                      transform: "translate(-50%, -100%)",
+                      transform: 'translate(-50%, -100%)',
                       backgroundColor: 'var(--surface-high)',
                       color: 'var(--on-surface)',
                     }}
                   >
                     <span className="text-on-surface-variant">
-                      {hoveredDay.count} contribution{hoveredDay.count !== 1 ? "s" : ""}
-                    </span>{" "}
-                    on{" "}
-                    {new Date(hoveredDay.date).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
+                      {hoveredDay.count} contribution
+                      {hoveredDay.count !== 1 ? 's' : ''}
+                    </span>{' '}
+                    on{' '}
+                    {new Date(hoveredDay.date).toLocaleDateString('en-US', {
+                      month: 'short',
+                      day: 'numeric',
+                      year: 'numeric',
                     })}
                   </div>
                 )}

@@ -11,11 +11,7 @@ const LEVEL_STYLES: Record<string, string> = {
   ERR: 'text-error',
 };
 
-const BAR_COLORS = [
-  'bg-primary',
-  'bg-secondary',
-  'bg-error',
-];
+const BAR_COLORS = ['bg-primary', 'bg-secondary', 'bg-error'];
 
 export default function AboutPage() {
   const { sysSpecs, historyLog, terminalTitles } = copy.about;
@@ -52,7 +48,9 @@ export default function AboutPage() {
                   <span className="text-on-surface-variant tracking-wider">
                     {spec.label}
                   </span>
-                  <span className="text-on-surface font-bold">{spec.value}%</span>
+                  <span className="text-on-surface font-bold">
+                    {spec.value}%
+                  </span>
                 </div>
                 <div className="w-full h-4 bg-surface-high border border-outline">
                   <div
@@ -81,13 +79,13 @@ export default function AboutPage() {
                   <span className="text-on-surface-variant text-xs">
                     {entry.timestamp}
                   </span>
-                  <span className={`font-bold text-xs ${LEVEL_STYLES[entry.level] || 'text-primary'}`}>
+                  <span
+                    className={`font-bold text-xs ${LEVEL_STYLES[entry.level] || 'text-primary'}`}
+                  >
                     {entry.level}
                   </span>
                 </div>
-                <p className="text-on-surface">
-                  {entry.description}
-                </p>
+                <p className="text-on-surface">{entry.description}</p>
               </div>
             ))}
           </div>

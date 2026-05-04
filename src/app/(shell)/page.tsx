@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+import type { Metadata } from 'next';
 import HomePage from '@/components/pages/HomePage';
-import copy from "@/copy.json";
+import copy from '@/copy.json';
 
 export const metadata: Metadata = {
   title: copy.meta.title,

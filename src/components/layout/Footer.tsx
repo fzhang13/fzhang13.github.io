@@ -8,10 +8,15 @@ export default function Footer() {
       <div className="flex items-center gap-4">
         <span>{copy.footer.build}</span>
         <span className="text-outline">|</span>
-        <span>{copy.footer.status} <span className="text-primary">{copy.footer.statusValue}</span></span>
+        <span>
+          {copy.footer.status}{' '}
+          <span className="text-primary">{copy.footer.statusValue}</span>
+        </span>
       </div>
       <div className="flex items-center gap-4">
-        <span>&copy; {new Date().getFullYear()} {copy.footer.copyright}</span>
+        <span>
+          &copy; {new Date().getFullYear()} {copy.footer.copyright}
+        </span>
       </div>
     </footer>
   );

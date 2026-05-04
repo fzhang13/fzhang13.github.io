@@ -29,10 +29,10 @@ export default function BootSequence() {
 
     const timers: NodeJS.Timeout[] = [];
 
-    BOOT_LINES.forEach((line) => {
+    BOOT_LINES.forEach(line => {
       timers.push(
         setTimeout(() => {
-          setLines((prev) => [...prev, line.text]);
+          setLines(prev => [...prev, line.text]);
         }, line.delay)
       );
     });
@@ -60,11 +60,19 @@ export default function BootSequence() {
               <div key={i} className="leading-relaxed">
                 {line.includes('[OK]') ? (
                   <>
-                    <span className="text-on-surface-variant">{line.replace('[OK]', '')}</span>
+                    <span className="text-on-surface-variant">
+                      {line.replace('[OK]', '')}
+                    </span>
                     <span className="text-primary">[OK]</span>
                   </>
                 ) : (
-                  <span className={i === lines.length - 1 && line.includes('READY') ? 'text-primary phosphor-glow' : 'text-on-surface'}>
+                  <span
+                    className={
+                      i === lines.length - 1 && line.includes('READY')
+                        ? 'text-primary phosphor-glow'
+                        : 'text-on-surface'
+                    }
+                  >
                     {line}
                   </span>
                 )}
