@@ -85,7 +85,7 @@ export default function InteractiveTerminal({ embedded = false }: InteractiveTer
           {copy.terminal.commandHint}
         </p>
 
-        <div className="flex items-center">
+        <div className="flex items-center text-base">
           <span className="text-primary mr-1">$</span>
           <div className="relative flex-1">
             <input

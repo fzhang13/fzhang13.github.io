@@ -158,7 +158,7 @@ export default function HomeShell() {
         </div>
       )}
 
-      <div className="flex items-center font-mono text-sm">
+      <div className="flex items-center font-mono text-base">
         <span className="text-primary mr-1">$</span>
         <div className="relative flex-1">
           <input
