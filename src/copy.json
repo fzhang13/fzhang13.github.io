@@ -4,7 +4,7 @@
     "description": "Felix Zhang is a Full-Stack Engineer with 6+ years of experience delivering scalable web applications, cloud infrastructure, and digital experiences. Based in Toronto, Canada.",
     "ogDescription": "Full-Stack Engineer with 6+ years of experience delivering scalable web applications, cloud infrastructure, and digital experiences.",
     "siteName": "Felix Zhang Portfolio",
-    "url": "https://fzhang13.github.io",
+    "url": "https://felixzhang.dev",
     "keywords": [
       "Felix Zhang",
       "Cloud Engineer",
@@ -137,11 +137,6 @@
         "timestamp": "[2020.01.06:03018]",
         "level": "INF",
         "description": "MediaMonks system integration initialized. Primary employment loop commenced. Enterprise stack onboarding complete."
-      },
-      {
-        "timestamp": "[2019.03.14:02102]",
-        "level": "ERR",
-        "description": "Production database fault at Palomino Systems. Stripe webhook cascade triggered data inconsistency. Manual reconciliation applied. Post-mortem filed."
       }
     ]
   },
@@ -442,7 +437,7 @@
       "extractOk": "[OK]",
       "volumesMounted": "volumes mounted successfully.",
       "gitCommand": "git log --oneline --graph --decorate",
-      "author": "Author: FELIX_ZHANG",
+      "author": "Author: f.zhang <felix.zhang.dev@gmail.com>",
       "datePrefix": "Date:   ",
       "roleLabel": "[ROLE]",
       "roleConnector": " @ ",
