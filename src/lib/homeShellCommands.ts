@@ -3,7 +3,8 @@ import { themes } from '@/lib/themes';
 
 export interface OutputLine {
   text: string;
-  className?: string;
+  /** Semantic color token for the line; HomeShell maps it to a CSS module class. */
+  variant?: 'primary' | 'variant';
 }
 
 export interface CommandResult {
@@ -22,7 +23,6 @@ const PAGE_NAMES = Object.keys(NAV_TARGETS);
 
 const AUTOCOMPLETE_ENTRIES = [
   'about',
-  'cat',
   'cd',
   'clear',
   'exit',
@@ -93,10 +93,7 @@ function buildNeofetch(context: {
     if (i < ascii.length) {
       result.push({
         text: `${artPart}    ${infoPart}`,
-        className:
-          i === 0
-            ? 'text-on-surface-variant whitespace-pre'
-            : 'text-on-surface-variant whitespace-pre',
+        variant: 'variant',
       });
     } else {
       result.push({ text: `${pad}${infoPart}` });
@@ -131,10 +128,6 @@ export function executeCommand(
     return { lines: staticOutput('rm -rf /') };
   }
 
-  if (cmd === 'cat') {
-    return { lines: [{ text: copy.homeShell.errorMessages.catMissing }] };
-  }
-
   // Navigation: bare name, cd <name>, cd /<name>, cd ~, cd /
   let target: string | null = null;
 
@@ -158,7 +151,7 @@ export function executeCommand(
     const path = NAV_TARGETS[target];
     const feedback = copy.homeShell.navigationFeedback.replace('{page}', path);
     return {
-      lines: [{ text: feedback, className: 'text-primary whitespace-pre' }],
+      lines: [{ text: feedback, variant: 'primary' }],
       action: 'navigate',
       navigateTo: path,
     };

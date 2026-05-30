@@ -1,0 +1,162 @@
+.header {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+
+  > * + * {
+    margin-top: 0.25rem;
+  }
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.muted {
+  color: var(--on-surface-variant);
+}
+
+.text {
+  color: var(--on-surface);
+}
+
+.headerExtracting {
+  color: var(--on-surface-variant);
+  margin-top: 1rem;
+}
+
+.gitCommand {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.log {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+.commit {
+  position: relative;
+}
+
+.commitLine {
+  display: flex;
+  align-items: flex-start;
+}
+
+.commitMarker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1.5rem;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.secondary {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.dash {
+  color: var(--secondary);
+}
+
+.commitBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.commitHash {
+  color: var(--secondary);
+}
+
+.error {
+  color: var(--error);
+}
+
+.indent {
+  margin-left: 2rem;
+  color: var(--on-surface-variant);
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+}
+
+// Tree gutter color variants (was lineColor: text-error / text-outline-bright)
+.gutterHead {
+  color: var(--error);
+  flex-shrink: 0;
+}
+
+.gutterNormal {
+  color: var(--outline-bright);
+  flex-shrink: 0;
+}
+
+.rowText {
+  margin-left: 0.25rem;
+}
+
+.rowFill {
+  margin-left: 0.25rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.periodValue {
+  color: var(--secondary);
+}
+
+.roleBlock {
+  margin-left: 2rem;
+}
+
+.roleLabel {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.roleTitle {
+  color: var(--on-surface);
+  font-weight: 700;
+}
+
+.companyLink {
+  color: var(--primary);
+  font-weight: 700;
+  word-break: break-word;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.highlights {
+  margin-left: 2rem;
+  color: var(--on-surface-variant);
+}
+
+.tags {
+  margin-left: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.tagChips {
+  margin-left: 0.25rem;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.connector {
+  margin-left: 2rem;
+}
+
+.activitySection {
+  margin-top: 2rem;
+}

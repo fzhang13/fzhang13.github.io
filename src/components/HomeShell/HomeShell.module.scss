@@ -1,0 +1,96 @@
+.root {
+  cursor: text;
+}
+
+.history {
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.scroll {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  max-height: 12rem;
+  overflow-y: auto;
+  overflow-x: auto;
+
+  > * + * {
+    margin-top: 0.125rem;
+  }
+}
+
+.inputLine {
+  color: var(--on-surface);
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.outputPrimary {
+  color: var(--primary);
+  white-space: pre;
+}
+
+.outputVariant {
+  color: var(--on-surface-variant);
+  white-space: pre;
+}
+
+.fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2rem;
+  background: linear-gradient(to left, var(--bg), transparent);
+  pointer-events: none;
+}
+
+.promptRow {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 1rem;
+}
+
+.promptSign {
+  color: var(--primary);
+  margin-right: 0.25rem;
+}
+
+.inputWrap {
+  position: relative;
+  flex: 1;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--on-surface);
+  width: 100%;
+  caret-color: transparent;
+  font: inherit;
+}
+
+.ghost {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  color: var(--outline-bright);
+  opacity: 0.4;
+}
+
+.cursor {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+}
+
+.hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--outline-bright);
+  margin-top: 0.5rem;
+}

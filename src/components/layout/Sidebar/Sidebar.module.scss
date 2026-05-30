@@ -1,0 +1,155 @@
+@use '@/styles/breakpoints' as *;
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.heading {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--outline);
+  margin-bottom: 0.5rem;
+}
+
+.headingTitle {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+}
+
+.headingMeta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--outline-bright);
+  margin-top: 0.25rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  transition: color 0.15s, background-color 0.15s;
+
+  &:hover {
+    color: var(--primary);
+    background-color: color-mix(in srgb, var(--primary) 5%, transparent);
+  }
+}
+
+.linkActive {
+  color: var(--primary);
+  border-right: 2px solid var(--primary);
+  background-color: color-mix(in srgb, var(--primary) 5%, transparent);
+}
+
+.caret {
+  color: var(--primary);
+  opacity: 0;
+  transition: opacity 0.15s;
+
+  .link:hover & {
+    opacity: 1;
+  }
+}
+
+.caretActive {
+  opacity: 1;
+}
+
+.hamburger {
+  position: fixed;
+  left: 0.75rem;
+  top: 0.6rem;
+  z-index: 100;
+  padding: 0.4rem;
+  border: 1px solid var(--outline);
+  background-color: var(--surface);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include md {
+    display: none;
+  }
+}
+
+.scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background-color: color-mix(in srgb, var(--bg) 80%, transparent);
+
+  @include md {
+    display: none;
+  }
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: var(--sidebar);
+  background-color: var(--bg);
+  border-right: 1px solid var(--outline);
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.2s;
+
+  @include md {
+    transform: translateX(0);
+    position: static;
+    z-index: auto;
+  }
+}
+
+.sidebarOpen {
+  transform: translateX(0);
+}
+
+.closeRow {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.75rem 1rem 0.5rem;
+
+  @include md {
+    display: none;
+  }
+}
+
+.closeButton {
+  padding: 0.4rem;
+  border: 1px solid var(--outline);
+  background-color: var(--surface);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.body {
+  flex: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+}
+
+.footer {
+  border-top: 1px solid var(--outline);
+  padding: 0.75rem 1rem;
+}
+
+.footerPath {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--outline-bright);
+}

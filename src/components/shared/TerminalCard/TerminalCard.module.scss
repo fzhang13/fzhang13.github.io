@@ -1,0 +1,43 @@
+@use '@/styles/mixins' as *;
+
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--outline);
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--outline);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.controls {
+  color: var(--outline-bright);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.body {
+  padding: 16px;
+}

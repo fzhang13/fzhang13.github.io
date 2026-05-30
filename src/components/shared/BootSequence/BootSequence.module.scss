@@ -1,0 +1,38 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.console {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--primary);
+  max-width: 32rem;
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.line {
+  line-height: 1.625;
+}
+
+.dim {
+  color: var(--on-surface-variant);
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.ready {
+  color: var(--primary);
+}
+
+.text {
+  color: var(--on-surface);
+}

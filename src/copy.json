@@ -22,10 +22,22 @@
   "nav": {
     "brand": "felix.zhang",
     "items": [
-      { "label": "Home", "href": "#home" },
-      { "label": "About", "href": "#about" },
-      { "label": "Expertise", "href": "#expertise" },
-      { "label": "Experience", "href": "#experience" }
+      {
+        "label": "Home",
+        "href": "#home"
+      },
+      {
+        "label": "About",
+        "href": "#about"
+      },
+      {
+        "label": "Expertise",
+        "href": "#expertise"
+      },
+      {
+        "label": "Experience",
+        "href": "#experience"
+      }
     ],
     "resumeLabel": "Resume",
     "resumeHref": "/resume/FelixZhang.pdf"
@@ -84,9 +96,16 @@
         "Full-stack monorepo architectures"
       ],
       "shipped": [
-        { "name": "Meta (Facebook)", "comment": "contingent engineer" },
-        { "names": ["Adidas", "Airbnb", "KFC", "Zoox"] },
-        { "names": ["WhatsApp", "Oculus", "Visa"] }
+        {
+          "name": "Meta (Facebook)",
+          "comment": "contingent engineer"
+        },
+        {
+          "names": ["Adidas", "Airbnb", "KFC", "Zoox"]
+        },
+        {
+          "names": ["WhatsApp", "Oculus", "Visa"]
+        }
       ],
       "backend": [
         "Node.js",
@@ -97,20 +116,47 @@
         "Serverless"
       ],
       "offHours": [
-        { "text": "chasing powder ⛷", "items": ["building keyboards ⌨"] },
-        { "text": "running", "items": ["cycling", "coding to chill beats"] }
+        {
+          "text": "chasing powder ⛷",
+          "items": ["building keyboards ⌨"]
+        },
+        {
+          "text": "running",
+          "items": ["cycling", "coding to chill beats"]
+        }
       ],
       "chillBeatsUrl": "https://youtu.be/hHW1oY26kxQ"
     },
     "stats": [
-      { "icon": "Cloud", "label": "Cloud", "value": "AWS/GCP" },
-      { "icon": "Terminal", "label": "Experience", "value": "6+ yrs" },
-      { "icon": "Boxes", "label": "Projects", "value": "20+" }
+      {
+        "icon": "Cloud",
+        "label": "Cloud",
+        "value": "AWS/GCP"
+      },
+      {
+        "icon": "Terminal",
+        "label": "Experience",
+        "value": "6+ yrs"
+      },
+      {
+        "icon": "Boxes",
+        "label": "Projects",
+        "value": "20+"
+      }
     ],
     "sysSpecs": [
-      { "label": "FRONTEND_RENDER", "value": 88 },
-      { "label": "BACKEND_LOGIC", "value": 91 },
-      { "label": "INFRA_DEVOPS", "value": 74 }
+      {
+        "label": "FRONTEND_RENDER",
+        "value": 88
+      },
+      {
+        "label": "BACKEND_LOGIC",
+        "value": 91
+      },
+      {
+        "label": "INFRA_DEVOPS",
+        "value": 74
+      }
     ],
     "historyLog": [
       {
@@ -224,15 +270,31 @@
       "packagesTitle": "INSTALLED_PACKAGES.log"
     },
     "installSequence": [
-      { "text": "$ npm install stack", "delay": 0, "type": "cmd" },
-      { "text": "", "delay": 300, "type": "info" },
-      { "text": "resolving dependencies...", "delay": 500, "type": "info" },
+      {
+        "text": "$ npm install stack",
+        "delay": 0,
+        "type": "cmd"
+      },
+      {
+        "text": "",
+        "delay": 300,
+        "type": "info"
+      },
+      {
+        "text": "resolving dependencies...",
+        "delay": 500,
+        "type": "info"
+      },
       {
         "text": "fetching packages from registry...",
         "delay": 900,
         "type": "info"
       },
-      { "text": "", "delay": 1100, "type": "info" },
+      {
+        "text": "",
+        "delay": 1100,
+        "type": "info"
+      },
       {
         "text": "+ typescript@6.4       + javascript@es2026",
         "delay": 1300,
@@ -248,7 +310,11 @@
         "delay": 1600,
         "type": "pkg"
       },
-      { "text": "", "delay": 1700, "type": "info" },
+      {
+        "text": "",
+        "delay": 1700,
+        "type": "info"
+      },
       {
         "text": "installing frontend frameworks...",
         "delay": 1800,
@@ -264,7 +330,11 @@
         "delay": 2100,
         "type": "pkg"
       },
-      { "text": "", "delay": 2200, "type": "info" },
+      {
+        "text": "",
+        "delay": 2200,
+        "type": "info"
+      },
       {
         "text": "installing backend modules...",
         "delay": 2300,
@@ -275,9 +345,21 @@
         "delay": 2450,
         "type": "pkg"
       },
-      { "text": "+ graphql@17.x", "delay": 2600, "type": "pkg" },
-      { "text": "", "delay": 2700, "type": "info" },
-      { "text": "linking databases...", "delay": 2800, "type": "info" },
+      {
+        "text": "+ graphql@17.x",
+        "delay": 2600,
+        "type": "pkg"
+      },
+      {
+        "text": "",
+        "delay": 2700,
+        "type": "info"
+      },
+      {
+        "text": "linking databases...",
+        "delay": 2800,
+        "type": "info"
+      },
       {
         "text": "+ postgresql@18.2      + mysql@9.0.1",
         "delay": 2950,
@@ -288,8 +370,16 @@
         "delay": 3100,
         "type": "pkg"
       },
-      { "text": "", "delay": 3200, "type": "info" },
-      { "text": "provisioning cloud infra...", "delay": 3300, "type": "info" },
+      {
+        "text": "",
+        "delay": 3200,
+        "type": "info"
+      },
+      {
+        "text": "provisioning cloud infra...",
+        "delay": 3300,
+        "type": "info"
+      },
       {
         "text": "+ aws-sdk@3.x          + gcp@512.0.0",
         "delay": 3450,
@@ -300,9 +390,21 @@
         "delay": 3600,
         "type": "pkg"
       },
-      { "text": "+ serverless@4.0.0", "delay": 3750, "type": "pkg" },
-      { "text": "", "delay": 3850, "type": "info" },
-      { "text": "loading AI modules...", "delay": 3950, "type": "info" },
+      {
+        "text": "+ serverless@4.0.0",
+        "delay": 3750,
+        "type": "pkg"
+      },
+      {
+        "text": "",
+        "delay": 3850,
+        "type": "info"
+      },
+      {
+        "text": "loading AI modules...",
+        "delay": 3950,
+        "type": "info"
+      },
       {
         "text": "+ openai-gpt@4o        + anthropic-claude@4.7",
         "delay": 4100,
@@ -318,8 +420,16 @@
         "delay": 4400,
         "type": "pkg"
       },
-      { "text": "", "delay": 4500, "type": "info" },
-      { "text": "configuring toolchain...", "delay": 4600, "type": "info" },
+      {
+        "text": "",
+        "delay": 4500,
+        "type": "info"
+      },
+      {
+        "text": "configuring toolchain...",
+        "delay": 4600,
+        "type": "info"
+      },
       {
         "text": "+ git@2.52.0           + github-cli@2.60.0",
         "delay": 4750,
@@ -335,16 +445,36 @@
         "delay": 5050,
         "type": "pkg"
       },
-      { "text": "+ cursor@0.62.1", "delay": 5200, "type": "pkg" },
-      { "text": "", "delay": 5300, "type": "info" },
+      {
+        "text": "+ cursor@0.62.1",
+        "delay": 5200,
+        "type": "pkg"
+      },
+      {
+        "text": "",
+        "delay": 5300,
+        "type": "info"
+      },
       {
         "text": "verifying integrity... checksum OK",
         "delay": 5400,
         "type": "ok"
       },
-      { "text": "", "delay": 5500, "type": "info" },
-      { "text": "added 38 packages in 4.20s", "delay": 5600, "type": "ok" },
-      { "text": "stack environment ready.", "delay": 5800, "type": "ok" }
+      {
+        "text": "",
+        "delay": 5500,
+        "type": "info"
+      },
+      {
+        "text": "added 38 packages in 4.20s",
+        "delay": 5600,
+        "type": "ok"
+      },
+      {
+        "text": "stack environment ready.",
+        "delay": 5800,
+        "type": "ok"
+      }
     ],
     "installDuration": 6400,
     "areas": [
@@ -386,42 +516,150 @@
       }
     ],
     "techStack": [
-      { "name": "TypeScript", "category": "Language" },
-      { "name": "JavaScript", "category": "Language" },
-      { "name": "Python", "category": "Language" },
-      { "name": "PHP", "category": "Language" },
-      { "name": "SQL", "category": "Language" },
-      { "name": "HTML/CSS/SCSS", "category": "Language" },
-      { "name": "React", "category": "Frontend" },
-      { "name": "Next.js", "category": "Frontend" },
-      { "name": "Vite", "category": "Frontend" },
-      { "name": "React Native", "category": "Frontend" },
-      { "name": "Node.js", "category": "Backend" },
-      { "name": "NestJS", "category": "Backend" },
-      { "name": "GraphQL", "category": "Backend" },
-      { "name": "PostgreSQL", "category": "Database" },
-      { "name": "MySQL", "category": "Database" },
-      { "name": "MongoDB", "category": "Database" },
-      { "name": "Redis", "category": "Database" },
-      { "name": "AWS", "category": "Cloud & DevOps" },
-      { "name": "GCP", "category": "Cloud & DevOps" },
-      { "name": "Docker", "category": "Cloud & DevOps" },
-      { "name": "Terraform", "category": "Cloud & DevOps" },
-      { "name": "Serverless", "category": "Cloud & DevOps" },
-      { "name": "OpenAI GPT", "category": "AI" },
-      { "name": "Anthropic Claude", "category": "AI" },
-      { "name": "Google Gemini", "category": "AI" },
-      { "name": "Prompt Engineering", "category": "AI" },
-      { "name": "GitHub Copilot", "category": "AI" },
-      { "name": "Claude Code", "category": "AI" },
-      { "name": "OpenAI Codex", "category": "AI" },
-      { "name": "Git", "category": "Tool" },
-      { "name": "GitHub", "category": "Tool" },
-      { "name": "Jira", "category": "Tool" },
-      { "name": "Postman", "category": "Tool" },
-      { "name": "Figma", "category": "Tool" },
-      { "name": "VSCode", "category": "Tool" },
-      { "name": "Cursor", "category": "Tool" }
+      {
+        "name": "TypeScript",
+        "category": "Language"
+      },
+      {
+        "name": "JavaScript",
+        "category": "Language"
+      },
+      {
+        "name": "Python",
+        "category": "Language"
+      },
+      {
+        "name": "PHP",
+        "category": "Language"
+      },
+      {
+        "name": "SQL",
+        "category": "Language"
+      },
+      {
+        "name": "HTML/CSS/SCSS",
+        "category": "Language"
+      },
+      {
+        "name": "React",
+        "category": "Frontend"
+      },
+      {
+        "name": "Next.js",
+        "category": "Frontend"
+      },
+      {
+        "name": "Vite",
+        "category": "Frontend"
+      },
+      {
+        "name": "React Native",
+        "category": "Frontend"
+      },
+      {
+        "name": "Node.js",
+        "category": "Backend"
+      },
+      {
+        "name": "NestJS",
+        "category": "Backend"
+      },
+      {
+        "name": "GraphQL",
+        "category": "Backend"
+      },
+      {
+        "name": "PostgreSQL",
+        "category": "Database"
+      },
+      {
+        "name": "MySQL",
+        "category": "Database"
+      },
+      {
+        "name": "MongoDB",
+        "category": "Database"
+      },
+      {
+        "name": "Redis",
+        "category": "Database"
+      },
+      {
+        "name": "AWS",
+        "category": "Cloud & DevOps"
+      },
+      {
+        "name": "GCP",
+        "category": "Cloud & DevOps"
+      },
+      {
+        "name": "Docker",
+        "category": "Cloud & DevOps"
+      },
+      {
+        "name": "Terraform",
+        "category": "Cloud & DevOps"
+      },
+      {
+        "name": "Serverless",
+        "category": "Cloud & DevOps"
+      },
+      {
+        "name": "OpenAI GPT",
+        "category": "AI"
+      },
+      {
+        "name": "Anthropic Claude",
+        "category": "AI"
+      },
+      {
+        "name": "Google Gemini",
+        "category": "AI"
+      },
+      {
+        "name": "Prompt Engineering",
+        "category": "AI"
+      },
+      {
+        "name": "GitHub Copilot",
+        "category": "AI"
+      },
+      {
+        "name": "Claude Code",
+        "category": "AI"
+      },
+      {
+        "name": "OpenAI Codex",
+        "category": "AI"
+      },
+      {
+        "name": "Git",
+        "category": "Tool"
+      },
+      {
+        "name": "GitHub",
+        "category": "Tool"
+      },
+      {
+        "name": "Jira",
+        "category": "Tool"
+      },
+      {
+        "name": "Postman",
+        "category": "Tool"
+      },
+      {
+        "name": "Figma",
+        "category": "Tool"
+      },
+      {
+        "name": "VSCode",
+        "category": "Tool"
+      },
+      {
+        "name": "Cursor",
+        "category": "Tool"
+      }
     ]
   },
   "experience": {
@@ -625,7 +863,6 @@
     "notFoundPrefix": "zsh: command not found:",
     "notFoundHint": "Type 'help' for available commands.",
     "errorMessages": {
-      "catMissing": "cat: missing operand. Try: cat about.yml",
       "alreadyHome": "Already home."
     }
   },
@@ -660,16 +897,36 @@
     "commandNotFoundHint": "Type 'help' for available commands.",
     "crashDuration": 3600,
     "crashSequence": [
-      { "text": "Segmentation fault (core dumped)", "delay": 0, "type": "err" },
-      { "text": "", "delay": 200, "type": "info" },
-      { "text": "--- [ cut here ] ---", "delay": 400, "type": "info" },
+      {
+        "text": "Segmentation fault (core dumped)",
+        "delay": 0,
+        "type": "err"
+      },
+      {
+        "text": "",
+        "delay": 200,
+        "type": "info"
+      },
+      {
+        "text": "--- [ cut here ] ---",
+        "delay": 400,
+        "type": "info"
+      },
       {
         "text": "kernel panic — not syncing: page not found",
         "delay": 600,
         "type": "err"
       },
-      { "text": "", "delay": 800, "type": "info" },
-      { "text": "Call Trace:", "delay": 1000, "type": "info" },
+      {
+        "text": "",
+        "delay": 800,
+        "type": "info"
+      },
+      {
+        "text": "Call Trace:",
+        "delay": 1000,
+        "type": "info"
+      },
       {
         "text": "  [<0x00000404>] resolve_route+0x404/0x808",
         "delay": 1150,
@@ -695,17 +952,41 @@
         "delay": 1750,
         "type": "trace"
       },
-      { "text": "", "delay": 1900, "type": "info" },
+      {
+        "text": "",
+        "delay": 1900,
+        "type": "info"
+      },
       {
         "text": "Code: 04 04 00 00 de ad be ef ca fe ba be",
         "delay": 2000,
         "type": "addr"
       },
-      { "text": "RIP: 0x0000000000000404", "delay": 2150, "type": "addr" },
-      { "text": "RSP: 0x00007fff00000000", "delay": 2250, "type": "addr" },
-      { "text": "", "delay": 2400, "type": "info" },
-      { "text": "System halted.", "delay": 2600, "type": "err" },
-      { "text": "", "delay": 2800, "type": "info" },
+      {
+        "text": "RIP: 0x0000000000000404",
+        "delay": 2150,
+        "type": "addr"
+      },
+      {
+        "text": "RSP: 0x00007fff00000000",
+        "delay": 2250,
+        "type": "addr"
+      },
+      {
+        "text": "",
+        "delay": 2400,
+        "type": "info"
+      },
+      {
+        "text": "System halted.",
+        "delay": 2600,
+        "type": "err"
+      },
+      {
+        "text": "",
+        "delay": 2800,
+        "type": "info"
+      },
       {
         "text": "Rebooting into recovery shell...",
         "delay": 3000,

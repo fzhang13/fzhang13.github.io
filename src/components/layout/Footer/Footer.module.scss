@@ -1,0 +1,27 @@
+.footer {
+  height: 2rem;
+  border-top: 1px solid var(--outline);
+  background-color: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--on-surface-variant);
+  flex-shrink: 0;
+}
+
+.group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.divider {
+  color: var(--outline);
+}
+
+.accent {
+  color: var(--primary);
+}

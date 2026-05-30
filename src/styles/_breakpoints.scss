@@ -1,0 +1,21 @@
+// Responsive breakpoint mixins.
+// Mirrors the Tailwind breakpoints in use (only `md` is used today).
+
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Max-width helper for mobile-only adjustments (e.g. CRT scanline dimming).
+@mixin max-md {
+  @media (max-width: 768px) {
+    @content;
+  }
+}

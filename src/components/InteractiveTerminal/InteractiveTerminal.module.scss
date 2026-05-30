@@ -1,0 +1,129 @@
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--outline);
+  position: relative;
+  cursor: text;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--outline);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hint {
+  color: var(--on-surface-variant);
+  font-size: 10px;
+}
+
+.controls {
+  color: var(--outline-bright);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.body {
+  padding: 16px;
+}
+
+.embedded {
+  cursor: text;
+}
+
+.viewport {
+  position: relative;
+}
+
+.scroll {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  max-height: 24rem;
+  overflow-y: auto;
+  overflow-x: auto;
+
+  > * + * {
+    margin-top: 0.25rem;
+  }
+}
+
+.inputLine {
+  color: var(--on-surface);
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.output {
+  color: var(--on-surface-variant);
+  white-space: pre;
+}
+
+.commandHint {
+  color: var(--outline-bright);
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.promptRow {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.promptSign {
+  color: var(--primary);
+  margin-right: 0.25rem;
+}
+
+.inputWrap {
+  position: relative;
+  flex: 1;
+}
+
+.input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--on-surface);
+  width: 100%;
+  caret-color: transparent;
+  font-size: 1rem;
+}
+
+.ghost {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+  color: var(--outline-bright);
+  opacity: 0.4;
+}
+
+.cursor {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+}
+
+.fade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2rem;
+  background: linear-gradient(to left, var(--bg), transparent);
+  pointer-events: none;
+}
