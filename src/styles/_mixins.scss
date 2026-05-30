@@ -1,0 +1,21 @@
+// Shared style mixins for the terminal/CRT aesthetic.
+// Tokens are consumed as CSS custom properties (var(--*)) defined in globals.scss,
+// so these mixins remain theme-aware.
+//
+// Note: phosphor glow / CRT overlays are also exposed as global utility classes
+// in globals.scss (.phosphor-glow, .crt-scanlines, etc.) for use directly in JSX.
+// These mixins are for authoring new module styles that need the same effects.
+
+// Phosphor text glow (per-theme intensity via --glow-blur).
+@mixin phosphor-glow {
+  text-shadow: 0 0 var(--glow-blur) var(--primary);
+}
+
+// Monospace uppercase label typography (bracket-chip / subheadings).
+@mixin mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}

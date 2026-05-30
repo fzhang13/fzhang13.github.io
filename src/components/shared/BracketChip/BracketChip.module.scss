@@ -1,0 +1,26 @@
+@use '@/styles/mixins' as *;
+
+.chip {
+  @include mono-label;
+  white-space: nowrap;
+
+  &::before {
+    content: '[ ';
+  }
+
+  &::after {
+    content: ' ]';
+  }
+}
+
+.default {
+  color: var(--primary);
+}
+
+.error {
+  color: var(--error);
+}
+
+.success {
+  color: var(--secondary);
+}

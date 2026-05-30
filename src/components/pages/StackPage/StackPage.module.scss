@@ -1,0 +1,89 @@
+.launcher {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+}
+
+.command {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.commandText {
+  color: var(--on-surface);
+}
+
+.pressEnter {
+  color: var(--outline-bright);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  margin-top: 1.5rem;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.console {
+  max-height: 50vh;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.625;
+}
+
+.spacer {
+  height: 0.75rem;
+}
+
+.lineVariant {
+  color: var(--on-surface-variant);
+}
+
+.lineDefault {
+  color: var(--on-surface);
+}
+
+.lineOk {
+  color: var(--primary);
+}
+
+.packagesSection {
+  margin-top: 1.5rem;
+}
+
+.categoryList {
+  > * + * {
+    margin-top: 1.25rem;
+  }
+}
+
+.categoryLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}

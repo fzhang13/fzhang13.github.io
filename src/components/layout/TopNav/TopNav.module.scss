@@ -1,0 +1,80 @@
+@use '@/styles/breakpoints' as *;
+
+.header {
+  height: var(--topnav);
+  border-bottom: 1px solid var(--outline);
+  background-color: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 3.5rem;
+  padding-right: 1rem;
+
+  @include md {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.brand {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+  white-space: nowrap;
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--primary);
+  }
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.brandShort {
+  @include md {
+    display: none;
+  }
+}
+
+.brandFull {
+  display: none;
+
+  @include md {
+    display: inline;
+  }
+}
+
+.themes {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.themeButton {
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+  border: 1px solid var(--outline);
+  background-color: transparent;
+  color: var(--on-surface-variant);
+
+  &:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+}
+
+.themeButtonActive {
+  background-color: var(--primary);
+  color: var(--bg);
+  border-color: var(--primary);
+
+  &:hover {
+    color: var(--bg);
+  }
+}

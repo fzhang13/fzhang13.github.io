@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import './globals.css';
+import './globals.scss';
 import copy from '@/copy.json';
 import FaviconPulse from '@/components/FaviconPulse';
 import { ThemeProvider } from '@/context/ThemeContext';
