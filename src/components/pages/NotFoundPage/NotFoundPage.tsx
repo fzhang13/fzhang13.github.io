@@ -7,6 +7,7 @@ import BlockCursor from '@/components/shared/BlockCursor';
 import TerminalCard from '@/components/shared/TerminalCard';
 import copy from '@/copy.json';
 import { getTerminalGhostText } from '@/lib/terminalAutocomplete';
+import { buildCopyTokens, interpolate } from '@/lib/copyInterpolate';
 import styles from './NotFoundPage.module.scss';
 
 interface Line {
@@ -54,6 +55,7 @@ function executeRecoveryCommand(
   router: ReturnType<typeof useRouter>
 ): { lines: Line[]; action?: 'clear' | 'navigate'; navigateTo?: string } {
   const cmd = raw.trim().toLowerCase();
+  const tokens = buildCopyTokens();
 
   if (cmd === 'clear') {
     return { lines: [], action: 'clear' };
@@ -66,7 +68,10 @@ function executeRecoveryCommand(
     ];
     if (sudoOutput) {
       return {
-        lines: sudoOutput.map(text => ({ type: 'output' as const, text })),
+        lines: sudoOutput.map(text => ({
+          type: 'output' as const,
+          text: interpolate(text, tokens),
+        })),
       };
     }
   }
@@ -78,7 +83,10 @@ function executeRecoveryCommand(
     ];
     if (rmOutput) {
       return {
-        lines: rmOutput.map(text => ({ type: 'output' as const, text })),
+        lines: rmOutput.map(text => ({
+          type: 'output' as const,
+          text: interpolate(text, tokens),
+        })),
       };
     }
   }
@@ -89,7 +97,10 @@ function executeRecoveryCommand(
   // Try exact match first
   if (commands[cmd]) {
     return {
-      lines: commands[cmd].map(text => ({ type: 'output' as const, text })),
+      lines: commands[cmd].map(text => ({
+        type: 'output' as const,
+        text: interpolate(text, tokens),
+      })),
     };
   }
 
@@ -99,7 +110,7 @@ function executeRecoveryCommand(
     return {
       lines: commands[commandKey].map(text => ({
         type: 'output' as const,
-        text,
+        text: interpolate(text, tokens),
       })),
     };
   }
