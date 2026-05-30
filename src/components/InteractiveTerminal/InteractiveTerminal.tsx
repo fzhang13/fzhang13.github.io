@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, KeyboardEvent } from 'react';
 import copy from '@/copy.json';
 import { getTerminalGhostText } from '@/lib/terminalAutocomplete';
+import { buildCopyTokens, interpolate } from '@/lib/copyInterpolate';
 import styles from './InteractiveTerminal.module.scss';
 
 const COMMANDS: Record<string, string[]> = copy.terminal.commands;
@@ -70,7 +71,10 @@ export default function InteractiveTerminal({
 
     const response = COMMANDS[cmd];
     if (response) {
-      response.forEach(line => newLines.push({ type: 'output', text: line }));
+      const tokens = buildCopyTokens();
+      response.forEach(line =>
+        newLines.push({ type: 'output', text: interpolate(line, tokens) })
+      );
     } else {
       newLines.push(
         { type: 'output', text: `${copy.terminal.notFoundPrefix} ${cmd}` },
