@@ -1073,7 +1073,7 @@
         "make: *** No rule to make target 'coffee'.",
         "Try: make tea",
         "",
-        "418 I'm a teapot."
+        "[418 I'm a teapot.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/418)"
       ],
       "ping": [
         "PING localhost (127.0.0.1): 56 data bytes",

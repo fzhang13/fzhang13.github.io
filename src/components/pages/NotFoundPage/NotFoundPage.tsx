@@ -8,6 +8,7 @@ import TerminalCard from '@/components/shared/TerminalCard';
 import copy from '@/copy.json';
 import { getTerminalGhostText } from '@/lib/terminalAutocomplete';
 import { buildCopyTokens, interpolate } from '@/lib/copyInterpolate';
+import { renderCopyLinks } from '@/lib/renderCopyLinks';
 import styles from './NotFoundPage.module.scss';
 
 interface Line {
@@ -455,7 +456,7 @@ export default function NotFoundPage() {
                               : styles.outputVariant
                         }
                       >
-                        {line.text}
+                        {renderCopyLinks(line.text)}
                       </p>
                     )
                   )}
