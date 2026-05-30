@@ -1036,10 +1036,10 @@
         "The site is already broken. How much worse can it get?"
       ],
       "cat /var/log/syslog": [
-        "[{today.dot}] ERR  route_resolver: no matching path for requested URL",
-        "[{today.dot}] WRN  page_cache: cache miss — entry evicted",
-        "[{today.dot}] INF  recovery_shell: interactive terminal spawned",
-        "[{today.dot}] DBG  easter_egg: you found the logs. try more commands."
+        "[{today.dot.time}] ERR  route_resolver: no matching path for requested URL",
+        "[{today.dot.time}] WRN  page_cache: cache miss — entry evicted",
+        "[{today.dot.time}] INF  recovery_shell: interactive terminal spawned",
+        "[{today.dot.time}] DBG  easter_egg: you found the logs. try more commands."
       ],
       "cat /etc/passwd": [
         "root:x:0:0:Felix Zhang:/home/felix:/bin/zsh",
@@ -1049,12 +1049,12 @@
       ],
       "git blame": [
         "git blame 404.tsx:",
-        "  fzhang13  ({today.iso})  — \"it works on my machine\""
+        "  fzhang13  ({today.iso.time})  — \"it works on my machine\""
       ],
       "git log": [
         "commit 0x404DEAD (HEAD -> nowhere)",
         "Author: Felix Zhang <felix.zhang.dev@gmail.com>",
-        "Date:   {today.long}",
+        "Date:   {today.long.time}",
         "",
         "    fix: accidentally deleted this page"
       ],
