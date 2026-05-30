@@ -32,6 +32,7 @@ export default function InteractiveTerminal({
 }: InteractiveTerminalProps) {
   const [lines, setLines] = useState<Line[]>(INITIAL_LINES);
   const [input, setInput] = useState('');
+  const [caret, setCaret] = useState(0);
   const [ghostText, setGhost] = useState('');
   const [historyStack, setHistoryStack] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
@@ -45,9 +46,13 @@ export default function InteractiveTerminal({
     }
   }, [lines]);
 
+  // Keep the fake block cursor in sync with the real (transparent) caret.
+  const syncCaret = () => setCaret(inputRef.current?.selectionStart ?? 0);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setInput(val);
+    setCaret(e.target.selectionStart ?? val.length);
     setGhost(getTerminalGhostText(val, AUTOCOMPLETE_ENTRIES));
     setHistoryIndex(-1);
   };
@@ -64,6 +69,7 @@ export default function InteractiveTerminal({
     if (cmd === 'clear') {
       setLines([]);
       setInput('');
+      setCaret(0);
       return;
     }
 
@@ -84,6 +90,7 @@ export default function InteractiveTerminal({
 
     setLines(newLines);
     setInput('');
+    setCaret(0);
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -101,6 +108,7 @@ export default function InteractiveTerminal({
       e.preventDefault();
       const completed = input + ghostText;
       setInput(completed);
+      setCaret(completed.length);
       setGhost(getTerminalGhostText(completed, AUTOCOMPLETE_ENTRIES));
       return;
     }
@@ -114,6 +122,7 @@ export default function InteractiveTerminal({
       setHistoryIndex(newIndex);
       const cmd = historyStack[historyStack.length - 1 - newIndex];
       setInput(cmd);
+      setCaret(cmd.length);
       setGhost(getTerminalGhostText(cmd, AUTOCOMPLETE_ENTRIES));
       return;
     }
@@ -123,6 +132,7 @@ export default function InteractiveTerminal({
       if (historyIndex <= 0) {
         setHistoryIndex(-1);
         setInput(savedInput);
+        setCaret(savedInput.length);
         setGhost(getTerminalGhostText(savedInput, AUTOCOMPLETE_ENTRIES));
         return;
       }
@@ -130,6 +140,7 @@ export default function InteractiveTerminal({
       setHistoryIndex(newIndex);
       const cmd = historyStack[historyStack.length - 1 - newIndex];
       setInput(cmd);
+      setCaret(cmd.length);
       setGhost(getTerminalGhostText(cmd, AUTOCOMPLETE_ENTRIES));
     }
   };
@@ -160,6 +171,9 @@ export default function InteractiveTerminal({
               value={input}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
+              onKeyUp={syncCaret}
+              onSelect={syncCaret}
+              onClick={syncCaret}
               className={styles.input}
               autoComplete="off"
               spellCheck={false}
@@ -173,11 +187,10 @@ export default function InteractiveTerminal({
                 {ghostText}
               </span>
             )}
-            <span
-              className={styles.cursor}
-              style={{ left: `${input.length}ch` }}
-            >
-              <span className="block-cursor">&#x2588;</span>
+            <span className={styles.cursor} style={{ left: `${caret}ch` }}>
+              <span key={caret} className="block-cursor">
+                &#x2588;
+              </span>
             </span>
           </div>
         </div>

@@ -157,6 +157,7 @@ export default function NotFoundPage() {
   const [crashLines, setCrashLines] = useState<CrashLine[]>([]);
   const [shellLines, setShellLines] = useState<Line[]>([]);
   const [input, setInput] = useState('');
+  const [caret, setCaret] = useState(0);
   const [ghostText, setGhost] = useState('');
   const [historyStack, setHistoryStack] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
@@ -258,9 +259,13 @@ export default function NotFoundPage() {
     return () => clearInterval(interval);
   }, [phase, shellLines.length]);
 
+  // Keep the fake block cursor in sync with the real (transparent) caret.
+  const syncCaret = () => setCaret(inputRef.current?.selectionStart ?? 0);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setInput(val);
+    setCaret(e.target.selectionStart ?? val.length);
     setGhost(getTerminalGhostText(val, AUTOCOMPLETE_ENTRIES, NAV_PAGES));
     setHistoryIndex(-1);
   };
@@ -278,6 +283,7 @@ export default function NotFoundPage() {
     if (result.action === 'clear') {
       setShellLines([]);
       setInput('');
+      setCaret(0);
       return;
     }
 
@@ -289,6 +295,7 @@ export default function NotFoundPage() {
 
     setShellLines(newLines);
     setInput('');
+    setCaret(0);
 
     if (result.action === 'navigate' && result.navigateTo) {
       const dest = result.navigateTo;
@@ -311,6 +318,7 @@ export default function NotFoundPage() {
       e.preventDefault();
       const completed = input + ghostText;
       setInput(completed);
+      setCaret(completed.length);
       setGhost(
         getTerminalGhostText(completed, AUTOCOMPLETE_ENTRIES, NAV_PAGES)
       );
@@ -326,6 +334,7 @@ export default function NotFoundPage() {
       setHistoryIndex(newIndex);
       const cmd = historyStack[historyStack.length - 1 - newIndex];
       setInput(cmd);
+      setCaret(cmd.length);
       setGhost(getTerminalGhostText(cmd, AUTOCOMPLETE_ENTRIES, NAV_PAGES));
       return;
     }
@@ -335,6 +344,7 @@ export default function NotFoundPage() {
       if (historyIndex <= 0) {
         setHistoryIndex(-1);
         setInput(savedInput);
+        setCaret(savedInput.length);
         setGhost(
           getTerminalGhostText(savedInput, AUTOCOMPLETE_ENTRIES, NAV_PAGES)
         );
@@ -344,6 +354,7 @@ export default function NotFoundPage() {
       setHistoryIndex(newIndex);
       const cmd = historyStack[historyStack.length - 1 - newIndex];
       setInput(cmd);
+      setCaret(cmd.length);
       setGhost(getTerminalGhostText(cmd, AUTOCOMPLETE_ENTRIES, NAV_PAGES));
     }
   };
@@ -463,6 +474,9 @@ export default function NotFoundPage() {
                     value={input}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
+                    onKeyUp={syncCaret}
+                    onSelect={syncCaret}
+                    onClick={syncCaret}
                     className={styles.input}
                     autoComplete="off"
                     autoCapitalize="off"
@@ -480,9 +494,11 @@ export default function NotFoundPage() {
                   )}
                   <span
                     className={styles.cursor}
-                    style={{ left: `${input.length}ch` }}
+                    style={{ left: `${caret}ch` }}
                   >
-                    <span className="block-cursor">&#x2588;</span>
+                    <span key={caret} className="block-cursor">
+                      &#x2588;
+                    </span>
                   </span>
                 </div>
               </div>
