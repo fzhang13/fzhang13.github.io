@@ -18,7 +18,7 @@
       "eslint --fix",
       "bash -c 'tsc --noEmit'"
     ],
-    "*.{js,jsx,json,css,md}": [
+    "*.{js,jsx,json,css,scss,md,yml,yaml}": [
       "prettier --write"
     ]
   },

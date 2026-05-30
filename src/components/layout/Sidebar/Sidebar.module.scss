@@ -35,7 +35,9 @@
   font-family: var(--font-mono);
   font-size: 0.875rem;
   color: var(--on-surface-variant);
-  transition: color 0.15s, background-color 0.15s;
+  transition:
+    color 0.15s,
+    background-color 0.15s;
 
   &:hover {
     color: var(--primary);
