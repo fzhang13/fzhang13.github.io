@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import BlockCursor from '@/components/shared/BlockCursor';
 import TerminalCard from '@/components/shared/TerminalCard';
 import copy from '@/copy.json';
+import { getTerminalGhostText } from '@/lib/terminalAutocomplete';
 
 interface Line {
   type: 'input' | 'output';
@@ -25,6 +26,14 @@ const NAV_TARGETS: Record<string, string> = {
   stack: '/stack',
   work: '/work',
 };
+
+const NAV_PAGES = Object.keys(NAV_TARGETS);
+
+const AUTOCOMPLETE_ENTRIES = [
+  ...Object.keys(copy.notFound.commands),
+  ...NAV_PAGES,
+  'clear',
+].sort();
 
 const KONAMI = [
   'ArrowUp',
@@ -136,6 +145,10 @@ export default function NotFoundPage() {
   const [crashLines, setCrashLines] = useState<CrashLine[]>([]);
   const [shellLines, setShellLines] = useState<Line[]>([]);
   const [input, setInput] = useState('');
+  const [ghostText, setGhost] = useState('');
+  const [historyStack, setHistoryStack] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [savedInput, setSavedInput] = useState('');
   const [konamiIndex, setKonamiIndex] = useState(0);
   const [konamiActivated, setKonamiActivated] = useState(false);
   const [glitch, setGlitch] = useState(false);
@@ -233,9 +246,20 @@ export default function NotFoundPage() {
     return () => clearInterval(interval);
   }, [phase, shellLines.length]);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setInput(val);
+    setGhost(getTerminalGhostText(val, AUTOCOMPLETE_ENTRIES, NAV_PAGES));
+    setHistoryIndex(-1);
+  };
+
   const handleSubmit = () => {
     const raw = input.trim();
     if (!raw) return;
+
+    setHistoryStack(prev => [...prev, raw]);
+    setHistoryIndex(-1);
+    setGhost('');
 
     const result = executeRecoveryCommand(raw, router);
 
@@ -263,6 +287,52 @@ export default function NotFoundPage() {
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSubmit();
+      return;
+    }
+
+    if (
+      (e.key === 'Tab' ||
+        (e.key === 'ArrowRight' &&
+          inputRef.current?.selectionStart === input.length)) &&
+      ghostText
+    ) {
+      e.preventDefault();
+      const completed = input + ghostText;
+      setInput(completed);
+      setGhost(
+        getTerminalGhostText(completed, AUTOCOMPLETE_ENTRIES, NAV_PAGES)
+      );
+      return;
+    }
+
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (historyStack.length === 0) return;
+      const newIndex = historyIndex + 1;
+      if (newIndex >= historyStack.length) return;
+      if (historyIndex === -1) setSavedInput(input);
+      setHistoryIndex(newIndex);
+      const cmd = historyStack[historyStack.length - 1 - newIndex];
+      setInput(cmd);
+      setGhost(getTerminalGhostText(cmd, AUTOCOMPLETE_ENTRIES, NAV_PAGES));
+      return;
+    }
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex <= 0) {
+        setHistoryIndex(-1);
+        setInput(savedInput);
+        setGhost(
+          getTerminalGhostText(savedInput, AUTOCOMPLETE_ENTRIES, NAV_PAGES)
+        );
+        return;
+      }
+      const newIndex = historyIndex - 1;
+      setHistoryIndex(newIndex);
+      const cmd = historyStack[historyStack.length - 1 - newIndex];
+      setInput(cmd);
+      setGhost(getTerminalGhostText(cmd, AUTOCOMPLETE_ENTRIES, NAV_PAGES));
     }
   };
 
@@ -385,7 +455,7 @@ export default function NotFoundPage() {
                     ref={inputRef}
                     type="text"
                     value={input}
-                    onChange={e => setInput(e.target.value)}
+                    onChange={handleChange}
                     onKeyDown={handleKeyDown}
                     className="bg-transparent border-none outline-none text-on-surface w-full caret-transparent"
                     autoComplete="off"
@@ -394,6 +464,14 @@ export default function NotFoundPage() {
                     spellCheck={false}
                     aria-label="Recovery shell input"
                   />
+                  {ghostText && (
+                    <span
+                      className="absolute top-0 pointer-events-none text-outline-bright opacity-40"
+                      style={{ left: `${input.length}ch` }}
+                    >
+                      {ghostText}
+                    </span>
+                  )}
                   <span
                     className="absolute top-0 pointer-events-none"
                     style={{ left: `${input.length}ch` }}

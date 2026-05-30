@@ -725,7 +725,7 @@
         "",
         "  Diagnostics:",
         "    cat /var/log/syslog view error logs",
-        "    blame              who did this?",
+        "    git blame          who did this?",
         "    git log            recent changes",
         "    whoami             identify yourself",
         "    clear              clear terminal",
