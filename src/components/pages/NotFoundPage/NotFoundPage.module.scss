@@ -127,6 +127,11 @@
 .outputVariant {
   color: var(--on-surface-variant);
   white-space: pre;
+
+  a {
+    color: var(--primary);
+    text-decoration: underline;
+  }
 }
 
 .outputPrimary {
