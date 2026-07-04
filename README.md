@@ -62,6 +62,5 @@ All text content lives in `src/copy.json`. Edit that file to update copy across 
 
 - [Next.js 14](https://nextjs.org/) (App Router, static export)
 - [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [lucide-react](https://lucide.dev/)
