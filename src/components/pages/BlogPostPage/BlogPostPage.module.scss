@@ -1,0 +1,243 @@
+.back {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.backLink {
+  color: var(--on-surface-variant);
+
+  .accent {
+    color: var(--primary);
+  }
+
+  &:hover {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+}
+
+.command {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  color: var(--on-surface);
+}
+
+.accent {
+  color: var(--primary);
+}
+
+.muted {
+  color: var(--on-surface-variant);
+}
+
+.text {
+  color: var(--on-surface);
+}
+
+.secondary {
+  color: var(--secondary);
+}
+
+.postHeader {
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--outline);
+}
+
+.title {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--on-surface);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.dot {
+  color: var(--outline-bright);
+}
+
+.tags {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ============================================
+   PROSE — restore readable defaults stripped by
+   the global reset in globals.scss (list-style:none,
+   margin:0, text-decoration:inherit, border-radius:0).
+   All colors via theme CSS vars.
+   ============================================ */
+
+.prose {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--on-surface);
+
+  > * + * {
+    margin-top: 1.25rem;
+  }
+
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--primary);
+    margin-top: 2.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+
+    &::before {
+      content: '## ';
+      color: var(--outline-bright);
+    }
+  }
+
+  h3 {
+    font-size: 1.0625rem;
+
+    &::before {
+      content: '### ';
+      color: var(--outline-bright);
+    }
+  }
+
+  h4 {
+    font-size: 1rem;
+  }
+
+  p {
+    color: var(--on-surface-variant);
+  }
+
+  strong {
+    color: var(--on-surface);
+    font-weight: 700;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+      color: var(--primary-dim);
+    }
+  }
+
+  ul,
+  ol {
+    padding-left: 1.5rem;
+    color: var(--on-surface-variant);
+
+    > li + li {
+      margin-top: 0.5rem;
+    }
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li::marker {
+    color: var(--secondary);
+  }
+
+  /* Inline code */
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background-color: var(--surface-high);
+    color: var(--secondary);
+    padding: 0.1em 0.4em;
+    border: 1px solid var(--outline);
+  }
+
+  /* Code blocks */
+  pre {
+    background-color: var(--surface-low);
+    border: 1px solid var(--outline);
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+
+    code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--on-surface);
+      font-size: inherit;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--primary);
+    padding-left: 1rem;
+    color: var(--on-surface-variant);
+    font-style: italic;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--outline);
+    margin: 2rem 0;
+  }
+
+  /* GFM tables (remark-gfm) */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+  }
+
+  th,
+  td {
+    border: 1px solid var(--outline);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+
+  th {
+    background-color: var(--surface-high);
+    color: var(--on-surface);
+    font-weight: 700;
+  }
+
+  td {
+    color: var(--on-surface-variant);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid var(--outline);
+  }
+}

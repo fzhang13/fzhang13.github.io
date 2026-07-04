@@ -20,4 +20,5 @@ export const NAV_ITEMS = [
   { label: 'ABOUT.log', href: '/about' },
   { label: 'STACK.env', href: '/stack' },
   { label: 'WORK.tar.gz', href: '/work' },
+  { label: 'BLOG.md', href: '/blog' },
 ] as const;
