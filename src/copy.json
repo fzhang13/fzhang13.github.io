@@ -737,6 +737,23 @@
       }
     ]
   },
+  "blog": {
+    "terminal": {
+      "user": "user@system",
+      "blogDir": " : ~/blog $ ",
+      "listCommand": "ls -la --sort=date",
+      "listOk": "[OK]",
+      "entrySingular": "entry found",
+      "entryPlural": "entries found",
+      "catIndexCommand": "cat index.log",
+      "indexTitle": "INDEX : POSTS",
+      "empty": "// no posts yet — check back soon",
+      "readSuffix": "min read",
+      "backLabel": "cd ../blog",
+      "catCommand": "cat ",
+      "postTitlePrefix": "CAT : "
+    }
+  },
   "projects": {
     "sectionNumber": "04",
     "sectionLabel": "Projects",

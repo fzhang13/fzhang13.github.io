@@ -5,6 +5,7 @@ import Link from 'next/link';
 import TerminalCard from '@/components/shared/TerminalCard';
 import BracketChip from '@/components/shared/BracketChip';
 import { formatDate, type Post } from '@/lib/blogShared';
+import copy from '@/copy.json';
 import styles from './BlogPostPage.module.scss';
 
 const TAG_VARIANTS: Array<'default' | 'success' | 'error'> = [
@@ -23,6 +24,8 @@ interface BlogPostPageProps {
 }
 
 export default function BlogPostPage({ post, children }: BlogPostPageProps) {
+  const { terminal } = copy.blog;
+
   return (
     <div>
       {/* Back link */}
@@ -33,7 +36,7 @@ export default function BlogPostPage({ post, children }: BlogPostPageProps) {
         className={styles.back}
       >
         <Link href="/blog" className={styles.backLink}>
-          <span className={styles.accent}>&lt;</span> cd ../blog
+          <span className={styles.accent}>&lt;</span> {terminal.backLabel}
         </Link>
       </motion.div>
 
@@ -42,12 +45,15 @@ export default function BlogPostPage({ post, children }: BlogPostPageProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15 }}
       >
-        <TerminalCard title={`CAT : ${post.slug}.mdx`}>
+        <TerminalCard title={`${terminal.postTitlePrefix}${post.slug}.mdx`}>
           {/* Prompt line */}
           <div className={styles.command}>
-            <span className={styles.accent}>felix@zhang</span>
-            <span className={styles.muted}>:~/blog $ </span>
-            <span className={styles.text}>cat {post.slug}.mdx</span>
+            <span className={styles.accent}>{terminal.user}</span>
+            <span className={styles.muted}>{terminal.blogDir}</span>
+            <span className={styles.text}>
+              {terminal.catCommand}
+              {post.slug}.mdx
+            </span>
           </div>
 
           {/* Title + meta */}
@@ -56,7 +62,9 @@ export default function BlogPostPage({ post, children }: BlogPostPageProps) {
             <div className={styles.meta}>
               <span className={styles.secondary}>{formatDate(post.date)}</span>
               <span className={styles.dot}>·</span>
-              <span className={styles.muted}>{post.readingTime} min read</span>
+              <span className={styles.muted}>
+                {post.readingTime} {terminal.readSuffix}
+              </span>
             </div>
             {post.tags.length > 0 && (
               <div className={styles.tags}>

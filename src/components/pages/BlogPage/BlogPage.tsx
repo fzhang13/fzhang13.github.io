@@ -5,6 +5,7 @@ import Link from 'next/link';
 import TerminalCard from '@/components/shared/TerminalCard';
 import BracketChip from '@/components/shared/BracketChip';
 import { formatDate, type PostMeta } from '@/lib/blogShared';
+import copy from '@/copy.json';
 import styles from './BlogPage.module.scss';
 
 const TAG_VARIANTS: Array<'default' | 'success' | 'error'> = [
@@ -22,6 +23,8 @@ interface BlogPageProps {
 }
 
 export default function BlogPage({ posts }: BlogPageProps) {
+  const { terminal } = copy.blog;
+
   return (
     <div>
       {/* Visually hidden h1 for SEO and accessibility */}
@@ -35,13 +38,14 @@ export default function BlogPage({ posts }: BlogPageProps) {
         className={styles.header}
       >
         <p>
-          <span className={styles.accent}>felix@zhang</span>
-          <span className={styles.muted}>:~/blog $ </span>
-          <span className={styles.text}>ls -la --sort=date</span>
+          <span className={styles.accent}>{terminal.user}</span>
+          <span className={styles.muted}>{terminal.blogDir}</span>
+          <span className={styles.text}>{terminal.listCommand}</span>
         </p>
         <p className={styles.headerMeta}>
-          <span className={styles.accent}>ok</span> {posts.length}{' '}
-          {posts.length === 1 ? 'entry' : 'entries'} found
+          <span className={styles.accent}>{terminal.listOk}</span>{' '}
+          {posts.length}{' '}
+          {posts.length === 1 ? terminal.entrySingular : terminal.entryPlural}
         </p>
       </motion.div>
 
@@ -51,17 +55,15 @@ export default function BlogPage({ posts }: BlogPageProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        <TerminalCard title="INDEX : POSTS">
+        <TerminalCard title={terminal.indexTitle}>
           <div className={styles.command}>
-            <span className={styles.accent}>felix@zhang</span>
-            <span className={styles.muted}>:~/blog $ </span>
-            <span className={styles.text}>cat index.log</span>
+            <span className={styles.accent}>{terminal.user}</span>
+            <span className={styles.muted}>{terminal.blogDir}</span>
+            <span className={styles.text}>{terminal.catIndexCommand}</span>
           </div>
 
           {posts.length === 0 ? (
-            <p className={styles.empty}>
-              {'// no posts yet — check back soon'}
-            </p>
+            <p className={styles.empty}>{terminal.empty}</p>
           ) : (
             <div className={styles.list}>
               {posts.map((post, i) => (
@@ -78,7 +80,7 @@ export default function BlogPage({ posts }: BlogPageProps) {
                     </span>
                     <span className={styles.dot}>·</span>
                     <span className={styles.muted}>
-                      {post.readingTime} min read
+                      {post.readingTime} {terminal.readSuffix}
                     </span>
                   </div>
 
