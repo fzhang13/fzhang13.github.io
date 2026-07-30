@@ -685,21 +685,22 @@
     },
     "items": [
       {
-        "title": "Full-Stack Engineer",
+        "title": "Senior Full-Stack Engineer",
         "company": "MediaMonks Inc. (Formerly Jam3)",
         "companyUrl": "https://www.mediamonks.com",
         "location": "Toronto, Ontario, Canada",
         "period": "2020 — Present",
         "highlights": [
-          "SWE IC on Monks.flow. MediaMonks' full-stack AI platform for marketing — LLM-driven content generation pipelines built with NestJS, Redis, Docker, PostgreSQL and Vite, along with high test coverage maintained across all services",
+          "Core SWE on Monks.flow, MediaMonks' enterprise agentic AI platform — LLM-driven content generation pipelines and a high-throughput data ETL pipeline built with NestJS, Redis, BullMQ, PostgreSQL, pgvector, Docker and Vite, with rigorous test coverage maintained across all services",
           "Integrated Claude Code into the development lifecycle of Monks.flow to automate complex refactors, generate comprehensive test suites, and accelerate feature iteration across the NestJS and Redis layers",
-          "Tech-led the full site launch of Zoox.com end-to-end — owning frontend architecture, backend APIs, headless CMS integration, and cloud infrastructure — delivering a highly animated experience with consistently high Lighthouse performance and accessibility scores (90+)",
+          "Designed and prototyped an AI-powered speech-to-text conversational chatbot integrated with a physical hologram display for Skechers — real-time audio streaming, low-latency API orchestration, and conversational state management using Deepgram, AWS Step Functions and Amazon Bedrock",
+          "Tech-led the full site launch of Zoox.com end-to-end — owning frontend architecture, backend APIs, headless CMS integration, and cloud infrastructure — delivering a highly optimized experience with 90+ Lighthouse performance and accessibility scores",
           "Tech lead on the Oculus Creators platform and Novi.com. Deployed production code to Meta's internal infrastructure as a contingent engineer, adhering to enterprise-level code quality, security compliance, and access-control standards",
-          "Tech lead on Adidas LA Flagship retail digital experience. Full-stack digital in store experience using NextJS, AWS, Node and NFC modules",
-          "Tech lead on Adidas FIFA World Cup and Airbnb Voyager Scholarship microsites",
+          "Tech lead on Adidas LA Flagship retail digital experience and the Adidas FIFA World Cup experience",
           "Architected and shipped full-stack solutions for KFC, Burger King and Texas State Technical College",
           "IC Engineer for Facebook Marketplace, WhatsApp.com, Oculus.com, and Visa Super Bowl digital experiences",
           "Championed monorepo architecture standards and frontend framework best practices across the engineering department",
+          "Rapidly prototyped and delivered full-stack proofs-of-concept for global brands, validating complex integrations to align cross-functional stakeholders",
           "Led co-op recruitment strategy and mentorship programs, growing multiple junior engineers into full-time employees"
         ],
         "tags": [
@@ -708,6 +709,7 @@
           "NestJS",
           "Node.js",
           "Redis",
+          "BullMQ",
           "PostgreSQL",
           "AWS",
           "Docker",
